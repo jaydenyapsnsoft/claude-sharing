@@ -272,6 +272,20 @@
 </style>
 </head>
 <body>
+<script>
+  (function(){
+    const correct = "claude";
+    const key = "auth_claude_sharing";
+    if(sessionStorage.getItem(key) !== "1"){
+      const input = prompt("请输入访问密码 / Enter password:");
+      if(input === correct){
+        sessionStorage.setItem(key, "1");
+      } else {
+        document.body.innerHTML = "<div style='display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888;font-size:1.1rem'>Access denied.</div>";
+      }
+    }
+  })();
+</script>
 
 <div class="app">
 
