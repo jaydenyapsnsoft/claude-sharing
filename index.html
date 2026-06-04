@@ -20,7 +20,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
-  body{font-family:"Noto Sans SC",-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-weight:300;line-height:1.62;font-size:15px;-webkit-font-smoothing:antialiased;overflow:hidden;}
+  body{font-family:"Noto Sans SC",-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-weight:300;line-height:1.62;font-size:15px;-webkit-font-smoothing:antialiased;overflow:hidden;overflow-wrap:break-word;-webkit-text-size-adjust:100%;}
   ::selection{background:var(--bronze-soft);}
 
   .app{display:grid;grid-template-columns:252px 1fr;height:100vh;position:relative;}
@@ -31,7 +31,6 @@
   .masthead{padding:0 10px 22px;border-bottom:1px solid var(--line-soft);margin-bottom:16px;}
   .masthead .kick{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze-deep);font-weight:500;}
   .masthead h1{font-family:"Noto Serif SC",serif;font-weight:700;font-size:1.42rem;line-height:1.15;margin:9px 0 8px;letter-spacing:-.01em;}
-  .masthead .meta{font-size:.72rem;color:var(--ink-3);letter-spacing:.04em;font-weight:400;}
 
   .langtog{display:inline-flex;margin-top:14px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);}
   .lt{border:none;background:none;font-family:"Noto Sans SC",serif;font-size:.82rem;font-weight:500;color:var(--ink-2);padding:5px 16px;cursor:pointer;transition:.2s;}
@@ -44,7 +43,6 @@
   .tab:hover{background:rgba(166,117,58,.09);color:var(--ink);}
   .tab.active{background:var(--ink);color:#F5F1E6;box-shadow:0 8px 20px -8px rgba(25,34,44,.55);}
   .tab.active .n{color:var(--bronze-soft);}
-  .rail-foot{font-size:.66rem;color:var(--ink-3);padding:18px 10px 0;line-height:1.6;font-weight:400;}
 
   .main{position:relative;z-index:1;overflow-y:auto;scroll-behavior:smooth;}
   .main::-webkit-scrollbar{width:9px;}
@@ -224,15 +222,52 @@
     .mtab{flex:none;border:1px solid var(--line);background:var(--card);font-family:inherit;font-size:.82rem;color:var(--ink-2);padding:6px 13px;border-radius:9px;cursor:pointer;white-space:nowrap;}
     .mtab.active{background:var(--ink);color:#EFE9DA;border-color:var(--ink);}
     .main{overflow:visible;}
-    .panel{padding:26px 20px 60px;}
-    .phead .bignum{font-size:5rem;top:-12px;}
+    .panel{padding:24px 16px 54px;}
+    .phead .bignum{font-size:4rem;top:-6px;opacity:.1;}
+    .tbl{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .tbl::-webkit-scrollbar{height:7px;}
+    .tbl::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px;}
+    .tbl table{min-width:520px;}
+    table{font-size:.82rem;}
+    thead th,tbody td{padding:9px 12px;}
     .phead h2{font-size:1.6rem;}
     .phead h2 .en{display:none;}
-    .feat3,.ba-row,.reasons,.pp,.grid2,.grid3,.proj3{grid-template-columns:1fr;}
+    .feat3,.ba-row,.reasons,.pp,.grid2,.grid3{grid-template-columns:1fr;}
+    .proj3{grid-template-columns:1fr 1fr;gap:10px;}
     ul.tight{grid-template-columns:1fr;}
     .subtabs{display:flex;max-width:100%;overflow-x:auto;}
     .subtabs::-webkit-scrollbar{display:none;}
     .subtab{flex:0 0 auto;}
+  }
+
+  /* laptop & tablet-landscape: tighten the fixed-rail layout so content isn't cramped */
+  @media(min-width:881px) and (max-width:1180px){
+    .app{grid-template-columns:216px 1fr;}
+    .rail{padding:28px 14px 22px;}
+    .masthead h1{font-size:1.3rem;}
+    .tab{font-size:.88rem;padding:9px 11px;gap:11px;}
+    .panel{padding:40px 38px 70px;}
+    .phead h2{font-size:1.95rem;}
+    .phead .bignum{font-size:6.5rem;top:-22px;}
+  }
+
+  /* small phones */
+  @media(max-width:430px){
+    .panel{padding:20px 13px 48px;}
+    .phead h2{font-size:1.42rem;}
+    .phead .eye{font-size:.62rem;}
+    h3{font-size:1.05rem;}
+    .mtop .mh h1{font-size:1.02rem;}
+    .formula{padding:14px;gap:6px;}
+    .formula .c{font-size:.92rem;padding:7px 13px;}
+    .callout{padding:15px 17px;}
+    .case{padding:18px 18px;}
+    .radarpop{width:228px;}
+  }
+
+  /* respect reduced-motion preference */
+  @media(prefers-reduced-motion:reduce){
+    *{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}
   }
 </style>
 </head>
@@ -259,7 +294,6 @@
       <button class="tab" data-t="p6"><span class="n">6</span><span class="zh">有效提问方法</span><span class="eng">Effective Prompting</span></button>
       <button class="tab" data-t="p7"><span class="n">7</span><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span></button>
     </div>
-    <div class="rail-foot"><span class="zh">内部分享资料 · 结论仍须由专业人员核验</span><span class="eng">Internal briefing material · Conclusions must still be verified by professionals</span></div>
   </div>
 
   <!-- MOBILE TOP -->
@@ -370,11 +404,11 @@
 
       <h4 class="st"><span class="zh">ChatBI 取数</span><span class="eng">ChatBI data pull</span></h4>
       <div class="case lead st">
-        <div class="chead"><span class="ctag">01</span><span class="ch"><span class="zh">运营、产品直接用大白话问数据</span><span class="eng">Ops and product ask data questions in plain language</span></span></div>
+        <div class="chead"><span class="ctag">01</span><span class="ch"><span class="zh">运营、产品用自然语言直接问数据</span><span class="eng">Ops and product ask data questions in natural language</span></span></div>
         <p><span class="zh">不必再走"提需求 → 排期 → 等数据团队"的老流程:同事用自然语言向 Claude 提问,Claude 通过 chatbi 查询数仓并返回结果,几分钟内拿到数据。</span><span class="eng">No more &lsquo;submit a request → wait for scheduling → wait for the data team&rsquo;: colleagues ask Claude in natural language, Claude queries the warehouse via chatbi and returns results, and the data is in hand within minutes.</span></p>
         <div class="flow">
           <div class="flowrow old"><span class="ftag">Before</span><span class="step"><span class="zh">提需求</span><span class="eng">Submit request</span></span><span class="arr">→</span><span class="step"><span class="zh">排期</span><span class="eng">Scheduling</span></span><span class="arr">→</span><span class="step"><span class="zh">数据团队取数</span><span class="eng">Data team pulls data</span></span><span class="arr">→</span><span class="step"><span class="zh">拿到数据</span><span class="eng">Get data</span></span><span class="when"><span class="zh">数天等待</span><span class="eng">Days of waiting</span></span></div>
-          <div class="flowrow new"><span class="ftag">Now</span><span class="step"><span class="zh">用大白话直接问 Claude</span><span class="eng">Ask Claude in plain language</span></span><span class="arr">→</span><span class="step"><span class="zh">自动查数仓</span><span class="eng">Auto-query the warehouse</span></span><span class="arr">→</span><span class="step"><span class="zh">拿到数据 + 图表</span><span class="eng">Get data + charts</span></span><span class="when"><span class="zh">几分钟自助</span><span class="eng">Self-service in minutes</span></span></div>
+          <div class="flowrow new"><span class="ftag">Now</span><span class="step"><span class="zh">用自然语言直接问 Claude</span><span class="eng">Ask Claude in natural language</span></span><span class="arr">→</span><span class="step"><span class="zh">自动查数仓</span><span class="eng">Auto-query the warehouse</span></span><span class="arr">→</span><span class="step"><span class="zh">拿到数据 + 图表</span><span class="eng">Get data + charts</span></span><span class="when"><span class="zh">几分钟自助</span><span class="eng">Self-service in minutes</span></span></div>
         </div>
       </div>
 
@@ -399,8 +433,6 @@
           </div>
         </div>
       </div>
-
-      <div class="callout soft st"><span class="lbl"><span class="zh">配套前提</span><span class="eng">Prerequisite</span></span><span class="zh">这些能力都建立在<strong>第 5 章的数据规范</strong>之上:取数前确认数据权限与级别,涉及个人信息或敏感字段先脱敏后使用。</span><span class="eng">These capabilities all rest on <strong>the data rules in Section 5</strong>: confirm data permissions and classification before pulling, and de-identify personal or sensitive fields before use.</span></div>
     </section>
 
     <!-- P2 -->
@@ -420,13 +452,13 @@
           <tr data-tool="Grok"><td class="rk">7</td><td>Grok</td><td>xAI</td><td>Grok 4.3 (2026.05)</td><td><span class="zh">100 万</span><span class="eng">1M</span></td><td><span class="zh">一般</span><span class="eng">Average</span></td><td><span class="zh">支持(BYO MCP)</span><span class="eng">Supported (BYO MCP)</span></td><td><span class="zh">实时接入 X 数据;直接,有时带倾向性,幻觉率偏高</span><span class="eng">Real-time access to X data; direct, sometimes opinionated, higher hallucination rate</span></td></tr>
           <tr data-tool="Perplexity"><td class="rk">8</td><td>Perplexity</td><td>Perplexity AI</td><td><span class="zh">Sonar / Sonar Pro</span><span class="eng">Sonar / Sonar Pro</span></td><td>200K</td><td><span class="zh">企业版可配置</span><span class="eng">Configurable</span></td><td>—</td><td><span class="zh">以搜索为核心,回答附引用来源,适合需可溯源信息的场景</span><span class="eng">Search-first; answers come with cited sources, suited to cases needing traceable information</span></td></tr>
         </tbody></table></div>
-      <p class="st" style="font-size:.74rem;color:var(--ink-3);margin:-2px 0 0;line-height:1.55"><span class="zh">排名与雷达图为 2026-06 综合评估(模型能力、数据安全、中英文与本公司 HR/行政/法务场景适配),并参考 Artificial Analysis 智能指数等公开基准——截至 2026-06,该指数由 Claude Opus 4.8(61.4)领先,GPT-5.5(60.2)、Gemini 3.1 Pro(57)紧随;第一梯队整体接近,雷达分值为相对估计。</span><span class="eng">Ranking and radar reflect a 2026-06 overall assessment (capability, data security, EN/CN, and fit for our HR/Admin/Legal use), informed by public benchmarks such as the Artificial Analysis Intelligence Index—where, as of 2026-06, Claude Opus 4.8 leads (61.4), with GPT-5.5 (60.2) and Gemini 3.1 Pro (57) close behind. The top tier is tightly clustered; radar scores are relative estimates.</span></p>
+      <p class="st" style="font-size:.74rem;color:var(--ink-3);margin:-2px 0 0;line-height:1.55"><span class="zh">排名与雷达图为 2026-06 综合评估(模型能力、数据安全、中英文与本公司各部门场景适配),并参考 Artificial Analysis 智能指数等公开基准——截至 2026-06,该指数由 Claude Opus 4.8(61.4)领先,GPT-5.5(60.2)、Gemini 3.1 Pro(57)紧随;第一梯队整体接近,雷达分值为相对估计。</span><span class="eng">Ranking and radar reflect a 2026-06 overall assessment (capability, data security, EN/CN, and fit for our teams&rsquo; use), informed by public benchmarks such as the Artificial Analysis Intelligence Index—where, as of 2026-06, Claude Opus 4.8 leads (61.4), with GPT-5.5 (60.2) and Gemini 3.1 Pro (57) close behind. The top tier is tightly clustered; radar scores are relative estimates.</span></p>
 
       <h3 class="st"><span class="hn">2.2</span><span class="zh">选用 Claude 的理由与依据</span><span class="eng">Why We Choose Claude</span></h3>
       <div class="reasons st">
         <div class="reason"><div class="rn">01</div><b><span class="zh">数据安全有合同保障</span><span class="eng">Data security backed by contract</span></b><p><span class="zh">企业版数据不用于训练,受服务协议约束,适合处理公司内部文件。</span><span class="eng">Enterprise data is not used for training and is bound by the service agreement—suitable for internal company documents.</span></p></div>
         <div class="reason"><div class="rn">02</div><b><span class="zh">长文档处理能力突出</span><span class="eng">Outstanding long-document handling</span></b><p><span class="zh">100 万 token 超长上下文,合同、政策、多页 PDF 一次读完,不截断,精度高。</span><span class="eng">A 1M-token context reads contracts, policies, and multi-page PDFs in one pass—no truncation, high accuracy.</span></p></div>
-        <div class="reason"><div class="rn">03</div><b><span class="zh">输出质量稳定可靠</span><span class="eng">Stable, reliable output</span></b><p><span class="zh">语气更谨慎,更少随意编造,符合 HR/行政/法务对专业性与准确性的要求。</span><span class="eng">A more careful tone with less fabrication, meeting HR / Admin / Legal needs for professionalism and accuracy.</span></p></div>
+        <div class="reason"><div class="rn">03</div><b><span class="zh">输出质量稳定可靠</span><span class="eng">Stable, reliable output</span></b><p><span class="zh">语气更谨慎,更少随意编造,符合各部门对专业性与准确性的要求。</span><span class="eng">A more careful tone with less fabrication, meeting every team&rsquo;s needs for professionalism and accuracy.</span></p></div>
         <div class="reason"><div class="rn">04</div><b><span class="zh">多语言处理能力强</span><span class="eng">Strong multilingual capability</span></b><p><span class="zh">中文、英文、菲律宾语均可流畅处理,支持中英双语输出。</span><span class="eng">Handles Chinese, English, and Filipino fluently, with bilingual EN/CN output.</span></p></div>
         <div class="reason" style="grid-column:1/-1"><div class="rn">05</div><b><span class="zh">企业功能体系完善</span><span class="eng">A complete enterprise feature set</span></b><p><span class="zh">Projects(知识沉淀)、MCP(系统连接)、文件直接输出,满足企业使用场景。</span><span class="eng">Projects (knowledge retention), MCP (system connections), and direct file output cover enterprise use cases.</span></p></div>
       </div>
@@ -487,6 +519,18 @@
           <tr><td>Haiku 4.5</td><td><span class="zh">轻快</span><span class="eng">Light &amp; fast</span></td><td><span class="zh">简单问答、批量任务、初步筛选</span><span class="eng">Simple Q&amp;A, batch tasks, first-pass screening</span></td></tr>
         </tbody></table></div>
       <div class="callout soft st"><span class="lbl"><span class="zh">实用建议</span><span class="eng">Practical tip</span></span><span class="zh">日常工作选用 <strong>Sonnet 4.6</strong> 即可满足绝大多数需求;复杂分析与关键决策时,切换至 <strong>Opus 系列</strong>。</span><span class="eng"><strong>Sonnet 4.6</strong> covers the vast majority of daily needs; switch to the <strong>Opus series</strong> for complex analysis and critical decisions.</span></div>
+
+      <h3 class="st"><span class="hn">4.4</span><span class="zh">连接公司系统 · 连接器(MCP)</span><span class="eng">Connecting Company Systems · Connectors (MCP)</span></h3>
+      <p class="st"><span class="zh">除了上传文件,Claude 还能通过<b>连接器(MCP)</b>安全接入公司在用的系统——例如 <b>Lark(飞书)套件</b>与<b>数据仓库</b>:在里面取数、查文档、整理信息、办事,不必来回复制粘贴。MCP 是实现这种连接的开放标准。</span><span class="eng">Beyond uploading files, Claude can securely connect to the systems the company already uses through <b>connectors (MCP)</b>—for example the <b>Lark suite</b> and the <b>data warehouse</b>: pull data, search docs, organize information, and get work done, with no copy-pasting back and forth. MCP is the open standard that makes this possible.</span></p>
+      <div class="st"><span class="livebadge"><span class="ld"></span><span class="zh">已实现 · ChatBI 连接数仓</span><span class="eng">Live · ChatBI connects the warehouse</span></span></div>
+      <div class="grid3 st">
+        <div class="mini tline"><h5><span class="zh">数据仓库 / BI</span><span class="eng">Data warehouse / BI</span></h5><p><span class="zh">用自然语言查询,直接拿到数据与图表(ChatBI,已上线)。</span><span class="eng">Query in natural language; get data and charts straight back (ChatBI, live).</span></p></div>
+        <div class="mini tline"><h5><span class="zh">Lark 云文档 / 知识库</span><span class="eng">Lark Docs / Wiki</span></h5><p><span class="zh">检索、总结、起草云文档与 Wiki 内容。</span><span class="eng">Search, summarize, and draft Docs and Wiki content.</span></p></div>
+        <div class="mini tline"><h5><span class="zh">Lark 多维表格 / 表格</span><span class="eng">Lark Base / Sheets</span></h5><p><span class="zh">读取与整理表格数据,按条件汇总、生成记录。</span><span class="eng">Read and organize table data; summarize and generate records by criteria.</span></p></div>
+        <div class="mini tline"><h5><span class="zh">Lark 消息 / 群聊</span><span class="eng">Lark Messenger</span></h5><p><span class="zh">归纳群聊讨论,整理成会议纪要与待办。</span><span class="eng">Distill group-chat discussions into minutes and to-dos.</span></p></div>
+        <div class="mini tline"><h5><span class="zh">Lark 日历 / 会议</span><span class="eng">Lark Calendar / Meetings</span></h5><p><span class="zh">查日程、安排会议,整理会议纪要(妙记)。</span><span class="eng">Check schedules, set up meetings, and tidy meeting minutes.</span></p></div>
+        <div class="mini tline"><h5><span class="zh">Lark 邮箱 / 审批</span><span class="eng">Lark Mail / Approval</span></h5><p><span class="zh">起草与归纳邮件,梳理审批与待办事项。</span><span class="eng">Draft and summarize email; track approvals and action items.</span></p></div>
+      </div>
     </section>
 
     <!-- P5 -->
@@ -499,7 +543,7 @@
           <ul class="tight full">
             <li><span class="zh">公司使用 Claude <b>企业版(Team / Enterprise)</b>,数据<b>不会用于训练</b>,受合同保障。</span><span class="eng">The company uses <b>Claude Enterprise (Team / Enterprise)</b>; data is <b>not used for training</b> and is contractually protected.</span></li>
             <li><span class="zh">"内容被学走"的顾虑在企业版下不成立。</span><span class="eng">The worry that &lsquo;your content gets learned&rsquo; does not apply on the enterprise plan.</span></li>
-            <li><span class="zh">HR / 行政 / 法务日常文字工作,可放心使用。</span><span class="eng">Day-to-day text work for HR / Admin / Legal can be done with confidence.</span></li>
+            <li><span class="zh">各部门日常文字工作,均可放心使用。</span><span class="eng">Day-to-day text work across all teams can be done with confidence.</span></li>
           </ul>
         </div>
         <div>
