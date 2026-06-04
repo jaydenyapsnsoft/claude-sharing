@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude 分享大纲</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EEE3;--paper-soft:#EAE4D6;--card:#FBFAF4;--card-2:#FFFFFF;
+    --ink:#19222C;--ink-2:#4D5560;--ink-3:#8B8A80;
+    --bronze:#A6753A;--bronze-deep:#7E5520;--bronze-soft:#E9DBC5;
+    --forest:#365142;--forest-soft:#DBE4D9;--rust:#9A4B33;--rust-soft:#EFDDD4;
+    --line:rgba(25,34,44,.13);--line-soft:rgba(25,34,44,.06);
+    --sh:0 1px 2px rgba(25,34,44,.04),0 10px 26px -16px rgba(25,34,44,.22);
+    --sh-lg:0 2px 6px rgba(25,34,44,.06),0 26px 60px -28px rgba(25,34,44,.34);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{font-family:"Noto Sans SC",-apple-system,sans-serif;background:var(--paper);color:var(--ink);font-weight:300;line-height:1.62;font-size:15px;-webkit-font-smoothing:antialiased;overflow:hidden;}
+  ::selection{background:var(--bronze-soft);}
+
+  .app{display:grid;grid-template-columns:252px 1fr;height:100vh;position:relative;}
+  .app::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");}
+
+  .rail{position:relative;z-index:2;background:var(--paper-soft);border-right:1px solid var(--line);padding:34px 18px 26px;display:flex;flex-direction:column;overflow-y:auto;}
+  .rail::-webkit-scrollbar{width:0;}
+  .masthead{padding:0 10px 22px;border-bottom:1px solid var(--line-soft);margin-bottom:16px;}
+  .masthead .kick{font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--bronze-deep);font-weight:500;}
+  .masthead h1{font-family:"Noto Serif SC",serif;font-weight:700;font-size:1.42rem;line-height:1.15;margin:9px 0 8px;letter-spacing:-.01em;}
+  .masthead .meta{font-size:.72rem;color:var(--ink-3);letter-spacing:.04em;font-weight:400;}
+
+  .langtog{display:inline-flex;margin-top:14px;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--card);}
+  .lt{border:none;background:none;font-family:"Noto Sans SC",serif;font-size:.82rem;font-weight:500;color:var(--ink-2);padding:5px 16px;cursor:pointer;transition:.2s;}
+  .lt.active{background:var(--ink);color:#EFE9DA;}
+  .lt+.lt{border-left:1px solid var(--line);}
+
+  .tabs{display:flex;flex-direction:column;gap:2px;flex:1;}
+  .tab{display:flex;align-items:center;gap:13px;padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--ink-2);transition:.22s;border:none;background:none;text-align:left;font-family:inherit;font-size:.92rem;font-weight:400;width:100%;position:relative;}
+  .tab .n{font-family:"Instrument Serif",serif;font-style:italic;font-size:1.05rem;color:var(--bronze);width:18px;flex:none;transition:.22s;}
+  .tab:hover{background:rgba(166,117,58,.09);color:var(--ink);}
+  .tab.active{background:var(--ink);color:#F5F1E6;box-shadow:0 8px 20px -8px rgba(25,34,44,.55);}
+  .tab.active .n{color:var(--bronze-soft);}
+  .rail-foot{font-size:.66rem;color:var(--ink-3);padding:18px 10px 0;line-height:1.6;font-weight:400;}
+
+  .main{position:relative;z-index:1;overflow-y:auto;scroll-behavior:smooth;}
+  .main::-webkit-scrollbar{width:9px;}
+  .main::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px;border:3px solid var(--paper);}
+  .panel{display:none;padding:46px 56px 80px;max-width:1080px;}
+  .panel.active{display:block;}
+
+  .phead{position:relative;margin-bottom:30px;}
+  .phead .bignum{position:absolute;right:0;top:-26px;font-family:"Instrument Serif",serif;font-size:8rem;line-height:1;color:var(--bronze);opacity:.13;pointer-events:none;font-weight:400;}
+  .phead .eye{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze-deep);font-weight:500;display:flex;align-items:center;gap:10px;}
+  .phead .eye::before{content:"";width:26px;height:1.5px;background:var(--bronze);}
+  .phead h2{font-family:"Noto Serif SC",serif;font-weight:700;font-size:2.15rem;line-height:1.12;letter-spacing:-.015em;margin:12px 0 0;}
+  .phead h2 .en{font-family:"Instrument Serif",serif;font-style:italic;font-weight:400;color:var(--ink-3);font-size:.62em;margin-left:12px;letter-spacing:.01em;}
+  .phead::after{content:"";display:block;height:1px;background:linear-gradient(90deg,var(--line),transparent);margin-top:22px;}
+
+  h3{font-family:"Noto Serif SC",serif;font-weight:600;font-size:1.12rem;margin:30px 0 12px;display:flex;align-items:baseline;gap:10px;color:var(--ink);flex-wrap:wrap;}
+  h3:first-of-type{margin-top:6px;}
+  h3 .hn{font-family:"Instrument Serif",serif;font-style:italic;font-size:1.05rem;color:var(--bronze);}
+  h4{font-weight:700;font-size:.92rem;margin:18px 0 10px;color:var(--ink);letter-spacing:.01em;}
+
+  p{margin:0 0 13px;color:var(--ink-2);}
+  p strong{color:var(--ink);font-weight:700;}
+
+  .feat3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:6px 0 8px;}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 17px;box-shadow:var(--sh);}
+  .fcard .ft{font-weight:700;color:var(--ink);font-size:.92rem;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+  .fcard .ft::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--bronze);box-shadow:0 0 0 3px var(--bronze-soft);flex:none;}
+  .fcard p{font-size:.84rem;margin:0;line-height:1.55;color:var(--ink-2);}
+
+  ul.tight{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;margin:8px 0 10px;}
+  ul.tight li{position:relative;padding-left:18px;font-size:.88rem;color:var(--ink-2);}
+  ul.tight li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--bronze);}
+  ul.tight.full{grid-template-columns:1fr;}
+  ul.tight li b{color:var(--ink);font-weight:700;}
+
+  ol.steps{list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:9px;margin:8px 0 12px;}
+  ol.steps li{position:relative;padding-left:38px;counter-increment:s;color:var(--ink-2);font-size:.9rem;}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:7px;background:var(--ink);color:var(--paper);font-family:"Instrument Serif",serif;font-style:italic;font-size:.9rem;display:flex;align-items:center;justify-content:center;}
+
+  .callout{border-radius:14px;padding:18px 22px;margin:16px 0;font-size:1rem;}
+  .callout.dark{background:linear-gradient(140deg,#243140,#19222c);color:#EDE6D6;box-shadow:var(--sh-lg);}
+  .callout.dark .lbl{font-family:"Instrument Serif",serif;font-style:italic;color:var(--bronze);font-size:.95rem;display:block;margin-bottom:5px;}
+  .callout.dark strong{color:#fff;}
+  .callout.soft{background:var(--bronze-soft);border:1px solid rgba(166,117,58,.3);color:#5c4220;font-size:.92rem;}
+  .callout.soft .lbl{font-weight:700;color:var(--bronze-deep);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:5px;}
+  .callout.soft strong{color:#3d2c12;}
+
+  .tbl{margin:12px 0 16px;border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--sh);background:var(--card-2);}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;}
+  thead th{background:var(--ink);color:#EFE9DA;font-weight:500;text-align:left;padding:11px 15px;font-size:.8rem;letter-spacing:.02em;white-space:nowrap;}
+  tbody td{padding:10px 15px;border-top:1px solid var(--line-soft);color:var(--ink-2);vertical-align:top;line-height:1.5;}
+  tbody tr:nth-child(even){background:rgba(25,34,44,.016);}
+  tbody tr{transition:background .18s;}
+  tbody tr:hover{background:rgba(166,117,58,.07);}
+  tbody td:first-child{color:var(--ink);font-weight:500;}
+  tr.acc td,td.cl{background:rgba(166,117,58,.08)!important;}
+  thead th.cl{background:var(--bronze)!important;color:#fff;}
+  td.rk{font-family:"Instrument Serif",serif;font-style:italic;font-size:1.18rem;color:var(--bronze);text-align:center;width:48px;}
+  tr.acc td.rk{color:var(--bronze-deep);font-weight:600;}
+  thead th.rkh{text-align:center;width:48px;}
+  tr[data-tool]{cursor:pointer;}
+  .radarpop{position:fixed;z-index:60;pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .14s ease;background:var(--card-2);border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh-lg);padding:12px 14px 9px;width:262px;}
+  .radarpop.show{opacity:1;transform:none;}
+  .radarpop .rp-title{font-family:"Noto Serif SC",serif;font-weight:600;font-size:.94rem;color:var(--ink);text-align:center;line-height:1.2;}
+  .radarpop .rp-sub{font-size:.62rem;color:var(--ink-3);text-align:center;letter-spacing:.05em;margin:1px 0 2px;text-transform:uppercase;}
+  .radarpop svg{display:block;width:100%;height:auto;}
+  .pill{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:6px;background:var(--bronze-soft);color:var(--bronze-deep);font-weight:500;white-space:nowrap;}
+  .pill.ok{background:var(--forest-soft);color:var(--forest);}
+  code.m{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--bronze-deep);}
+  .scrollx{overflow-x:auto;}
+  .scrollx::-webkit-scrollbar{height:7px;}
+  .scrollx::-webkit-scrollbar-thumb{background:var(--line);border-radius:9px;}
+
+  .subtabs{display:inline-flex;gap:4px;background:var(--paper-soft);border:1px solid var(--line);border-radius:11px;padding:4px;margin:6px 0 12px;}
+  .subtab{border:none;background:none;font-family:inherit;font-size:.86rem;font-weight:500;color:var(--ink-2);padding:6px 16px;border-radius:8px;cursor:pointer;transition:.2s;white-space:nowrap;}
+  .subtab.active{background:var(--ink);color:#EFE9DA;box-shadow:var(--sh);}
+  .deptbox{display:none;}
+  .deptbox.active{display:block;}
+
+  .ba-row{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:8px 0 6px;}
+  .ba{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--sh);}
+  .ba .bt{padding:11px 15px;background:rgba(25,34,44,.04);font-weight:600;color:var(--ink);font-size:.88rem;border-bottom:1px solid var(--line-soft);}
+  .ba .bb{padding:13px 15px;}
+  .ba .lab{font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700;display:block;margin-bottom:3px;}
+  .ba .b1{color:var(--ink-3);font-size:.84rem;margin-bottom:11px;}
+  .ba .b1 .lab{color:var(--rust);}
+  .ba .b2{color:var(--ink-2);font-size:.84rem;}
+  .ba .b2 .lab{color:var(--forest);}
+  .ba .div{height:1px;background:var(--line-soft);margin:0 0 11px;position:relative;}
+  .ba .div::after{content:"↓";position:absolute;left:50%;top:-9px;transform:translateX(-50%);background:var(--card);color:var(--bronze);font-size:.8rem;padding:0 6px;}
+
+  .reasons{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0;}
+  .reason{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:15px 17px;box-shadow:var(--sh);position:relative;}
+  .reason .rn{font-family:"Instrument Serif",serif;font-style:italic;font-size:1.5rem;color:var(--bronze);line-height:1;}
+  .reason b{display:block;color:var(--ink);font-size:.92rem;margin:6px 0 4px;font-weight:700;}
+  .reason p{font-size:.82rem;margin:0;line-height:1.5;color:var(--ink-2);}
+
+  .pp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:6px 0 14px;align-items:stretch;}
+  .pq{border-radius:12px;padding:14px 16px;font-family:"JetBrains Mono",monospace;font-size:.79rem;line-height:1.65;border:1px solid transparent;position:relative;}
+  .pq .mk{font-family:"Noto Sans SC";font-weight:700;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;display:block;margin-bottom:7px;}
+  .pq.bad{background:var(--rust-soft);border-color:rgba(154,75,51,.28);color:#6e2f20;}
+  .pq.bad .mk{color:var(--rust);}
+  .pq.good{background:var(--forest-soft);border-color:rgba(54,81,66,.28);color:#2a3f33;}
+  .pq.good .mk{color:var(--forest);}
+
+  .formula{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:14px 0;padding:18px;background:var(--card);border:1px dashed var(--line);border-radius:14px;}
+  .formula .c{font-family:"Noto Serif SC",serif;font-weight:600;font-size:1rem;background:var(--card-2);padding:8px 18px;border-radius:9px;box-shadow:var(--sh);color:var(--ink);}
+  .formula .p{color:var(--bronze);font-family:"Instrument Serif",serif;font-style:italic;font-size:1.3rem;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:8px 0;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:8px 0;}
+  .mini{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px 17px;box-shadow:var(--sh);}
+  .mini.tline{border-top:3px solid var(--bronze);}
+  .mini h5{font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:7px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .mini h5 .tg{font-size:.62rem;background:var(--bronze-soft);color:var(--bronze-deep);padding:2px 7px;border-radius:5px;font-weight:600;letter-spacing:.04em;}
+  .mini p{font-size:.82rem;margin:0;line-height:1.55;color:var(--ink-2);}
+  .dl{display:flex;flex-direction:column;}
+  .dl .it{padding:8px 0;border-top:1px solid var(--line-soft);}
+  .dl .it:first-child{border-top:none;padding-top:0;}
+  .dl .it b{color:var(--ink);font-weight:600;font-size:.86rem;}
+  .dl .it .ds{display:block;color:var(--ink-2);font-size:.8rem;line-height:1.5;margin-top:2px;}
+
+  .proj3{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin:8px 0;}
+  .proj{background:linear-gradient(150deg,var(--card-2),var(--card));border:1px solid var(--line);border-radius:13px;padding:18px;text-align:center;box-shadow:var(--sh);transition:.22s;}
+  .proj:hover{transform:translateY(-3px);box-shadow:var(--sh-lg);}
+  .proj .ic{width:38px;height:38px;margin:0 auto 10px;border-radius:10px;background:var(--ink);color:var(--bronze-soft);display:flex;align-items:center;justify-content:center;font-family:"Instrument Serif",serif;font-style:italic;font-size:1.05rem;}
+  .proj b{display:block;color:var(--ink);font-size:.9rem;line-height:1.4;}
+
+  .livebadge{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:700;letter-spacing:.05em;color:var(--forest);background:var(--forest-soft);border:1px solid rgba(54,81,66,.3);padding:6px 14px;border-radius:100px;margin-bottom:14px;}
+  .livebadge .ld{width:7px;height:7px;border-radius:50%;background:var(--forest);box-shadow:0 0 0 3px rgba(54,81,66,.2);animation:pulse 2s infinite;}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 3px rgba(54,81,66,.2);}50%{box-shadow:0 0 0 6px rgba(54,81,66,.05);}}
+  .case{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--sh);margin:8px 0 14px;position:relative;}
+  .case.lead{border-top:3px solid var(--bronze);}
+  .case .chead{display:flex;align-items:baseline;gap:12px;margin-bottom:4px;}
+  .case .ctag{font-family:"Instrument Serif",serif;font-style:italic;color:var(--bronze);font-size:1.05rem;}
+  .case .ch{font-family:"Noto Serif SC",serif;font-weight:600;font-size:1.18rem;color:var(--ink);}
+  .case>p{font-size:.9rem;margin:0 0 4px;}
+  .flow{display:flex;flex-direction:column;gap:10px;margin:16px 0 6px;}
+  .flowrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .flowrow .ftag{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;width:48px;flex:none;}
+  .flowrow.old .ftag{color:var(--rust);}
+  .flowrow.new .ftag{color:var(--forest);}
+  .step{font-size:.8rem;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card-2);color:var(--ink-2);}
+  .flowrow.old .step{color:var(--ink-3);}
+  .flowrow.new .step{border-color:rgba(54,81,66,.32);background:var(--forest-soft);color:#2a3f33;font-weight:500;}
+  .arr{color:var(--bronze);font-size:.85rem;flex:none;}
+  .flowrow .when{margin-left:auto;font-size:.72rem;font-weight:700;}
+  .flowrow.old .when{color:var(--rust);}
+  .flowrow.new .when{color:var(--forest);}
+  .chiprow{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 6px;}
+  .cchip{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;color:var(--ink);background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;}
+  .pipe{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:12px 0 4px;}
+  .pnode{font-size:.82rem;font-weight:500;color:var(--ink);background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;}
+  .pnode.hl{background:var(--ink);color:#EFE9DA;border-color:var(--ink);}
+
+  @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+
+  /* language toggle */
+  .eng{display:none;}
+  body.lang-en .zh{display:none;}
+  body.lang-en .eng{display:inline;}
+  body.lang-en .phead h2 .en{display:none;}
+
+  /* mobile */
+  .mtop{display:none;}
+  @media(max-width:880px){
+    body{overflow:auto;}
+    .app{grid-template-columns:1fr;height:auto;}
+    .rail{display:none;}
+    .mtop{display:block;position:sticky;top:0;z-index:30;background:rgba(242,238,227,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+    .mtop .mh{padding:13px 20px 9px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;}
+    .mtop .mh .kick{font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze-deep);font-weight:500;}
+    .mtop .mh h1{font-family:"Noto Serif SC",serif;font-weight:700;font-size:1.12rem;}
+    .mtop .langtog{margin-top:0;flex:none;}
+    .mstrip{display:flex;gap:6px;overflow-x:auto;padding:0 16px 11px;}
+    .mstrip::-webkit-scrollbar{display:none;}
+    .mtab{flex:none;border:1px solid var(--line);background:var(--card);font-family:inherit;font-size:.82rem;color:var(--ink-2);padding:6px 13px;border-radius:9px;cursor:pointer;white-space:nowrap;}
+    .mtab.active{background:var(--ink);color:#EFE9DA;border-color:var(--ink);}
+    .main{overflow:visible;}
+    .panel{padding:26px 20px 60px;}
+    .phead .bignum{font-size:5rem;top:-12px;}
+    .phead h2{font-size:1.6rem;}
+    .phead h2 .en{display:none;}
+    .feat3,.ba-row,.reasons,.pp,.grid2,.grid3,.proj3{grid-template-columns:1fr;}
+    ul.tight{grid-template-columns:1fr;}
+    .subtabs{display:flex;max-width:100%;overflow-x:auto;}
+    .subtabs::-webkit-scrollbar{display:none;}
+    .subtab{flex:0 0 auto;}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <!-- RAIL -->
+  <div class="rail">
+    <div class="masthead">
+      <div class="kick">Enterprise Guide</div>
+      <h1><span class="zh">Claude 分享大纲</span><span class="eng">Claude Briefing Guide</span></h1>
+      <div class="langtog">
+        <button class="lt active" data-l="zh">中文</button>
+        <button class="lt" data-l="en">EN</button>
+      </div>
+    </div>
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-t="p1"><span class="n">1</span><span class="zh">引言</span><span class="eng">Introduction</span></button>
+      <button class="tab" data-t="p2"><span class="n">2</span><span class="zh">AI 工具市场概览</span><span class="eng">AI Tool Landscape</span></button>
+      <button class="tab" data-t="p3"><span class="n">3</span><span class="zh">Claude 的价值定位</span><span class="eng">Why Claude</span></button>
+      <button class="tab" data-t="p4"><span class="n">4</span><span class="zh">产品与功能概述</span><span class="eng">Products &amp; Features</span></button>
+      <button class="tab" data-t="p5"><span class="n">5</span><span class="zh">数据规范与安全</span><span class="eng">Data Policy &amp; Security</span></button>
+      <button class="tab" data-t="p6"><span class="n">6</span><span class="zh">有效提问方法</span><span class="eng">Effective Prompting</span></button>
+      <button class="tab" data-t="p7"><span class="n">7</span><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span></button>
+    </div>
+    <div class="rail-foot"><span class="zh">内部分享资料 · 结论仍须由专业人员核验</span><span class="eng">Internal briefing material · Conclusions must still be verified by professionals</span></div>
+  </div>
+
+  <!-- MOBILE TOP -->
+  <div class="mtop">
+    <div class="mh">
+      <div><div class="kick">Enterprise Guide</div><h1><span class="zh">Claude 分享大纲</span><span class="eng">Claude Briefing Guide</span></h1></div>
+      <div class="langtog"><button class="lt active" data-l="zh">中</button><button class="lt" data-l="en">EN</button></div>
+    </div>
+    <div class="mstrip" id="mstrip">
+      <button class="mtab active" data-t="p1"><span class="zh">引言</span><span class="eng">Intro</span></button>
+      <button class="mtab" data-t="p2"><span class="zh">AI 市场</span><span class="eng">Landscape</span></button>
+      <button class="mtab" data-t="p3"><span class="zh">价值定位</span><span class="eng">Why Claude</span></button>
+      <button class="mtab" data-t="p4"><span class="zh">产品功能</span><span class="eng">Products</span></button>
+      <button class="mtab" data-t="p5"><span class="zh">数据安全</span><span class="eng">Security</span></button>
+      <button class="mtab" data-t="p6"><span class="zh">提问方法</span><span class="eng">Prompting</span></button>
+      <button class="mtab" data-t="p7"><span class="zh">应用场景</span><span class="eng">Use Cases</span></button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main" id="main">
+
+    <!-- P1 -->
+    <section class="panel active" id="p1">
+      <div class="phead st"><span class="bignum">01</span><div class="eye">Section&nbsp;01</div><h2><span class="zh">引言</span><span class="eng">Introduction</span><span class="en">Why AI, Why Now</span></h2></div>
+
+      <h3 class="st"><span class="hn">1.1</span><span class="zh">AI 学习的必要性与价值</span><span class="eng">Why Learning AI Matters</span></h3>
+      <p class="st"><span class="zh">AI 正在以前所未有的速度改变每一个行业的工作方式。</span><span class="eng">AI is changing how every industry works at an unprecedented pace.</span></p>
+      <div class="feat3 st">
+        <div class="fcard"><div class="ft"><span class="zh">早学者持续受益</span><span class="eng">Early adopters keep gaining</span></div><p><span class="zh">现在学会的人,每天都在节省时间与精力;推迟意味着仍在承担本可交给 AI 的重复工作。</span><span class="eng">Those who learn now save time and energy every day; delaying means still carrying repetitive work that could be handed to AI.</span></p></div>
+        <div class="fcard"><div class="ft"><span class="zh">使用门槛极低</span><span class="eng">A very low barrier</span></div><p><span class="zh">无需技术背景,无需编程能力,能够打字即可上手。</span><span class="eng">No technical background or coding skills required—if you can type, you can use it.</span></p></div>
+        <div class="fcard"><div class="ft"><span class="zh">直接提升成果</span><span class="eng">Directly better output</span></div><p><span class="zh">AI 生成的初稿质量更高、速度更快,使精力集中于真正需要专业判断的环节。</span><span class="eng">AI produces higher-quality first drafts, faster, freeing your focus for the parts that truly require professional judgment.</span></p></div>
+      </div>
+
+      <h3 class="st"><span class="hn">1.2</span><span class="zh">对工作效率的核心提升价值</span><span class="eng">The Core Efficiency Gain</span></h3>
+      <div class="callout dark st"><span class="lbl">Core Value</span><span class="zh">AI 最核心的能力是:<strong>承接大量重复性文字工作,使人员得以专注于只有人才能完成的专业判断。</strong></span><span class="eng">AI's core capability: <strong>take on large volumes of repetitive text work, so people can focus on the professional judgment only humans can provide.</strong></span></div>
+      <div class="tbl st"><table>
+        <thead><tr><th><span class="zh">工作类型</span><span class="eng">Task type</span></th><th><span class="zh">传统方式</span><span class="eng">Traditional approach</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">邮件 / 信函起草</span><span class="eng">Email / letter drafting</span></td><td><span class="zh">从空白页撰写,反复修改</span><span class="eng">Start from a blank page, revise repeatedly</span></td><td class="cl"><span class="zh">提供关键信息,数秒生成初稿,仅需审阅</span><span class="eng">Give key facts; a first draft in seconds, only review needed</span></td></tr>
+          <tr><td><span class="zh">文件翻译</span><span class="eng">Document translation</span></td><td><span class="zh">等待外部译员或逐句自译</span><span class="eng">Wait for an external translator, or translate line by line</span></td><td class="cl"><span class="zh">上传文件,即时输出双语版本</span><span class="eng">Upload the file; get a bilingual version instantly</span></td></tr>
+          <tr><td><span class="zh">长文档分析</span><span class="eng">Long-document analysis</span></td><td><span class="zh">逐页阅读,手动标注重点</span><span class="eng">Read page by page, mark key points by hand</span></td><td class="cl"><span class="zh">上传后直接提问,秒级输出摘要与风险</span><span class="eng">Upload and ask; summaries and risk flags in seconds</span></td></tr>
+          <tr><td><span class="zh">会议 / 面试纪要</span><span class="eng">Meeting / interview minutes</span></td><td><span class="zh">手写记录,会后整理归纳</span><span class="eng">Take notes by hand, organize afterward</span></td><td class="cl"><span class="zh">粘贴零散记录,输出结构化纪要</span><span class="eng">Paste rough notes; get structured minutes</span></td></tr>
+          <tr><td><span class="zh">文件批量重命名</span><span class="eng">Bulk file renaming</span></td><td><span class="zh">逐个手动修改</span><span class="eng">Edit each file by hand</span></td><td class="cl"><span class="zh">说明命名规则,生成对照表,批量完成</span><span class="eng">State the naming rule; get a mapping table and rename in bulk</span></td></tr>
+          <tr><td><span class="zh">多文档横向对比</span><span class="eng">Cross-document comparison</span></td><td><span class="zh">多窗口来回翻阅,手动比对</span><span class="eng">Flip between windows, compare manually</span></td><td class="cl"><span class="zh">粘贴内容,输出对比表与分析结论</span><span class="eng">Paste the content; get a comparison table and conclusions</span></td></tr>
+          <tr><td><span class="zh">法规 / 政策研究</span><span class="eng">Regulatory / policy research</span></td><td><span class="zh">搜索引擎 + 大量网页阅读</span><span class="eng">Search engines plus extensive web reading</span></td><td class="cl"><span class="zh">快速获取研究方向与要点(结论仍须核验)</span><span class="eng">Quickly get research directions and key points (conclusions still need verification)</span></td></tr>
+        </tbody></table></div>
+      <ul class="tight st">
+        <li><span class="zh">消除面对空白页面的压力</span><span class="eng">Removes the pressure of the blank page</span></li>
+        <li><span class="zh">减少在措辞与结构上的反复纠结</span><span class="eng">Less agonizing over wording and structure</span></li>
+        <li><span class="zh">避免精力耗费在格式整理等低价值工作</span><span class="eng">Avoids spending energy on low-value work like formatting</span></li>
+        <li><span class="zh">重复执行交给 AI,专业判断留给人</span><span class="eng">Repetitive execution goes to AI; judgment stays with people</span></li>
+      </ul>
+
+      <h3 class="st"><span class="hn">1.3</span><span class="zh">预期成效与实践案例</span><span class="eng">Expected Outcomes &amp; Real Cases</span></h3>
+      <div class="subtabs st">
+        <button class="subtab active" data-d="d-hr">HR</button>
+        <button class="subtab" data-d="d-ad"><span class="zh">行政</span><span class="eng">Admin</span></button>
+        <button class="subtab" data-d="d-lg"><span class="zh">法务</span><span class="eng">Legal</span></button>
+        <button class="subtab" data-d="d-mkt"><span class="zh">市场 · 品牌 · PMO</span><span class="eng">Marketing · PMO</span></button>
+        <button class="subtab" data-d="d-pro"><span class="zh">产品 · 运营 · 体育</span><span class="eng">Product · Ops</span></button>
+      </div>
+      <div class="deptbox active" id="d-hr"><div class="tbl">
+        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">审阅 10 份候选人简历并出对比报告</span><span class="eng">Review 10 candidate resumes and produce a comparison report</span></td><td><span class="zh">逐份阅读 3–4 小时,手动制表</span><span class="eng">Read each one, 3–4 hours, build the table by hand</span></td><td class="cl"><span class="zh">粘贴脱敏简历,20 分钟产出结构化对比表</span><span class="eng">Paste de-identified resumes; a structured table in 20 minutes</span></td></tr>
+          <tr><td><span class="zh">起草个性化拒信</span><span class="eng">Draft a personalized rejection letter</span></td><td><span class="zh">每封 15–20 分钟,语气难把握</span><span class="eng">15–20 minutes each, tone hard to gauge</span></td><td class="cl"><span class="zh">2 分钟产出初稿,审阅后发出</span><span class="eng">A first draft in 2 minutes; review and send</span></td></tr>
+          <tr><td><span class="zh">解答假期政策咨询</span><span class="eng">Answer questions on leave policy</span></td><td><span class="zh">翻查手册 10–15 分钟定位章节</span><span class="eng">Search the handbook 10–15 minutes to find the section</span></td><td class="cl"><span class="zh">上传手册直接提问,即时输出并标注引用</span><span class="eng">Upload the handbook and ask; instant answers with cited sections</span></td></tr>
+          <tr><td><span class="zh">起草职位描述(JD)</span><span class="eng">Draft a job description (JD)</span></td><td><span class="zh">参考旧版,从头撰写 30–60 分钟</span><span class="eng">Reference old versions, write from scratch, 30–60 minutes</span></td><td class="cl"><span class="zh">提供岗位要求,3 分钟产出初稿</span><span class="eng">Provide the requirements; a first draft in 3 minutes</span></td></tr>
+        </tbody></table>
+      </div></div>
+      <div class="deptbox" id="d-ad"><div class="tbl">
+        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">撰写中英双语公司公告</span><span class="eng">Write a bilingual (EN/CN) company announcement</span></td><td><span class="zh">写中文后再翻译英文,1–2 小时</span><span class="eng">Write Chinese, then translate to English, 1–2 hours</span></td><td class="cl"><span class="zh">提供关键信息,10 分钟产出双语版本</span><span class="eng">Provide key facts; a bilingual version in 10 minutes</span></td></tr>
+          <tr><td><span class="zh">规范 200 个命名混乱的文件</span><span class="eng">Standardize 200 messily named files</span></td><td><span class="zh">逐一手动修改,耗费大半天</span><span class="eng">Edit one by one, most of a day</span></td><td class="cl"><span class="zh">说明命名规则,输出对照表,批量完成</span><span class="eng">State the rule; get a mapping table and rename in bulk</span></td></tr>
+          <tr><td><span class="zh">录音 / 手写记录整理为正式纪要</span><span class="eng">Turn recordings / handwritten notes into formal minutes</span></td><td><span class="zh">边整理边撰写,约 2 小时</span><span class="eng">Organize and write at once, about 2 hours</span></td><td class="cl"><span class="zh">粘贴内容,15 分钟产出结构化纪要</span><span class="eng">Paste the content; structured minutes in 15 minutes</span></td></tr>
+          <tr><td><span class="zh">翻译供应商报价单</span><span class="eng">Translate a supplier quotation</span></td><td><span class="zh">等待翻译或逐句自译,约 1 天</span><span class="eng">Wait for translation or do it line by line, about a day</span></td><td class="cl"><span class="zh">上传文件,数分钟产出双语对照版本</span><span class="eng">Upload the file; a side-by-side bilingual version in minutes</span></td></tr>
+        </tbody></table>
+      </div></div>
+      <div class="deptbox" id="d-lg"><div class="tbl">
+        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">审阅 50 页合同并提取风险条款</span><span class="eng">Review a 50-page contract and extract risk clauses</span></td><td><span class="zh">逐页阅读 3–5 小时,手动标注</span><span class="eng">Read page by page, 3–5 hours, annotate by hand</span></td><td class="cl"><span class="zh">上传后提问"有哪些风险条款",30 分钟完成</span><span class="eng">Upload and ask &lsquo;what are the risk clauses&rsquo;; done in 30 minutes</span></td></tr>
+          <tr><td><span class="zh">起草正式信函或法律意见初稿</span><span class="eng">Draft a formal letter or legal opinion</span></td><td><span class="zh">从头撰写,结构语气耗时 1–2 小时</span><span class="eng">Write from scratch; structure and tone take 1–2 hours</span></td><td class="cl"><span class="zh">提供关键事实与要点,10 分钟产出初稿</span><span class="eng">Provide key facts and points; a first draft in 10 minutes</span></td></tr>
+          <tr><td><span class="zh">研究菲律宾劳动法条款适用范围</span><span class="eng">Research the scope of a Philippine labor-law provision</span></td><td><span class="zh">查阅法条与多份文件,数小时</span><span class="eng">Look up statutes and multiple documents, several hours</span></td><td class="cl"><span class="zh">快速获得研究起点与方向(须对照原文核验)</span><span class="eng">Quickly get a research starting point and direction (verify against the source text)</span></td></tr>
+          <tr><td><span class="zh">对比合同两个版本的差异</span><span class="eng">Compare two versions of a contract</span></td><td><span class="zh">逐条比对,易遗漏,1–2 小时</span><span class="eng">Compare clause by clause, easy to miss things, 1–2 hours</span></td><td class="cl"><span class="zh">上传两版本,列出所有实质性差异</span><span class="eng">Upload both versions; list every substantive difference</span></td></tr>
+        </tbody></table>
+      </div></div>
+      <div class="deptbox" id="d-mkt"><div class="tbl">
+        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">营销文案:社媒 / 邮件 / 落地页一稿多版</span><span class="eng">Marketing copy: multi-version social / email / landing</span></td><td><span class="zh">各渠道从头手写、反复改,半天</span><span class="eng">Hand-write per channel, revise repeatedly, half a day</span></td><td class="cl"><span class="zh">给卖点,几分钟产出多渠道多版本初稿</span><span class="eng">Give the selling points; multi-channel, multi-version drafts in minutes</span></td></tr>
+          <tr><td><span class="zh">中英双语品牌内容 / 新闻稿</span><span class="eng">Bilingual brand content / press release</span></td><td><span class="zh">写中文再翻译,1–2 小时</span><span class="eng">Write in Chinese then translate, 1–2 hours</span></td><td class="cl"><span class="zh">一次产出中英双语稿,审阅即用</span><span class="eng">Both languages at once, review-ready</span></td></tr>
+          <tr><td><span class="zh">汇报简报 / 会议纪要(CEO Office)</span><span class="eng">Briefings / meeting minutes (CEO Office)</span></td><td><span class="zh">手记后整理归纳,1 小时+</span><span class="eng">Note by hand then organize, 1 hr+</span></td><td class="cl"><span class="zh">粘贴零散记录,15 分钟出结构化纪要</span><span class="eng">Paste rough notes; structured minutes in 15 min</span></td></tr>
+          <tr><td><span class="zh">跨项目状态与风险汇总(PMO)</span><span class="eng">Cross-project status &amp; risk roll-up (PMO)</span></td><td><span class="zh">从各项目逐一收集、手动拼装,易遗漏,数小时</span><span class="eng">Collect from each project by hand, error-prone, hours</span></td><td class="cl"><span class="zh">汇总成统一的项目集状态 + 风险 / 依赖清单,10 分钟出初稿</span><span class="eng">Consolidate into one portfolio status + risk / dependency list; a draft in 10 min</span></td></tr>
+        </tbody></table>
+      </div></div>
+      <div class="deptbox" id="d-pro"><div class="tbl">
+        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">归纳用户反馈并分类(产品)</span><span class="eng">Synthesize &amp; categorize user feedback (Product)</span></td><td><span class="zh">逐条人工阅读、分类,数小时</span><span class="eng">Read and sort each entry, hours</span></td><td class="cl"><span class="zh">粘贴反馈,自动归类 + 排优先级,20 分钟</span><span class="eng">Paste feedback; auto-sorted with priorities in 20 min</span></td></tr>
+          <tr><td><span class="zh">PRD / 需求文档 / 版本说明初稿(产品)</span><span class="eng">PRD / spec / release-notes draft (Product)</span></td><td><span class="zh">参考旧版从头写,30–60 分钟</span><span class="eng">Reference old versions, write from scratch, 30–60 min</span></td><td class="cl"><span class="zh">给要点,几分钟出初稿</span><span class="eng">Give the points; a first draft in minutes</span></td></tr>
+          <tr><td><span class="zh">活动公告 / 用户通知(运营)</span><span class="eng">Campaign notices / user announcements (Ops)</span></td><td><span class="zh">从头撰写、反复改语气,30 分钟+</span><span class="eng">Write from scratch, retune tone, 30 min+</span></td><td class="cl"><span class="zh">给信息,几分钟出多版本通知</span><span class="eng">Give the info; multi-version notices in minutes</span></td></tr>
+          <tr><td><span class="zh">体育博彩促销文案与多语言公告(体育)</span><span class="eng">Sports-betting promo copy &amp; multilingual notices (Sports)</span></td><td><span class="zh">赛事资讯逐条整理、各语言从头写,1–2 小时</span><span class="eng">Compile match info, write each language from scratch, 1–2 hours</span></td><td class="cl"><span class="zh">给赛事与活动要点,一次产出多语言促销与公告初稿</span><span class="eng">Give match / event points; multilingual promo &amp; notice drafts at once</span></td></tr>
+        </tbody></table>
+      </div></div>
+
+      <div class="callout soft st"><span class="lbl"><span class="zh">总结性变化</span><span class="eng">Net change</span></span><span class="zh">更多时间用于真正需要专业判断的工作 · 初稿质量提升,修改轮次减少 · 对外文件更专业、更具一致性 · 工作压力降低,重复任务不再成为负担。</span><span class="eng">More time for work that truly needs judgment · higher-quality first drafts with fewer revision rounds · more professional, more consistent external documents · lower stress, with repetitive tasks no longer a burden.</span></div>
+
+      <h3 class="st" style="margin-top:40px"><span class="hn">1.4</span><span class="zh">公司实践 · 用 AI 做数据</span><span class="eng">In Production · AI for Data</span></h3>
+      <div class="st"><span class="livebadge"><span class="ld"></span><span class="zh">已实现 · BI 团队正在使用</span><span class="eng">Live · in use by the BI team</span></span></div>
+      <p class="st"><span class="zh">这些不是设想——是 <b>BI 团队</b>目前已经在日常使用 AI 的部分。Claude 通过 <b>ChatBI 连接器</b>直接对接数仓,让"取数 → 出图 → 出报告"这条链路从需要数据团队介入,变成业务同事可以自助完成。</span><span class="eng">This isn&rsquo;t a vision—it&rsquo;s where <b>the BI team</b> already uses AI day to day. Through the <b>ChatBI connector</b>, Claude connects directly to the data warehouse, turning the &lsquo;pull data → chart → report&rsquo; chain from something that needed the data team into something business colleagues can do themselves.</span></p>
+
+      <h4 class="st"><span class="zh">ChatBI 取数</span><span class="eng">ChatBI data pull</span></h4>
+      <div class="case lead st">
+        <div class="chead"><span class="ctag">01</span><span class="ch"><span class="zh">运营、产品直接用大白话问数据</span><span class="eng">Ops and product ask data questions in plain language</span></span></div>
+        <p><span class="zh">不必再走"提需求 → 排期 → 等数据团队"的老流程:同事用自然语言向 Claude 提问,Claude 通过 chatbi 查询数仓并返回结果,几分钟内拿到数据。</span><span class="eng">No more &lsquo;submit a request → wait for scheduling → wait for the data team&rsquo;: colleagues ask Claude in natural language, Claude queries the warehouse via chatbi and returns results, and the data is in hand within minutes.</span></p>
+        <div class="flow">
+          <div class="flowrow old"><span class="ftag">Before</span><span class="step"><span class="zh">提需求</span><span class="eng">Submit request</span></span><span class="arr">→</span><span class="step"><span class="zh">排期</span><span class="eng">Scheduling</span></span><span class="arr">→</span><span class="step"><span class="zh">数据团队取数</span><span class="eng">Data team pulls data</span></span><span class="arr">→</span><span class="step"><span class="zh">拿到数据</span><span class="eng">Get data</span></span><span class="when"><span class="zh">数天等待</span><span class="eng">Days of waiting</span></span></div>
+          <div class="flowrow new"><span class="ftag">Now</span><span class="step"><span class="zh">用大白话直接问 Claude</span><span class="eng">Ask Claude in plain language</span></span><span class="arr">→</span><span class="step"><span class="zh">自动查数仓</span><span class="eng">Auto-query the warehouse</span></span><span class="arr">→</span><span class="step"><span class="zh">拿到数据 + 图表</span><span class="eng">Get data + charts</span></span><span class="when"><span class="zh">几分钟自助</span><span class="eng">Self-service in minutes</span></span></div>
+        </div>
+      </div>
+
+      <h4 class="st"><span class="zh">一句话出图 · 一句话出报告</span><span class="eng">One sentence to a chart—or a report</span></h4>
+      <div class="grid2 st">
+        <div class="case">
+          <div class="chead"><span class="ctag">02</span><span class="ch"><span class="zh">一句话出图</span><span class="eng">One sentence to a chart</span></span></div>
+          <p><span class="zh">同一个问题,不止给数字——Claude 可以直接把结果生成图表,贴进周报即用,实现数据可视化。</span><span class="eng">For the same question you get more than numbers—Claude can turn results straight into charts, ready to drop into a weekly report, for instant data visualization.</span></p>
+          <div class="chiprow">
+            <span class="cchip"><svg width="20" height="14" viewBox="0 0 20 14"><polyline points="1,11 6,6 11,8 19,2" fill="none" stroke="var(--bronze)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="zh">趋势图</span><span class="eng">Trend chart</span></span>
+            <span class="cchip"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--line)" stroke-width="3.2"/><circle cx="8" cy="8" r="6" fill="none" stroke="var(--bronze)" stroke-width="3.2" stroke-dasharray="22 38" transform="rotate(-90 8 8)"/></svg><span class="zh">占比图</span><span class="eng">Share chart</span></span>
+            <span class="cchip"><svg width="20" height="14" viewBox="0 0 20 14"><rect x="1" y="6" width="3" height="7" rx="1" fill="var(--bronze)"/><rect x="6" y="3" width="3" height="10" rx="1" fill="var(--bronze)"/><rect x="11" y="8" width="3" height="5" rx="1" fill="var(--bronze)"/><rect x="16" y="1" width="3" height="12" rx="1" fill="var(--bronze)"/></svg><span class="zh">排名图</span><span class="eng">Ranking chart</span></span>
+          </div>
+        </div>
+        <div class="case">
+          <div class="chead"><span class="ctag">03</span><span class="ch"><span class="zh">分析报告由 Claude 协助生成</span><span class="eng">Reports drafted with Claude&rsquo;s help</span></span></div>
+          <p><span class="zh">不只是取数与画图。Claude 还能对结果做解读、归纳要点、形成结构化的分析报告,人从"做表"转向"看结论、做判断"。</span><span class="eng">Beyond pulling data and drawing charts, Claude can interpret results, distill key points, and produce a structured analysis report—shifting people from &lsquo;building tables&rsquo; to &lsquo;reading conclusions and making judgments.&rsquo;</span></p>
+          <div class="pipe">
+            <span class="pnode"><span class="zh">取数</span><span class="eng">Pull data</span></span><span class="arr">→</span>
+            <span class="pnode hl"><span class="zh">Claude 分析与解读</span><span class="eng">Claude analyzes &amp; interprets</span></span><span class="arr">→</span>
+            <span class="pnode"><span class="zh">结构化报告</span><span class="eng">Structured report</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout soft st"><span class="lbl"><span class="zh">配套前提</span><span class="eng">Prerequisite</span></span><span class="zh">这些能力都建立在<strong>第 5 章的数据规范</strong>之上:取数前确认数据权限与级别,涉及个人信息或敏感字段先脱敏后使用。</span><span class="eng">These capabilities all rest on <strong>the data rules in Section 5</strong>: confirm data permissions and classification before pulling, and de-identify personal or sensitive fields before use.</span></div>
+    </section>
+
+    <!-- P2 -->
+    <section class="panel" id="p2">
+      <div class="phead st"><span class="bignum">02</span><div class="eye">Section&nbsp;02</div><h2><span class="zh">主流 AI 工具市场概览</span><span class="eng">AI Tool Landscape</span><span class="en">The Landscape · 2026.06</span></h2></div>
+
+      <h3 class="st"><span class="hn">2.1</span><span class="zh">主流 AI 助手横向对比</span><span class="eng">AI Assistants Compared</span></h3>
+      <p class="st" style="font-size:.76rem;color:var(--ink-3);margin:0 0 10px;line-height:1.5"><span class="zh">将鼠标悬停在任意工具行上,即可查看其六维能力雷达图(移动端点击)。数据参考 2026-06 最新公开基准,为相对估计。</span><span class="eng">Hover any tool row to see its six-axis capability radar (tap on mobile). Based on the latest 2026-06 public benchmarks; relative estimates.</span></p>
+      <div class="tbl scrollx st"><table style="min-width:940px">
+        <thead><tr><th class="rkh"><span class="zh">排名</span><span class="eng">Rank</span></th><th><span class="zh">工具</span><span class="eng">Tool</span></th><th><span class="zh">开发公司</span><span class="eng">Company</span></th><th><span class="zh">主力模型</span><span class="eng">Primary model</span></th><th><span class="zh">长文档</span><span class="eng">Long docs</span></th><th><span class="zh">数据安全(企业版)</span><span class="eng">Data security (ent.)</span></th><th><span class="zh">系统集成(MCP)</span><span class="eng">Integration (MCP)</span></th><th><span class="zh">核心特点</span><span class="eng">Key characteristics</span></th></tr></thead><tbody>
+          <tr class="acc" data-tool="Claude"><td class="rk">1</td><td><strong style="color:var(--bronze-deep)">Claude</strong></td><td>Anthropic</td><td>Opus 4.8 (2026.05)</td><td class="cl"><span class="zh">100 万</span><span class="eng">1M</span></td><td class="cl"><span class="zh">不用于训练</span><span class="eng">Not used for training</span></td><td class="cl"><span class="zh">开放标准</span><span class="eng">Open standard</span></td><td class="cl"><span class="zh">长文档理解强,输出谨慎可靠;数据不用于训练,最适配本公司场景</span><span class="eng">Strong long-document comprehension, careful and reliable; data not used for training—best fit for our use</span></td></tr>
+          <tr data-tool="ChatGPT"><td class="rk">2</td><td>ChatGPT</td><td>OpenAI</td><td>GPT-5.5 (2026.04)</td><td><span class="zh">100 万</span><span class="eng">1M</span></td><td><span class="zh">企业版可配置</span><span class="eng">Configurable</span></td><td><span class="zh">有限</span><span class="eng">Limited</span></td><td><span class="zh">用户最广,功能最全面;输出全能,偶过于表演化</span><span class="eng">Largest user base, most all-round features; versatile output, occasionally over-theatrical</span></td></tr>
+          <tr data-tool="Gemini"><td class="rk">3</td><td>Gemini</td><td>Google</td><td>Gemini 3.1 Pro (2026.02)</td><td><span class="zh">100 万</span><span class="eng">1M</span></td><td><span class="zh">企业版可配置</span><span class="eng">Configurable</span></td><td><span class="zh">Google 生态</span><span class="eng">Google ecosystem</span></td><td><span class="zh">深度整合 Google Workspace;技术导向,较简洁</span><span class="eng">Deeply integrated with Google Workspace; technical, fairly concise</span></td></tr>
+          <tr data-tool="Qwen"><td class="rk">4</td><td><span class="zh">通义千问 Qwen</span><span class="eng">Qwen</span></td><td><span class="zh">阿里云</span><span class="eng">Alibaba Cloud</span></td><td>Qwen3.7 Max (2026.05)</td><td><span class="zh">100 万</span><span class="eng">1M</span></td><td><span class="zh">企业版可配置</span><span class="eng">Configurable</span></td><td><span class="zh">原生支持</span><span class="eng">Native</span></td><td><span class="zh">中文能力强,擅长 Agent / 编码与办公自动化;另有开源版本</span><span class="eng">Strong Chinese; excels at agentic / coding &amp; office automation; open-weight versions too</span></td></tr>
+          <tr data-tool="DeepSeek"><td class="rk">5</td><td>DeepSeek</td><td><span class="zh">深度求索</span><span class="eng">DeepSeek</span></td><td>DeepSeek V4 (2026.04)</td><td><span class="zh">100 万</span><span class="eng">1M</span></td><td><span class="zh">开源可私有部署</span><span class="eng">Open-weight, self-hostable</span></td><td><span class="zh">可对接(开源)</span><span class="eng">Integrable (open)</span></td><td><span class="zh">开放权重、成本低,长上下文与编码能力强;中文表现好</span><span class="eng">Open-weight and low-cost, strong long-context &amp; coding; good in Chinese</span></td></tr>
+          <tr data-tool="Copilot"><td class="rk">6</td><td>Copilot</td><td>Microsoft</td><td><span class="zh">基于 GPT-5.5 系列</span><span class="eng">GPT-5.5 based</span></td><td><span class="zh">有限</span><span class="eng">Limited</span></td><td><span class="zh">企业版可配置</span><span class="eng">Configurable</span></td><td><span class="zh">Microsoft 生态</span><span class="eng">Microsoft ecosystem</span></td><td><span class="zh">深度整合 Microsoft 365;依托 Office 场景</span><span class="eng">Deeply integrated with Microsoft 365; built around Office</span></td></tr>
+          <tr data-tool="Grok"><td class="rk">7</td><td>Grok</td><td>xAI</td><td>Grok 4.3 (2026.05)</td><td><span class="zh">100 万</span><span class="eng">1M</span></td><td><span class="zh">一般</span><span class="eng">Average</span></td><td><span class="zh">支持(BYO MCP)</span><span class="eng">Supported (BYO MCP)</span></td><td><span class="zh">实时接入 X 数据;直接,有时带倾向性,幻觉率偏高</span><span class="eng">Real-time access to X data; direct, sometimes opinionated, higher hallucination rate</span></td></tr>
+          <tr data-tool="Perplexity"><td class="rk">8</td><td>Perplexity</td><td>Perplexity AI</td><td><span class="zh">Sonar / Sonar Pro</span><span class="eng">Sonar / Sonar Pro</span></td><td>200K</td><td><span class="zh">企业版可配置</span><span class="eng">Configurable</span></td><td>—</td><td><span class="zh">以搜索为核心,回答附引用来源,适合需可溯源信息的场景</span><span class="eng">Search-first; answers come with cited sources, suited to cases needing traceable information</span></td></tr>
+        </tbody></table></div>
+      <p class="st" style="font-size:.74rem;color:var(--ink-3);margin:-2px 0 0;line-height:1.55"><span class="zh">排名与雷达图为 2026-06 综合评估(模型能力、数据安全、中英文与本公司 HR/行政/法务场景适配),并参考 Artificial Analysis 智能指数等公开基准——截至 2026-06,该指数由 Claude Opus 4.8(61.4)领先,GPT-5.5(60.2)、Gemini 3.1 Pro(57)紧随;第一梯队整体接近,雷达分值为相对估计。</span><span class="eng">Ranking and radar reflect a 2026-06 overall assessment (capability, data security, EN/CN, and fit for our HR/Admin/Legal use), informed by public benchmarks such as the Artificial Analysis Intelligence Index—where, as of 2026-06, Claude Opus 4.8 leads (61.4), with GPT-5.5 (60.2) and Gemini 3.1 Pro (57) close behind. The top tier is tightly clustered; radar scores are relative estimates.</span></p>
+
+      <h3 class="st"><span class="hn">2.2</span><span class="zh">选用 Claude 的理由与依据</span><span class="eng">Why We Choose Claude</span></h3>
+      <div class="reasons st">
+        <div class="reason"><div class="rn">01</div><b><span class="zh">数据安全有合同保障</span><span class="eng">Data security backed by contract</span></b><p><span class="zh">企业版数据不用于训练,受服务协议约束,适合处理公司内部文件。</span><span class="eng">Enterprise data is not used for training and is bound by the service agreement—suitable for internal company documents.</span></p></div>
+        <div class="reason"><div class="rn">02</div><b><span class="zh">长文档处理能力突出</span><span class="eng">Outstanding long-document handling</span></b><p><span class="zh">100 万 token 超长上下文,合同、政策、多页 PDF 一次读完,不截断,精度高。</span><span class="eng">A 1M-token context reads contracts, policies, and multi-page PDFs in one pass—no truncation, high accuracy.</span></p></div>
+        <div class="reason"><div class="rn">03</div><b><span class="zh">输出质量稳定可靠</span><span class="eng">Stable, reliable output</span></b><p><span class="zh">语气更谨慎,更少随意编造,符合 HR/行政/法务对专业性与准确性的要求。</span><span class="eng">A more careful tone with less fabrication, meeting HR / Admin / Legal needs for professionalism and accuracy.</span></p></div>
+        <div class="reason"><div class="rn">04</div><b><span class="zh">多语言处理能力强</span><span class="eng">Strong multilingual capability</span></b><p><span class="zh">中文、英文、菲律宾语均可流畅处理,支持中英双语输出。</span><span class="eng">Handles Chinese, English, and Filipino fluently, with bilingual EN/CN output.</span></p></div>
+        <div class="reason" style="grid-column:1/-1"><div class="rn">05</div><b><span class="zh">企业功能体系完善</span><span class="eng">A complete enterprise feature set</span></b><p><span class="zh">Projects(知识沉淀)、MCP(系统连接)、文件直接输出,满足企业使用场景。</span><span class="eng">Projects (knowledge retention), MCP (system connections), and direct file output cover enterprise use cases.</span></p></div>
+      </div>
+    </section>
+
+    <!-- P3 -->
+    <section class="panel" id="p3">
+      <div class="phead st"><span class="bignum">03</span><div class="eye">Section&nbsp;03</div><h2><span class="zh">Claude 的价值定位</span><span class="eng">Why Claude</span><span class="en">Positioning</span></h2></div>
+
+      <h3 class="st"><span class="hn">3.1</span><span class="zh">核心定位</span><span class="eng">Core positioning</span></h3>
+      <div class="callout dark st"><span class="lbl">Definition</span><span class="zh">Claude 是一款企业级 AI 助手,负责<strong>承接文字密集型的重复工作</strong>,使员工得以将精力集中于真正需要专业判断的任务。</span><span class="eng">Claude is an enterprise-grade AI assistant that <strong>takes on text-intensive, repetitive work</strong>, so employees can focus on the tasks that truly require professional judgment.</span></div>
+
+      <h3 class="st"><span class="hn">3.2</span><span class="zh">适用工作类型</span><span class="eng">Where it fits</span></h3>
+      <div class="tbl st"><table>
+        <thead><tr><th><span class="zh">部门</span><span class="eng">Department</span></th><th><span class="zh">典型重复性工作</span><span class="eng">Typical repetitive work</span></th></tr></thead><tbody>
+          <tr><td>HR</td><td><span class="zh">简历筛选、邮件往来、政策答疑、入职材料、会议纪要</span><span class="eng">Resume screening, email correspondence, policy Q&amp;A, onboarding materials, meeting minutes</span></td></tr>
+          <tr><td><span class="zh">行政</span><span class="eng">Admin</span></td><td><span class="zh">通知公告、文件整理、双语翻译、活动与行程安排</span><span class="eng">Notices and announcements, document organization, bilingual translation, event and itinerary planning</span></td></tr>
+          <tr><td><span class="zh">法务</span><span class="eng">Legal</span></td><td><span class="zh">合同审查、风险提取、法规研究、信函与答复起草</span><span class="eng">Contract review, risk extraction, regulatory research, drafting letters and replies</span></td></tr>
+          <tr><td><span class="zh">市场 · 品牌 · mosaic · CEO Office · PMO</span><span class="eng">Marketing · Brand · mosaic · CEO Office · PMO</span></td><td><span class="zh">营销与品牌文案、对外公告、新闻稿、汇报简报、会议纪要、跨项目状态与行动项梳理</span><span class="eng">Marketing &amp; brand copy, external announcements, press releases, briefings, meeting minutes, cross-project status &amp; action items</span></td></tr>
+          <tr><td><span class="zh">产品 · 运营 · 体育团队</span><span class="eng">Product · Operations · Sports</span></td><td><span class="zh">需求文档与版本说明、用户反馈归纳、活动公告、体育博彩内容与促销、配合取数解读数据</span><span class="eng">Spec docs &amp; release notes, user-feedback synthesis, campaign notices, sports-betting content &amp; promos, data interpretation with ChatBI</span></td></tr>
+        </tbody></table></div>
+
+      <h3 class="st"><span class="hn">3.3</span><span class="zh">现场演示建议</span><span class="eng">Live demo suggestions</span> <span style="font-size:.8rem;font-weight:400;color:var(--ink-3)"><span class="zh">(选一个展示,引起共鸣)</span><span class="eng">(pick one to demo and resonate)</span></span></h3>
+      <div class="ba-row st">
+        <div class="ba"><div class="bt"><span class="zh">三份简历横向对比</span><span class="eng">Compare three resumes</span></div><div class="bb"><div class="b1"><span class="lab">Before</span><span class="zh">逐一翻阅多份文档</span><span class="eng">Flip through documents one by one</span></div><div class="div"></div><div class="b2"><span class="lab">After</span><span class="zh">一张结构化对比表</span><span class="eng">One structured comparison table</span></div></div></div>
+        <div class="ba"><div class="bt"><span class="zh">中英双语停电通知</span><span class="eng">Bilingual power-outage notice</span></div><div class="bb"><div class="b1"><span class="lab">Before</span><span class="zh">自行翻译</span><span class="eng">Translate it yourself</span></div><div class="div"></div><div class="b2"><span class="lab">After</span><span class="zh">一次生成双语文稿</span><span class="eng">Both languages generated at once</span></div></div></div>
+        <div class="ba"><div class="bt"><span class="zh">一批命名混乱的文件</span><span class="eng">A batch of messily named files</span></div><div class="bb"><div class="b1"><span class="lab">Before</span><span class="zh">手动逐一修改</span><span class="eng">Rename each by hand</span></div><div class="div"></div><div class="b2"><span class="lab">After</span><span class="zh">一张规范命名对照表</span><span class="eng">One standardized naming map</span></div></div></div>
+      </div>
+    </section>
+
+    <!-- P4 -->
+    <section class="panel" id="p4">
+      <div class="phead st"><span class="bignum">04</span><div class="eye">Section&nbsp;04</div><h2><span class="zh">产品与功能概述</span><span class="eng">Products &amp; Features</span><span class="en">Products &amp; Models</span></h2></div>
+
+      <h3 class="st"><span class="hn">4.1</span><span class="zh">产品定义与基本能力</span><span class="eng">What it is &amp; core capabilities</span></h3>
+      <ul class="tight full st">
+        <li><span class="zh">Claude 不是搜索引擎,而是能<b>读懂上下文、协助完成文字任务</b>的智能助手。</span><span class="eng">Claude is not a search engine, but an assistant that <b>understands context and helps complete text tasks</b>.</span></li>
+        <li><span class="zh">通过 claude.ai 即可访问,亦提供手机与桌面应用。</span><span class="eng">Accessible at claude.ai, with mobile and desktop apps as well.</span></li>
+        <li><span class="zh">支持文件读取(PDF / Word / Excel / 图片)、起草、翻译,并可直接输出 Word / Excel / PPT / PDF。</span><span class="eng">Reads files (PDF / Word / Excel / images), drafts, translates, and outputs Word / Excel / PPT / PDF directly.</span></li>
+      </ul>
+
+      <h3 class="st"><span class="hn">4.2</span><span class="zh">产品线概览</span><span class="eng">Product line overview</span></h3>
+      <h4 class="st"><span class="zh">正式产品(三款)</span><span class="eng">Generally available (3)</span></h4>
+      <div class="tbl st"><table>
+        <thead><tr><th><span class="zh">产品</span><span class="eng">Product</span></th><th><span class="zh">界面形态</span><span class="eng">Interface</span></th><th><span class="zh">适合谁</span><span class="eng">For whom</span></th><th><span class="zh">核心定位</span><span class="eng">Core role</span></th></tr></thead><tbody>
+          <tr><td>Claude Chat</td><td><span class="zh">网页 / 手机 / 桌面</span><span class="eng">Web / mobile / desktop</span></td><td><span class="zh">所有员工</span><span class="eng">All employees</span></td><td><span class="zh">日常工作首选,本次分享主角</span><span class="eng">The default for daily work; the focus of this briefing</span></td></tr>
+          <tr><td>Claude Cowork</td><td><span class="zh">桌面应用</span><span class="eng">Desktop app</span></td><td><span class="zh">非技术人员</span><span class="eng">Non-technical staff</span></td><td><span class="zh">直接操作本地文件,自动化重复桌面任务</span><span class="eng">Works on local files directly; automates repetitive desktop tasks</span></td></tr>
+          <tr><td>Claude Code</td><td><span class="zh">命令行 + IDE + 桌面</span><span class="eng">CLI + IDE + desktop</span></td><td><span class="zh">工程师</span><span class="eng">Engineers</span></td><td><span class="zh">代码库内自主编写、调试与代码审查</span><span class="eng">Autonomous coding, debugging, and code review within the repo</span></td></tr>
+        </tbody></table></div>
+
+      <h3 class="st"><span class="hn">4.3</span><span class="zh">模型选择指南</span><span class="eng">Choosing a model</span></h3>
+      <div class="tbl st"><table>
+        <thead><tr><th><span class="zh">模型</span><span class="eng">Model</span></th><th><span class="zh">定位</span><span class="eng">Position</span></th><th><span class="zh">适用场景</span><span class="eng">When to use</span></th></tr></thead><tbody>
+          <tr><td>Opus 4.8</td><td><span class="zh">最新旗舰,最强</span><span class="eng">Latest flagship, strongest</span></td><td><span class="zh">最高难度任务:复杂推理、关键决策、精度要求最高的分析</span><span class="eng">Hardest tasks: complex reasoning, critical decisions, the most precision-demanding analysis</span></td></tr>
+          <tr><td>Opus 4.7</td><td><span class="zh">上一代旗舰</span><span class="eng">Previous flagship</span></td><td><span class="zh">高难度任务,Opus 4.8 不可用时的首选备选</span><span class="eng">High-difficulty tasks; the first fallback when Opus 4.8 is unavailable</span></td></tr>
+          <tr><td>Opus 4.6</td><td><span class="zh">旗舰备选</span><span class="eng">Flagship fallback</span></td><td><span class="zh">Opus 4.7 不可用时的备选</span><span class="eng">Fallback when Opus 4.7 is unavailable</span></td></tr>
+          <tr style="background:rgba(54,81,66,.07)"><td><strong>Sonnet 4.6</strong></td><td><span class="pill ok"><span class="zh">日常主力 ✓</span><span class="eng">Daily workhorse ✓</span></span></td><td><span class="zh">日常 80%+ 工作,速度与质量最优平衡,推荐默认</span><span class="eng">80%+ of daily work; the best speed-quality balance, recommended default</span></td></tr>
+          <tr><td>Haiku 4.5</td><td><span class="zh">轻快</span><span class="eng">Light &amp; fast</span></td><td><span class="zh">简单问答、批量任务、初步筛选</span><span class="eng">Simple Q&amp;A, batch tasks, first-pass screening</span></td></tr>
+        </tbody></table></div>
+      <div class="callout soft st"><span class="lbl"><span class="zh">实用建议</span><span class="eng">Practical tip</span></span><span class="zh">日常工作选用 <strong>Sonnet 4.6</strong> 即可满足绝大多数需求;复杂分析与关键决策时,切换至 <strong>Opus 系列</strong>。</span><span class="eng"><strong>Sonnet 4.6</strong> covers the vast majority of daily needs; switch to the <strong>Opus series</strong> for complex analysis and critical decisions.</span></div>
+    </section>
+
+    <!-- P5 -->
+    <section class="panel" id="p5">
+      <div class="phead st"><span class="bignum">05</span><div class="eye">Section&nbsp;05</div><h2><span class="zh">数据使用规范与安全</span><span class="eng">Data Policy &amp; Security</span><span class="en">Data &amp; Security</span></h2></div>
+
+      <div class="grid2 st" style="align-items:start">
+        <div>
+          <h3 style="margin-top:6px"><span class="hn">5.1</span><span class="zh">企业版数据保障</span><span class="eng">Enterprise data protection</span></h3>
+          <ul class="tight full">
+            <li><span class="zh">公司使用 Claude <b>企业版(Team / Enterprise)</b>,数据<b>不会用于训练</b>,受合同保障。</span><span class="eng">The company uses <b>Claude Enterprise (Team / Enterprise)</b>; data is <b>not used for training</b> and is contractually protected.</span></li>
+            <li><span class="zh">"内容被学走"的顾虑在企业版下不成立。</span><span class="eng">The worry that &lsquo;your content gets learned&rsquo; does not apply on the enterprise plan.</span></li>
+            <li><span class="zh">HR / 行政 / 法务日常文字工作,可放心使用。</span><span class="eng">Day-to-day text work for HR / Admin / Legal can be done with confidence.</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="margin-top:6px"><span class="hn">5.3</span><span class="zh">脱敏处理示例</span><span class="eng">De-identification examples</span></h3>
+          <div class="tbl"><table>
+            <thead><tr><th><span class="zh">原始内容</span><span class="eng">Original</span></th><th><span class="zh">替换为</span><span class="eng">Replace with</span></th></tr></thead><tbody>
+              <tr><td><span class="zh">员工 / 候选人姓名</span><span class="eng">Employee / candidate name</span></td><td><code class="m">[Employee A] / [Candidate B]</code></td></tr>
+              <tr><td><span class="zh">公司 / 当事人名称</span><span class="eng">Company / party name</span></td><td><code class="m">[Company A] / [Party X]</code></td></tr>
+              <tr><td><span class="zh">部门</span><span class="eng">Department</span></td><td><code class="m">[Dept X]</code></td></tr>
+            </tbody></table></div>
+        </div>
+      </div>
+
+      <h3 class="st"><span class="hn">5.2</span><span class="zh">仍需注意的数据风险类型</span><span class="eng">Risks that still need care</span></h3>
+      <p class="st" style="font-size:.88rem"><span class="zh">企业版保障的是"不用于训练",但以下几类情况出于其他原因仍需谨慎处理:</span><span class="eng">The enterprise plan guarantees &lsquo;not used for training,&rsquo; but the following still warrant caution for other reasons:</span></p>
+      <div class="tbl st"><table>
+        <thead><tr><th><span class="zh">风险类型</span><span class="eng">Risk type</span></th><th><span class="zh">说明</span><span class="eng">Explanation</span></th><th><span class="zh">处理建议</span><span class="eng">What to do</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">公司数据分级政策</span><span class="eng">Company data-classification policy</span></td><td><span class="zh">某些级别数据按内规不得离开特定系统,与 AI 是否训练无关</span><span class="eng">Some classified data may not leave specific systems under internal rules, regardless of AI training</span></td><td><span class="pill"><span class="zh">确认数据级别</span><span class="eng">Check the data level</span></span></td></tr>
+          <tr><td><span class="zh">对客户 / 第三方保密义务</span><span class="eng">Confidentiality to clients / third parties</span></td><td><span class="zh">合同中的保密条款不因使用 AI 工具而豁免</span><span class="eng">Contractual confidentiality clauses are not waived by using an AI tool</span></td><td><span class="pill"><span class="zh">脱敏后再使用</span><span class="eng">De-identify first</span></span></td></tr>
+          <tr><td><span class="zh">法律保密特权(Privilege)</span><span class="eng">Legal privilege</span></td><td><span class="zh">法务享有保密特权的沟通内容须特别谨慎</span><span class="eng">Privileged communications require special caution</span></td><td><span class="pill"><span class="zh">脱敏或提交审批</span><span class="eng">De-identify or seek approval</span></span></td></tr>
+          <tr><td><span class="zh">个人信息保护(RA 10173)</span><span class="eng">Personal data protection (RA 10173)</span></td><td><span class="zh">处理个人数据须符合菲律宾《数据隐私法》等法规</span><span class="eng">Handling personal data must comply with the Philippine Data Privacy Act and related laws</span></td><td><span class="pill"><span class="zh">脱敏或匿名化</span><span class="eng">De-identify or anonymize</span></span></td></tr>
+        </tbody></table></div>
+
+      <h3 class="st"><span class="hn">5.4</span><span class="zh">各部门高风险数据清单</span><span class="eng">High-risk data by department</span></h3>
+      <div class="grid3 st">
+        <div class="mini tline"><h5>HR</h5><p><span class="zh">身份证 / 护照 / 银行账号、薪资明细与调薪记录、绩效评估、处分 / 投诉记录、候选人完整资料</span><span class="eng">IDs / passports / bank accounts, salary details and pay-adjustment records, performance reviews, disciplinary / complaint records, complete candidate profiles</span></p></div>
+        <div class="mini tline"><h5><span class="zh">行政</span><span class="eng">Admin</span></h5><p><span class="zh">供应商合同与报价单、高管 / 来宾行程与联系方式、标注"机密 / 内部"的文件</span><span class="eng">Supplier contracts and quotations, executive / guest itineraries and contacts, documents marked &lsquo;confidential / internal&rsquo;</span></p></div>
+        <div class="mini tline"><h5><span class="zh">法务</span><span class="eng">Legal</span></h5><p><span class="zh">未签署合同正本、诉讼 / 仲裁策略、和解金额与谈判底线、客户机密资料、保密特权沟通</span><span class="eng">Unsigned contract originals, litigation / arbitration strategy, settlement amounts and negotiation limits, client confidential materials, privileged communications</span></p></div>
+        <div class="mini tline"><h5><span class="zh">市场 · 品牌 · mosaic · CEO Office · PMO</span><span class="eng">Marketing · Brand · mosaic · CEO Office · PMO</span></h5><p><span class="zh">未公开的营销 / 品牌计划与预算、高管日程与董事会 / 机密决策材料、未发布的项目与里程碑、客户 / 合作伙伴名单与合同条款、内部财务与战略文件</span><span class="eng">Unreleased marketing / brand plans &amp; budgets, executive schedules and board / confidential decision materials, unannounced projects &amp; milestones, client / partner lists and contract terms, internal finance &amp; strategy documents</span></p></div>
+        <div class="mini tline"><h5><span class="zh">产品 · 运营 · 体育团队</span><span class="eng">Product · Operations · Sports</span></h5><p><span class="zh">未发布的产品路线图与功能、用户个人与投注 / 行为数据、运营与营收数据、赔率 / 风控模型、博彩牌照与合规材料</span><span class="eng">Unreleased product roadmaps &amp; features, user personal &amp; betting / behavioral data, ops &amp; revenue figures, odds / risk models, gaming licenses &amp; compliance materials</span></p></div>
+      </div>
+    </section>
+
+    <!-- P6 -->
+    <section class="panel" id="p6">
+      <div class="phead st"><span class="bignum">06</span><div class="eye">Section&nbsp;06</div><h2><span class="zh">有效提问方法</span><span class="eng">Effective Prompting</span><span class="en">Prompting</span></h2></div>
+
+      <h3 class="st"><span class="hn">6.1</span><span class="zh">五要素提问公式</span><span class="eng">The five-part prompt formula</span></h3>
+      <div class="formula st"><span class="c"><span class="zh">角色</span><span class="eng">Role</span></span><span class="p">+</span><span class="c"><span class="zh">任务</span><span class="eng">Task</span></span><span class="p">+</span><span class="c"><span class="zh">背景</span><span class="eng">Context</span></span><span class="p">+</span><span class="c"><span class="zh">约束</span><span class="eng">Constraints</span></span><span class="p">+</span><span class="c"><span class="zh">格式</span><span class="eng">Format</span></span></div>
+      <div class="tbl st"><table>
+        <thead><tr><th><span class="zh">要素</span><span class="eng">Element</span></th><th><span class="zh">说明</span><span class="eng">What it means</span></th><th><span class="zh">示例</span><span class="eng">Example</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">1. 角色</span><span class="eng">1. Role</span></td><td><span class="zh">告知所扮演的专业角色</span><span class="eng">State the professional role to play</span></td><td><code class="m">You are an HR specialist...</code></td></tr>
+          <tr><td><span class="zh">2. 任务</span><span class="eng">2. Task</span></td><td><span class="zh">明确需执行的具体任务</span><span class="eng">Specify the concrete task</span></td><td><code class="m">Review the following resumes...</code></td></tr>
+          <tr><td><span class="zh">3. 背景</span><span class="eng">3. Context</span></td><td><span class="zh">提供必要的上下文信息</span><span class="eng">Provide the necessary context</span></td><td><code class="m">...for a Legal Officer role in a PH gaming company</code></td></tr>
+          <tr><td><span class="zh">4. 约束</span><span class="eng">4. Constraints</span></td><td><span class="zh">说明范围限制与注意事项</span><span class="eng">Note scope limits and caveats</span></td><td><code class="m">Focus only on relevant experience and qualifications</code></td></tr>
+          <tr><td><span class="zh">5. 格式</span><span class="eng">5. Format</span></td><td><span class="zh">指定输出的结构与形式</span><span class="eng">Specify the output structure and form</span></td><td><code class="m">Present as a comparison table with a recommendation</code></td></tr>
+        </tbody></table></div>
+
+      <h3 class="st"><span class="hn">6.2</span><span class="zh">各部门提问示例对比</span><span class="eng">Prompt examples by department</span></h3>
+      <h4 class="st"><span class="zh">HR —— 简历对比</span><span class="eng">HR — Resume comparison</span></h4>
+      <div class="pp st">
+        <div class="pq bad"><span class="mk"><span class="zh">✕ 模糊</span><span class="eng">✕ Vague</span></span>Compare these resumes.</div>
+        <div class="pq good"><span class="mk"><span class="zh">✓ 有效</span><span class="eng">✓ Effective</span></span>Compare the following 3 resumes for a Legal Officer role. Evaluate each on relevant experience, key skills, education, and overall fit. Present a comparison table and recommend the top candidate.</div>
+      </div>
+      <h4 class="st"><span class="zh">行政 —— 双语公告</span><span class="eng">Admin — Bilingual announcement</span></h4>
+      <div class="pp st">
+        <div class="pq bad"><span class="mk"><span class="zh">✕ 模糊</span><span class="eng">✕ Vague</span></span><span class="zh">写个放假通知。</span><span class="eng">Write a holiday notice.</span></div>
+        <div class="pq good"><span class="mk"><span class="zh">✓ 有效</span><span class="eng">✓ Effective</span></span>Draft a company-wide announcement in both English and Chinese. The office will be closed on [date] for [reason]. Keep it professional and concise, under 100 words per language.</div>
+      </div>
+      <h4 class="st"><span class="zh">法务 —— 合同审查</span><span class="eng">Legal — Contract review</span></h4>
+      <div class="pp st">
+        <div class="pq bad"><span class="mk"><span class="zh">✕ 模糊</span><span class="eng">✕ Vague</span></span>Help me review this contract.</div>
+        <div class="pq good"><span class="mk"><span class="zh">✓ 有效</span><span class="eng">✓ Effective</span></span>I am a legal officer at a gaming company in the Philippines. Review the attached NDA and identify: 1) clauses unenforceable under Philippine law, 2) missing standard clauses, 3) ambiguous language. Present in a table with recommended revisions.</div>
+      </div>
+      <h4 class="st"><span class="zh">市场 / 品牌 —— 营销文案</span><span class="eng">Marketing / Brand — Marketing copy</span></h4>
+      <div class="pp st">
+        <div class="pq bad"><span class="mk"><span class="zh">✕ 模糊</span><span class="eng">✕ Vague</span></span><span class="zh">写个促销文案。</span><span class="eng">Write some promo copy.</span></div>
+        <div class="pq good"><span class="mk"><span class="zh">✓ 有效</span><span class="eng">✓ Effective</span></span>You are a brand copywriter. Write 3 versions of a launch post for [product/event] — one each for Instagram, LinkedIn, and X — under 280 characters, on-brand, with an EN and a CN version of each.</div>
+      </div>
+      <h4 class="st"><span class="zh">产品 / 运营 —— 用户反馈归纳</span><span class="eng">Product / Ops — User-feedback synthesis</span></h4>
+      <div class="pp st">
+        <div class="pq bad"><span class="mk"><span class="zh">✕ 模糊</span><span class="eng">✕ Vague</span></span><span class="zh">看看这些反馈。</span><span class="eng">Look at this feedback.</span></div>
+        <div class="pq good"><span class="mk"><span class="zh">✓ 有效</span><span class="eng">✓ Effective</span></span>Here are 50 raw user-feedback entries. Sort them into feature requests, bugs, and UX issues, rank each group by frequency, and summarize the top 5 action items in a table.</div>
+      </div>
+
+      <h3 class="st"><span class="hn">6.3</span><span class="zh">追问与迭代方法</span><span class="eng">Follow-up &amp; iteration</span></h3>
+      <div class="grid3 st">
+        <div class="mini"><h5><span class="zh">结果不符合预期</span><span class="eng">Result isn&rsquo;t what you expected</span></h5><p><span class="zh">说明具体哪里不对、期望的改动方向,而非仅要求"重写"。</span><span class="eng">Say specifically what&rsquo;s wrong and the direction you want, rather than just asking to &lsquo;rewrite.&rsquo;</span></p></div>
+        <div class="mini"><h5><span class="zh">任务较为复杂</span><span class="eng">The task is complex</span></h5><p><span class="zh">先要求输出大纲确认方向,确认后再展开执行。</span><span class="eng">Ask for an outline first to confirm direction, then proceed.</span></p></div>
+        <div class="mini"><h5><span class="zh">不确定是否被理解</span><span class="eng">Unsure it understood you</span></h5><p><span class="zh">让 Claude 先复述任务,确认无误后再执行。</span><span class="eng">Have Claude restate the task first, then proceed once it&rsquo;s correct.</span></p></div>
+      </div>
+    </section>
+
+    <!-- P7 -->
+    <section class="panel" id="p7">
+      <div class="phead st"><span class="bignum">07</span><div class="eye">Section&nbsp;07</div><h2><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span><span class="en">Use Cases</span></h2></div>
+
+      <div class="grid2 st">
+        <div class="mini"><h5><span class="tg">7.1</span><span class="zh">起草与文字撰写</span><span class="eng">Drafting &amp; writing</span></h5><div class="dl">
+          <div class="it"><b><span class="zh">邮件起草</span><span class="eng">Email drafting</span></b><span class="ds"><span class="zh">提供收件人、事由、期望行动,生成专业邮件</span><span class="eng">Provide recipient, purpose, and desired action; get a professional email</span></span></div>
+          <div class="it"><b><span class="zh">信函 / 通知撰写</span><span class="eng">Letters / notices</span></b><span class="ds"><span class="zh">内部通知、对外信函、中英双语公告</span><span class="eng">Internal notices, external letters, bilingual announcements</span></span></div>
+          <div class="it"><b><span class="zh">会议 / 面试纪要</span><span class="eng">Meeting / interview minutes</span></b><span class="ds"><span class="zh">零散记录整理为结构化纪要(日期/出席/议题/决议/待办)</span><span class="eng">Turn rough notes into structured minutes (date / attendees / agenda / decisions / action items)</span></span></div>
+          <div class="it"><b><span class="zh">长文档摘要</span><span class="eng">Long-document summaries</span></b><span class="ds"><span class="zh">将冗长文件浓缩为结构化要点</span><span class="eng">Condense lengthy files into structured key points</span></span></div>
+        </div></div>
+        <div class="mini"><h5><span class="tg">7.2</span><span class="zh">文档分析与对比</span><span class="eng">Document analysis &amp; comparison</span></h5><div class="dl">
+          <div class="it"><b><span class="zh">版本差异对比</span><span class="eng">Version diff</span></b><span class="ds"><span class="zh">提供两份文档,列出所有实质性差异</span><span class="eng">Provide two documents; list every substantive difference</span></span></div>
+          <div class="it"><b><span class="zh">多文档横向对比</span><span class="eng">Cross-document comparison</span></b><span class="ds"><span class="zh">多份简历/合同/报价单,生成结构化对比表</span><span class="eng">Multiple resumes / contracts / quotes; get a structured comparison table</span></span></div>
+          <div class="it"><b><span class="zh">长文档条款审阅</span><span class="eng">Long-document clause review</span></b><span class="ds"><span class="zh">上传 PDF/Word,提取关键条款、风险点或摘要</span><span class="eng">Upload PDF / Word; extract key clauses, risks, or a summary</span></span></div>
+        </div></div>
+        <div class="mini"><h5><span class="tg">7.3</span><span class="zh">数据整理与格式化</span><span class="eng">Data cleanup &amp; formatting</span></h5><div class="dl">
+          <div class="it"><b><span class="zh">文件批量重命名</span><span class="eng">Bulk file renaming</span></b><span class="ds"><span class="zh">说明规则并列出文件名,生成"原名 → 新名"对照表</span><span class="eng">State the rule and list filenames; get an &lsquo;old → new&rsquo; mapping table</span></span></div>
+          <div class="it"><b><span class="zh">数据结构化</span><span class="eng">Structuring data</span></b><span class="ds"><span class="zh">零散信息整理为规范表格,可直接输出 Excel</span><span class="eng">Organize scattered info into a clean table; export to Excel directly</span></span></div>
+          <div class="it"><b><span class="zh">台账 / 记录更新</span><span class="eng">Ledger / record updates</span></b><span class="ds"><span class="zh">粘贴现有台账与新增数据,输出更新后完整版本</span><span class="eng">Paste the existing ledger and new data; get the full updated version</span></span></div>
+        </div></div>
+        <div class="mini"><h5><span class="tg">7.4</span><span class="zh">翻译与文字润色</span><span class="eng">Translation &amp; polishing</span></h5><div class="dl">
+          <div class="it"><b><span class="zh">中英互译</span><span class="eng">EN ↔ CN translation</span></b><span class="ds"><span class="zh">邮件、通知、简报、合同条款的中英双向翻译</span><span class="eng">Two-way translation of emails, notices, briefs, and contract clauses</span></span></div>
+          <div class="it"><b><span class="zh">专业语气</span><span class="eng">Professional tone</span></b><span class="ds"><span class="zh">将过于随意或生硬的文字调整为专业、正式语气</span><span class="eng">Adjust overly casual or stiff text into a professional, formal tone</span></span></div>
+        </div></div>
+      </div>
+
+      <h3 class="st"><span class="hn">7.5</span><span class="zh">Projects 功能的配置与使用</span><span class="eng">Setting up &amp; using Projects</span></h3>
+      <p class="st" style="font-size:.9rem"><span class="zh">每个部门建议建立专属 Project,实现<strong>背景信息一次设置、所有对话长期生效</strong>。</span><span class="eng">Each department should set up its own Project, so <strong>background information is configured once and applies to all conversations long-term</strong>.</span></p>
+      <div class="grid2 st" style="align-items:start">
+        <div>
+          <h4 style="margin-top:4px"><span class="zh">配置步骤</span><span class="eng">Setup steps</span></h4>
+          <ol class="steps">
+            <li><span class="zh">上传部门常用参考资料(SOP、合同模板、手册章节、常用格式)。</span><span class="eng">Upload the department&rsquo;s common references (SOPs, contract templates, handbook sections, standard formats).</span></li>
+            <li><span class="zh">写入自定义指令(团队身份、惯用语气、输出格式要求)。</span><span class="eng">Write custom instructions (team identity, preferred tone, output-format requirements).</span></li>
+            <li><span class="zh">此后该 Project 内所有对话自动读取以上内容,无需重复说明。</span><span class="eng">From then on, every conversation in the Project reads this automatically—no need to repeat it.</span></li>
+          </ol>
+        </div>
+        <div>
+          <h4 style="margin-top:4px"><span class="zh">推荐建立的 Projects</span><span class="eng">Recommended Projects</span></h4>
+          <div class="proj3">
+            <div class="proj"><div class="ic">H</div><b><span class="zh">HR 政策<br>问答</span><span class="eng">HR Policy<br>Q&amp;A</span></b></div>
+            <div class="proj"><div class="ic">A</div><b><span class="zh">行政文件<br>与模板</span><span class="eng">Admin Docs<br>&amp; Templates</span></b></div>
+            <div class="proj"><div class="ic">L</div><b><span class="zh">法务合同<br>审查</span><span class="eng">Legal Contract<br>Review</span></b></div>
+            <div class="proj"><div class="ic">M</div><b><span class="zh">营销 / 品牌<br>内容</span><span class="eng">Marketing / Brand<br>Content</span></b></div>
+            <div class="proj"><div class="ic">R</div><b><span class="zh">汇报模板</span><span class="eng">Reporting<br>Templates</span></b></div>
+            <div class="proj"><div class="ic">O</div><b><span class="zh">产品 / 运营<br>文档</span><span class="eng">Product / Ops<br>Docs</span></b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+</div>
+
+<div class="radarpop" id="radarpop">
+  <div class="rp-title"></div>
+  <div class="rp-sub"><span class="zh">模型能力 · 相对估计</span><span class="eng">Capability · relative</span></div>
+  <div class="rp-body"></div>
+</div>
+
+<script>
+  const main=document.getElementById('main');
+  const allTabs=[...document.querySelectorAll('.tab,.mtab')];
+  const panels=[...document.querySelectorAll('.panel')];
+
+  function activate(id){
+    panels.forEach(p=>p.classList.toggle('active',p.id===id));
+    allTabs.forEach(t=>t.classList.toggle('active',t.dataset.t===id));
+    const panel=document.getElementById(id);
+    panel.querySelectorAll('.st').forEach((el,i)=>{
+      el.style.animation='none'; void el.offsetWidth;
+      el.style.animation='rise .5s cubic-bezier(.2,.7,.2,1) both';
+      el.style.animationDelay=(i*42)+'ms';
+    });
+    main.scrollTop=0;
+    if(window.innerWidth<=880){window.scrollTo({top:0,behavior:'smooth'});}
+  }
+  allTabs.forEach(t=>t.addEventListener('click',()=>activate(t.dataset.t)));
+
+  document.querySelectorAll('.subtab').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.subtab').forEach(x=>x.classList.toggle('active',x===b));
+      document.querySelectorAll('.deptbox').forEach(x=>x.classList.toggle('active',x.id===b.dataset.d));
+    });
+  });
+
+  // language toggle
+  document.querySelectorAll('.lt').forEach(b=>{
+    b.addEventListener('click',()=>{
+      const l=b.dataset.l;
+      document.body.classList.toggle('lang-en', l==='en');
+      document.documentElement.lang = (l==='en') ? 'en' : 'zh-CN';
+      document.querySelectorAll('.lt').forEach(x=>x.classList.toggle('active', x.dataset.l===l));
+    });
+  });
+
+  // capability radar on hover / tap
+  (function(){
+    const pop=document.getElementById('radarpop');
+    if(!pop) return;
+    const titleEl=pop.querySelector('.rp-title');
+    const bodyEl=pop.querySelector('.rp-body');
+    const LAB_ZH=['推理','写作','长文档','中文','多模态','可靠'];
+    const LAB_EN=['Reason','Writing','Long-doc','Chinese','Multi','Reliable'];
+    const NAMES={Claude:'Claude',ChatGPT:'ChatGPT',Gemini:'Gemini',Qwen:'通义千问 Qwen',DeepSeek:'DeepSeek',Copilot:'Copilot',Grok:'Grok',Perplexity:'Perplexity'};
+    const RADAR={
+      Claude:    [96,94,95,82,84,96],
+      ChatGPT:   [95,95,90,85,92,84],
+      Gemini:    [92,88,95,84,96,88],
+      Qwen:      [88,86,88,96,62,82],
+      DeepSeek:  [90,84,90,92,68,82],
+      Copilot:   [90,90,78,82,86,84],
+      Grok:      [88,84,88,78,82,72],
+      Perplexity:[72,70,76,76,60,86]
+    };
+    const cx=150, cy=128, R=80, N=6;
+    const ang=i=>(-90+i*60)*Math.PI/180;
+    const pt=(i,r)=>[cx+Math.cos(ang(i))*r, cy+Math.sin(ang(i))*r];
+    function svg(s){
+      let g='';
+      [0.25,0.5,0.75,1].forEach(f=>{
+        let p=[]; for(let i=0;i<N;i++){const a=pt(i,R*f);p.push(a[0].toFixed(1)+','+a[1].toFixed(1));}
+        g+='<polygon points="'+p.join(' ')+'" fill="none" stroke="var(--line)" stroke-width="1"/>';
+      });
+      for(let i=0;i<N;i++){const a=pt(i,R);g+='<line x1="'+cx+'" y1="'+cy+'" x2="'+a[0].toFixed(1)+'" y2="'+a[1].toFixed(1)+'" stroke="var(--line)" stroke-width="1"/>';}
+      let dp=[]; for(let i=0;i<N;i++){const a=pt(i,R*s[i]/100);dp.push(a[0].toFixed(1)+','+a[1].toFixed(1));}
+      g+='<polygon points="'+dp.join(' ')+'" fill="rgba(166,117,58,.22)" stroke="var(--bronze)" stroke-width="2" stroke-linejoin="round"/>';
+      for(let i=0;i<N;i++){const a=pt(i,R*s[i]/100);g+='<circle cx="'+a[0].toFixed(1)+'" cy="'+a[1].toFixed(1)+'" r="2.6" fill="var(--bronze-deep)"/>';}
+      for(let i=0;i<N;i++){
+        const a=pt(i,R+16); let anc='middle';
+        if(a[0]<cx-6)anc='end'; else if(a[0]>cx+6)anc='start';
+        const x=a[0].toFixed(1), y=(a[1]+3.5).toFixed(1);
+        g+='<text x="'+x+'" y="'+y+'" text-anchor="'+anc+'" class="zh" font-size="11" font-weight="500" fill="var(--ink-2)">'+LAB_ZH[i]+'</text>';
+        g+='<text x="'+x+'" y="'+y+'" text-anchor="'+anc+'" class="eng" font-size="9.5" font-weight="500" fill="var(--ink-2)">'+LAB_EN[i]+'</text>';
+      }
+      return '<svg viewBox="0 0 300 262" xmlns="http://www.w3.org/2000/svg">'+g+'</svg>';
+    }
+    let pinned=false; const W=262, H=300;
+    function show(t){const s=RADAR[t]; if(!s)return; titleEl.textContent=NAMES[t]||t; bodyEl.innerHTML=svg(s); pop.classList.add('show');}
+    function hide(){pop.classList.remove('show'); pinned=false;}
+    function place(x,y){
+      let px=x+18, py=y+18;
+      if(px+W>window.innerWidth-8) px=x-W-18;
+      if(px<8) px=8;
+      if(py+H>window.innerHeight-8) py=Math.max(8, window.innerHeight-H-8);
+      pop.style.left=px+'px'; pop.style.top=py+'px';
+    }
+    document.querySelectorAll('tr[data-tool]').forEach(row=>{
+      const t=row.dataset.tool;
+      row.addEventListener('mouseenter',e=>{ if(!pinned){ show(t); place(e.clientX,e.clientY);} });
+      row.addEventListener('mousemove',e=>{ if(!pinned && pop.classList.contains('show')) place(e.clientX,e.clientY); });
+      row.addEventListener('mouseleave',()=>{ if(!pinned) hide(); });
+      row.addEventListener('click',e=>{ const r=row.getBoundingClientRect(); show(t); place(e.clientX||r.left+60, e.clientY||r.bottom); pinned=true; e.stopPropagation(); });
+    });
+    document.addEventListener('click',()=>{ if(pinned) hide(); });
+    window.addEventListener('scroll',()=>{ if(!pinned) hide(); }, true);
+  })();
+
+  activate('p1');
+</script>
+</body>
+</html>
