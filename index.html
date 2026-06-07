@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -303,10 +304,9 @@
       <button class="tab active" data-t="p1"><span class="n">1</span><span class="zh">引言</span><span class="eng">Introduction</span></button>
       <button class="tab" data-t="p2"><span class="n">2</span><span class="zh">AI 工具市场概览</span><span class="eng">AI Tool Landscape</span></button>
       <button class="tab" data-t="p3"><span class="n">3</span><span class="zh">Claude 的价值定位</span><span class="eng">Why Claude</span></button>
-      <button class="tab" data-t="p4"><span class="n">4</span><span class="zh">产品与功能概述</span><span class="eng">Products &amp; Features</span></button>
-      <button class="tab" data-t="p5"><span class="n">5</span><span class="zh">数据规范与安全</span><span class="eng">Data Policy &amp; Security</span></button>
-      <button class="tab" data-t="p6"><span class="n">6</span><span class="zh">有效提问方法</span><span class="eng">Effective Prompting</span></button>
-      <button class="tab" data-t="p7"><span class="n">7</span><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span></button>
+      <button class="tab" data-t="p4"><span class="n">4</span><span class="zh">认识 Claude · 功能与设置</span><span class="eng">Features &amp; Setup</span></button>
+      <button class="tab" data-t="p6"><span class="n">5</span><span class="zh">如何写好提示词</span><span class="eng">Writing Better Prompts</span></button>
+      <button class="tab" data-t="p7"><span class="n">6</span><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span></button>
     </div>
   </div>
 
@@ -320,9 +320,8 @@
       <button class="mtab active" data-t="p1"><span class="zh">引言</span><span class="eng">Intro</span></button>
       <button class="mtab" data-t="p2"><span class="zh">AI 市场</span><span class="eng">Landscape</span></button>
       <button class="mtab" data-t="p3"><span class="zh">价值定位</span><span class="eng">Why Claude</span></button>
-      <button class="mtab" data-t="p4"><span class="zh">产品功能</span><span class="eng">Products</span></button>
-      <button class="mtab" data-t="p5"><span class="zh">数据安全</span><span class="eng">Security</span></button>
-      <button class="mtab" data-t="p6"><span class="zh">提问方法</span><span class="eng">Prompting</span></button>
+      <button class="mtab" data-t="p4"><span class="zh">功能设置</span><span class="eng">Features</span></button>
+      <button class="mtab" data-t="p6"><span class="zh">提示词</span><span class="eng">Prompting</span></button>
       <button class="mtab" data-t="p7"><span class="zh">应用场景</span><span class="eng">Use Cases</span></button>
     </div>
   </div>
@@ -332,94 +331,35 @@
 
     <!-- P1 -->
     <section class="panel active" id="p1">
-      <div class="phead st"><span class="bignum">01</span><div class="eye">Section&nbsp;01</div><h2><span class="zh">引言</span><span class="eng">Introduction</span><span class="en">Why AI, Why Now</span></h2></div>
+      <div class="phead st"><span class="bignum">01</span><div class="eye">Section&nbsp;01</div><h2><span class="zh">引言</span><span class="eng">Introduction</span><span class="en">Introduction</span></h2></div>
 
       <h3 class="st"><span class="hn">1.1</span><span class="zh">AI 学习的必要性与价值</span><span class="eng">Why Learning AI Matters</span></h3>
       <p class="st"><span class="zh">AI 正在以前所未有的速度改变每一个行业的工作方式。</span><span class="eng">AI is changing how every industry works at an unprecedented pace.</span></p>
       <div class="feat3 st">
-        <div class="fcard"><div class="ft"><span class="zh">早学者持续受益</span><span class="eng">Early adopters keep gaining</span></div><p><span class="zh">现在学会的人,每天都在节省时间与精力;推迟意味着仍在承担本可交给 AI 的重复工作。</span><span class="eng">Those who learn now save time and energy every day; delaying means still carrying repetitive work that could be handed to AI.</span></p></div>
-        <div class="fcard"><div class="ft"><span class="zh">使用门槛极低</span><span class="eng">A very low barrier</span></div><p><span class="zh">无需技术背景,无需编程能力,能够打字即可上手。</span><span class="eng">No technical background or coding skills required—if you can type, you can use it.</span></p></div>
-        <div class="fcard"><div class="ft"><span class="zh">直接提升成果</span><span class="eng">Directly better output</span></div><p><span class="zh">AI 生成的初稿质量更高、速度更快,使精力集中于真正需要专业判断的环节。</span><span class="eng">AI produces higher-quality first drafts, faster, freeing your focus for the parts that truly require professional judgment.</span></p></div>
+        <div class="fcard"><div class="ft"><span class="zh">早学者持续受益</span><span class="eng">Early adopters keep gaining</span></div><p><span class="zh">现在学会的人,每天都在节省时间与精力;推迟意味着仍在承担本可交给 AI 的重复工作。</span><span class="eng">The sooner you start, the more time you save — every single day. Those who delay are still doing manually what AI can already handle.</span></p></div>
+        <div class="fcard"><div class="ft"><span class="zh">使用门槛极低</span><span class="eng">No technical skills needed</span></div><p><span class="zh">无需技术背景,无需编程能力,能够打字即可上手。</span><span class="eng">You don't need to code. You don't need a tech background. If you can type, you can use AI. It's that simple.</span></p></div>
+        <div class="fcard"><div class="ft"><span class="zh">直接提升成果</span><span class="eng">Better output, faster</span></div><p><span class="zh">AI 生成的初稿质量更高、速度更快,使精力集中于真正需要专业判断的环节。</span><span class="eng">AI helps you produce higher-quality work in less time — so you can focus your energy on the parts that actually need your decision.</span></p></div>
       </div>
 
       <h3 class="st"><span class="hn">1.2</span><span class="zh">对工作效率的核心提升价值</span><span class="eng">The Core Efficiency Gain</span></h3>
-      <div class="callout dark st"><span class="lbl">Core Value</span><span class="zh">AI 最核心的能力是:<strong>承接大量重复性文字工作,使人员得以专注于只有人才能完成的专业判断。</strong></span><span class="eng">AI's core capability: <strong>take on large volumes of repetitive text work, so people can focus on the professional judgment only humans can provide.</strong></span></div>
+      <div class="callout dark st"><span class="lbl">Core Value</span><span class="zh">AI 最核心的能力是:<strong>承接大量重复性文字工作,使人员得以专注于只有人才能完成的专业判断。</strong></span><span class="eng">Let AI handle the repetitive work such as <strong>writing drafts, summarizing, formatting</strong> — so you can focus on what matters most: <strong>thinking and deciding.</strong></span></div>
       <div class="tbl st"><table>
         <thead><tr><th><span class="zh">工作类型</span><span class="eng">Task type</span></th><th><span class="zh">传统方式</span><span class="eng">Traditional approach</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
           <tr><td><span class="zh">邮件 / 信函起草</span><span class="eng">Email / letter drafting</span></td><td><span class="zh">从空白页撰写,反复修改</span><span class="eng">Start from a blank page, revise repeatedly</span></td><td class="cl"><span class="zh">提供关键信息,数秒生成初稿,仅需审阅</span><span class="eng">Give key facts; a first draft in seconds, only review needed</span></td></tr>
           <tr><td><span class="zh">文件翻译</span><span class="eng">Document translation</span></td><td><span class="zh">等待外部译员或逐句自译</span><span class="eng">Wait for an external translator, or translate line by line</span></td><td class="cl"><span class="zh">上传文件,即时输出双语版本</span><span class="eng">Upload the file; get a bilingual version instantly</span></td></tr>
           <tr><td><span class="zh">长文档分析</span><span class="eng">Long-document analysis</span></td><td><span class="zh">逐页阅读,手动标注重点</span><span class="eng">Read page by page, mark key points by hand</span></td><td class="cl"><span class="zh">上传后直接提问,秒级输出摘要与风险</span><span class="eng">Upload and ask; summaries and risk flags in seconds</span></td></tr>
-          <tr><td><span class="zh">会议 / 面试纪要</span><span class="eng">Meeting / interview minutes</span></td><td><span class="zh">手写记录,会后整理归纳</span><span class="eng">Take notes by hand, organize afterward</span></td><td class="cl"><span class="zh">粘贴零散记录,输出结构化纪要</span><span class="eng">Paste rough notes; get structured minutes</span></td></tr>
           <tr><td><span class="zh">文件批量重命名</span><span class="eng">Bulk file renaming</span></td><td><span class="zh">逐个手动修改</span><span class="eng">Edit each file by hand</span></td><td class="cl"><span class="zh">说明命名规则,生成对照表,批量完成</span><span class="eng">State the naming rule; get a mapping table and rename in bulk</span></td></tr>
           <tr><td><span class="zh">多文档横向对比</span><span class="eng">Cross-document comparison</span></td><td><span class="zh">多窗口来回翻阅,手动比对</span><span class="eng">Flip between windows, compare manually</span></td><td class="cl"><span class="zh">粘贴内容,输出对比表与分析结论</span><span class="eng">Paste the content; get a comparison table and conclusions</span></td></tr>
-          <tr><td><span class="zh">法规 / 政策研究</span><span class="eng">Regulatory / policy research</span></td><td><span class="zh">搜索引擎 + 大量网页阅读</span><span class="eng">Search engines plus extensive web reading</span></td><td class="cl"><span class="zh">快速获取研究方向与要点(结论仍须核验)</span><span class="eng">Quickly get research directions and key points (conclusions still need verification)</span></td></tr>
         </tbody></table></div>
-      <ul class="tight st">
-        <li><span class="zh">消除面对空白页面的压力</span><span class="eng">Removes the pressure of the blank page</span></li>
-        <li><span class="zh">减少在措辞与结构上的反复纠结</span><span class="eng">Less agonizing over wording and structure</span></li>
-        <li><span class="zh">避免精力耗费在格式整理等低价值工作</span><span class="eng">Avoids spending energy on low-value work like formatting</span></li>
-        <li><span class="zh">重复执行交给 AI,专业判断留给人</span><span class="eng">Repetitive execution goes to AI; judgment stays with people</span></li>
-      </ul>
 
-      <h3 class="st"><span class="hn">1.3</span><span class="zh">预期成效与实践案例</span><span class="eng">Expected Outcomes &amp; Real Cases</span></h3>
-      <div class="subtabs st">
-        <button class="subtab active" data-d="d-hr">HR</button>
-        <button class="subtab" data-d="d-ad"><span class="zh">行政</span><span class="eng">Admin</span></button>
-        <button class="subtab" data-d="d-lg"><span class="zh">法务</span><span class="eng">Legal</span></button>
-        <button class="subtab" data-d="d-mkt"><span class="zh">市场 · 品牌 · PMO</span><span class="eng">Marketing · PMO</span></button>
-        <button class="subtab" data-d="d-pro"><span class="zh">产品 · 运营 · 体育</span><span class="eng">Product · Ops</span></button>
-      </div>
-      <div class="deptbox active" id="d-hr"><div class="tbl">
-        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
-          <tr><td><span class="zh">审阅 10 份候选人简历并出对比报告</span><span class="eng">Review 10 candidate resumes and produce a comparison report</span></td><td><span class="zh">逐份阅读 3–4 小时,手动制表</span><span class="eng">Read each one, 3–4 hours, build the table by hand</span></td><td class="cl"><span class="zh">粘贴脱敏简历,20 分钟产出结构化对比表</span><span class="eng">Paste de-identified resumes; a structured table in 20 minutes</span></td></tr>
-          <tr><td><span class="zh">起草个性化拒信</span><span class="eng">Draft a personalized rejection letter</span></td><td><span class="zh">每封 15–20 分钟,语气难把握</span><span class="eng">15–20 minutes each, tone hard to gauge</span></td><td class="cl"><span class="zh">2 分钟产出初稿,审阅后发出</span><span class="eng">A first draft in 2 minutes; review and send</span></td></tr>
-          <tr><td><span class="zh">解答假期政策咨询</span><span class="eng">Answer questions on leave policy</span></td><td><span class="zh">翻查手册 10–15 分钟定位章节</span><span class="eng">Search the handbook 10–15 minutes to find the section</span></td><td class="cl"><span class="zh">上传手册直接提问,即时输出并标注引用</span><span class="eng">Upload the handbook and ask; instant answers with cited sections</span></td></tr>
-          <tr><td><span class="zh">起草职位描述(JD)</span><span class="eng">Draft a job description (JD)</span></td><td><span class="zh">参考旧版,从头撰写 30–60 分钟</span><span class="eng">Reference old versions, write from scratch, 30–60 minutes</span></td><td class="cl"><span class="zh">提供岗位要求,3 分钟产出初稿</span><span class="eng">Provide the requirements; a first draft in 3 minutes</span></td></tr>
-        </tbody></table>
-      </div></div>
-      <div class="deptbox" id="d-ad"><div class="tbl">
-        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
-          <tr><td><span class="zh">撰写中英双语公司公告</span><span class="eng">Write a bilingual (EN/CN) company announcement</span></td><td><span class="zh">写中文后再翻译英文,1–2 小时</span><span class="eng">Write Chinese, then translate to English, 1–2 hours</span></td><td class="cl"><span class="zh">提供关键信息,10 分钟产出双语版本</span><span class="eng">Provide key facts; a bilingual version in 10 minutes</span></td></tr>
-          <tr><td><span class="zh">规范 200 个命名混乱的文件</span><span class="eng">Standardize 200 messily named files</span></td><td><span class="zh">逐一手动修改,耗费大半天</span><span class="eng">Edit one by one, most of a day</span></td><td class="cl"><span class="zh">说明命名规则,输出对照表,批量完成</span><span class="eng">State the rule; get a mapping table and rename in bulk</span></td></tr>
-          <tr><td><span class="zh">录音 / 手写记录整理为正式纪要</span><span class="eng">Turn recordings / handwritten notes into formal minutes</span></td><td><span class="zh">边整理边撰写,约 2 小时</span><span class="eng">Organize and write at once, about 2 hours</span></td><td class="cl"><span class="zh">粘贴内容,15 分钟产出结构化纪要</span><span class="eng">Paste the content; structured minutes in 15 minutes</span></td></tr>
-          <tr><td><span class="zh">翻译供应商报价单</span><span class="eng">Translate a supplier quotation</span></td><td><span class="zh">等待翻译或逐句自译,约 1 天</span><span class="eng">Wait for translation or do it line by line, about a day</span></td><td class="cl"><span class="zh">上传文件,数分钟产出双语对照版本</span><span class="eng">Upload the file; a side-by-side bilingual version in minutes</span></td></tr>
-        </tbody></table>
-      </div></div>
-      <div class="deptbox" id="d-lg"><div class="tbl">
-        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
-          <tr><td><span class="zh">审阅 50 页合同并提取风险条款</span><span class="eng">Review a 50-page contract and extract risk clauses</span></td><td><span class="zh">逐页阅读 3–5 小时,手动标注</span><span class="eng">Read page by page, 3–5 hours, annotate by hand</span></td><td class="cl"><span class="zh">上传后提问"有哪些风险条款",30 分钟完成</span><span class="eng">Upload and ask &lsquo;what are the risk clauses&rsquo;; done in 30 minutes</span></td></tr>
-          <tr><td><span class="zh">起草正式信函或法律意见初稿</span><span class="eng">Draft a formal letter or legal opinion</span></td><td><span class="zh">从头撰写,结构语气耗时 1–2 小时</span><span class="eng">Write from scratch; structure and tone take 1–2 hours</span></td><td class="cl"><span class="zh">提供关键事实与要点,10 分钟产出初稿</span><span class="eng">Provide key facts and points; a first draft in 10 minutes</span></td></tr>
-          <tr><td><span class="zh">研究菲律宾劳动法条款适用范围</span><span class="eng">Research the scope of a Philippine labor-law provision</span></td><td><span class="zh">查阅法条与多份文件,数小时</span><span class="eng">Look up statutes and multiple documents, several hours</span></td><td class="cl"><span class="zh">快速获得研究起点与方向(须对照原文核验)</span><span class="eng">Quickly get a research starting point and direction (verify against the source text)</span></td></tr>
-          <tr><td><span class="zh">对比合同两个版本的差异</span><span class="eng">Compare two versions of a contract</span></td><td><span class="zh">逐条比对,易遗漏,1–2 小时</span><span class="eng">Compare clause by clause, easy to miss things, 1–2 hours</span></td><td class="cl"><span class="zh">上传两版本,列出所有实质性差异</span><span class="eng">Upload both versions; list every substantive difference</span></td></tr>
-        </tbody></table>
-      </div></div>
-      <div class="deptbox" id="d-mkt"><div class="tbl">
-        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
-          <tr><td><span class="zh">营销文案:社媒 / 邮件 / 落地页一稿多版</span><span class="eng">Marketing copy: multi-version social / email / landing</span></td><td><span class="zh">各渠道从头手写、反复改,半天</span><span class="eng">Hand-write per channel, revise repeatedly, half a day</span></td><td class="cl"><span class="zh">给卖点,几分钟产出多渠道多版本初稿</span><span class="eng">Give the selling points; multi-channel, multi-version drafts in minutes</span></td></tr>
-          <tr><td><span class="zh">中英双语品牌内容 / 新闻稿</span><span class="eng">Bilingual brand content / press release</span></td><td><span class="zh">写中文再翻译,1–2 小时</span><span class="eng">Write in Chinese then translate, 1–2 hours</span></td><td class="cl"><span class="zh">一次产出中英双语稿,审阅即用</span><span class="eng">Both languages at once, review-ready</span></td></tr>
-          <tr><td><span class="zh">汇报简报 / 会议纪要(CEO Office)</span><span class="eng">Briefings / meeting minutes (CEO Office)</span></td><td><span class="zh">手记后整理归纳,1 小时+</span><span class="eng">Note by hand then organize, 1 hr+</span></td><td class="cl"><span class="zh">粘贴零散记录,15 分钟出结构化纪要</span><span class="eng">Paste rough notes; structured minutes in 15 min</span></td></tr>
-          <tr><td><span class="zh">跨项目状态与风险汇总(PMO)</span><span class="eng">Cross-project status &amp; risk roll-up (PMO)</span></td><td><span class="zh">从各项目逐一收集、手动拼装,易遗漏,数小时</span><span class="eng">Collect from each project by hand, error-prone, hours</span></td><td class="cl"><span class="zh">汇总成统一的项目集状态 + 风险 / 依赖清单,10 分钟出初稿</span><span class="eng">Consolidate into one portfolio status + risk / dependency list; a draft in 10 min</span></td></tr>
-        </tbody></table>
-      </div></div>
-      <div class="deptbox" id="d-pro"><div class="tbl">
-        <table><thead><tr><th><span class="zh">任务场景</span><span class="eng">Task</span></th><th><span class="zh">引入 AI 前</span><span class="eng">Before AI</span></th><th class="cl"><span class="zh">引入 AI 后</span><span class="eng">With AI</span></th></tr></thead><tbody>
-          <tr><td><span class="zh">归纳用户反馈并分类(产品)</span><span class="eng">Synthesize &amp; categorize user feedback (Product)</span></td><td><span class="zh">逐条人工阅读、分类,数小时</span><span class="eng">Read and sort each entry, hours</span></td><td class="cl"><span class="zh">粘贴反馈,自动归类 + 排优先级,20 分钟</span><span class="eng">Paste feedback; auto-sorted with priorities in 20 min</span></td></tr>
-          <tr><td><span class="zh">PRD / 需求文档 / 版本说明初稿(产品)</span><span class="eng">PRD / spec / release-notes draft (Product)</span></td><td><span class="zh">参考旧版从头写,30–60 分钟</span><span class="eng">Reference old versions, write from scratch, 30–60 min</span></td><td class="cl"><span class="zh">给要点,几分钟出初稿</span><span class="eng">Give the points; a first draft in minutes</span></td></tr>
-          <tr><td><span class="zh">活动公告 / 用户通知(运营)</span><span class="eng">Campaign notices / user announcements (Ops)</span></td><td><span class="zh">从头撰写、反复改语气,30 分钟+</span><span class="eng">Write from scratch, retune tone, 30 min+</span></td><td class="cl"><span class="zh">给信息,几分钟出多版本通知</span><span class="eng">Give the info; multi-version notices in minutes</span></td></tr>
-          <tr><td><span class="zh">体育博彩促销文案与多语言公告(体育)</span><span class="eng">Sports-betting promo copy &amp; multilingual notices (Sports)</span></td><td><span class="zh">赛事资讯逐条整理、各语言从头写,1–2 小时</span><span class="eng">Compile match info, write each language from scratch, 1–2 hours</span></td><td class="cl"><span class="zh">给赛事与活动要点,一次产出多语言促销与公告初稿</span><span class="eng">Give match / event points; multilingual promo &amp; notice drafts at once</span></td></tr>
-        </tbody></table>
-      </div></div>
-
-      <div class="callout soft st"><span class="lbl"><span class="zh">总结性变化</span><span class="eng">Net change</span></span><span class="zh">更多时间用于真正需要专业判断的工作 · 初稿质量提升,修改轮次减少 · 对外文件更专业、更具一致性 · 工作压力降低,重复任务不再成为负担。</span><span class="eng">More time for work that truly needs judgment · higher-quality first drafts with fewer revision rounds · more professional, more consistent external documents · lower stress, with repetitive tasks no longer a burden.</span></div>
-
-      <h3 class="st" style="margin-top:40px"><span class="hn">1.4</span><span class="zh">公司实践 · 用 AI 做数据</span><span class="eng">In Production · AI for Data</span></h3>
+      <h3 class="st" style="margin-top:40px"><span class="hn">1.3</span><span class="zh">公司实践 · 用 AI 做数据</span><span class="eng">In Production · AI for Data</span></h3>
       <div class="st"><span class="livebadge"><span class="ld"></span><span class="zh">已实现 · BI 团队正在使用</span><span class="eng">Live · in use by the BI team</span></span></div>
-      <p class="st"><span class="zh">这些不是设想——是 <b>BI 团队</b>目前已经在日常使用 AI 的部分。Claude 通过 <b>ChatBI 连接器</b>直接对接数仓,让"取数 → 出图 → 出报告"这条链路从需要数据团队介入,变成业务同事可以自助完成。</span><span class="eng">This isn&rsquo;t a vision—it&rsquo;s where <b>the BI team</b> already uses AI day to day. Through the <b>ChatBI connector</b>, Claude connects directly to the data warehouse, turning the &lsquo;pull data → chart → report&rsquo; chain from something that needed the data team into something business colleagues can do themselves.</span></p>
+      <p class="st"><span class="zh">这些不是设想——是 <b>BI 团队</b>目前已经在日常使用 AI 的部分。Claude 通过 <b>ChatBI 连接器</b>直接对接数仓,让"取数 → 出图 → 出报告"这条链路从需要数据团队介入,变成业务同事可以自助完成。</span><span class="eng">This isn't a vision—it's where <b>the BI team</b> already uses AI day to day. Through the <b>ChatBI connector</b>, Claude connects directly to the data warehouse, turning the 'pull data → chart → report' chain from something that needed the data team into something business colleagues can do themselves.</span></p>
 
       <h4 class="st"><span class="zh">ChatBI 取数</span><span class="eng">ChatBI data pull</span></h4>
       <div class="case lead st">
-        <div class="chead"><span class="ctag">01</span><span class="ch"><span class="zh">运营、产品用自然语言直接问数据</span><span class="eng">Ops and product ask data questions in natural language</span></span></div>
-        <p><span class="zh">不必再走"提需求 → 排期 → 等数据团队"的老流程:同事用自然语言向 Claude 提问,Claude 通过 chatbi 查询数仓并返回结果,几分钟内拿到数据。</span><span class="eng">No more &lsquo;submit a request → wait for scheduling → wait for the data team&rsquo;: colleagues ask Claude in natural language, Claude queries the warehouse via chatbi and returns results, and the data is in hand within minutes.</span></p>
+        <div class="chead"><span class="ctag">01</span><span class="ch"><span class="zh">运营、产品用自然语言直接问数据</span><span class="eng">Operations and Product ask data questions in natural language</span></span></div>
+        <p><span class="zh">不必再走"提需求 → 排期 → 等数据团队"的老流程:同事用自然语言向 Claude 提问,Claude 通过 chatbi 查询数仓并返回结果,几分钟内拿到数据。</span><span class="eng">No more 'submit a request → wait for scheduling → wait for the data team': colleagues ask Claude in natural language, Claude queries the warehouse via chatbi and returns results, and the data is in hand within minutes.</span></p>
         <div class="flow">
           <div class="flowrow old"><span class="ftag">Before</span><span class="step"><span class="zh">提需求</span><span class="eng">Submit request</span></span><span class="arr">→</span><span class="step"><span class="zh">排期</span><span class="eng">Scheduling</span></span><span class="arr">→</span><span class="step"><span class="zh">数据团队取数</span><span class="eng">Data team pulls data</span></span><span class="arr">→</span><span class="step"><span class="zh">拿到数据</span><span class="eng">Get data</span></span><span class="when"><span class="zh">数天等待</span><span class="eng">Days of waiting</span></span></div>
           <div class="flowrow new"><span class="ftag">Now</span><span class="step"><span class="zh">用自然语言直接问 Claude</span><span class="eng">Ask Claude in natural language</span></span><span class="arr">→</span><span class="step"><span class="zh">自动查数仓</span><span class="eng">Auto-query the warehouse</span></span><span class="arr">→</span><span class="step"><span class="zh">拿到数据 + 图表</span><span class="eng">Get data + charts</span></span><span class="when"><span class="zh">几分钟自助</span><span class="eng">Self-service in minutes</span></span></div>
@@ -438,8 +378,8 @@
           </div>
         </div>
         <div class="case">
-          <div class="chead"><span class="ctag">03</span><span class="ch"><span class="zh">分析报告由 Claude 协助生成</span><span class="eng">Reports drafted with Claude&rsquo;s help</span></span></div>
-          <p><span class="zh">不只是取数与画图。Claude 还能对结果做解读、归纳要点、形成结构化的分析报告,人从"做表"转向"看结论、做判断"。</span><span class="eng">Beyond pulling data and drawing charts, Claude can interpret results, distill key points, and produce a structured analysis report—shifting people from &lsquo;building tables&rsquo; to &lsquo;reading conclusions and making judgments.&rsquo;</span></p>
+          <div class="chead"><span class="ctag">03</span><span class="ch"><span class="zh">分析报告由 Claude 协助生成</span><span class="eng">Reports drafted with Claude's help</span></span></div>
+          <p><span class="zh">不只是取数与画图。Claude 还能对结果做解读、归纳要点、形成结构化的分析报告,人从"做表"转向"看结论、做判断"。</span><span class="eng">Beyond pulling data and drawing charts, Claude can interpret results, distill key points, and produce a structured analysis report—shifting people from 'building tables' to 'reading conclusions and making judgments.'</span></p>
           <div class="pipe">
             <span class="pnode"><span class="zh">取数</span><span class="eng">Pull data</span></span><span class="arr">→</span>
             <span class="pnode hl"><span class="zh">Claude 分析与解读</span><span class="eng">Claude analyzes &amp; interprets</span></span><span class="arr">→</span>
@@ -451,7 +391,7 @@
 
     <!-- P2 -->
     <section class="panel" id="p2">
-      <div class="phead st"><span class="bignum">02</span><div class="eye">Section&nbsp;02</div><h2><span class="zh">主流 AI 工具市场概览</span><span class="eng">AI Tool Landscape</span><span class="en">The Landscape · 2026.06</span></h2></div>
+      <div class="phead st"><span class="bignum">02</span><div class="eye">Section&nbsp;02</div><h2><span class="zh">主流 AI 工具市场概览</span><span class="eng">AI Tool Landscape</span></h2></div>
 
       <h3 class="st"><span class="hn">2.1</span><span class="zh">主流 AI 助手横向对比</span><span class="eng">AI Assistants Compared</span></h3>
       <p class="st" style="font-size:.76rem;color:var(--ink-3);margin:0 0 10px;line-height:1.5"><span class="zh">将鼠标悬停在任意工具行上,即可查看其六维能力雷达图(移动端点击)。数据参考 2026-06 最新公开基准,为相对估计。</span><span class="eng">Hover any tool row to see its six-axis capability radar (tap on mobile). Based on the latest 2026-06 public benchmarks; relative estimates.</span></p>
@@ -466,26 +406,28 @@
           <tr data-tool="Grok"><td class="rk">7</td><td>Grok</td><td>xAI</td><td>Grok 4.3 (2026.05)</td><td><span class="zh">100 万</span><span class="eng">1M</span></td><td><span class="zh">一般</span><span class="eng">Average</span></td><td><span class="zh">支持(BYO MCP)</span><span class="eng">Supported (BYO MCP)</span></td><td><span class="zh">实时接入 X 数据;直接,有时带倾向性,幻觉率偏高</span><span class="eng">Real-time access to X data; direct, sometimes opinionated, higher hallucination rate</span></td></tr>
           <tr data-tool="Perplexity"><td class="rk">8</td><td>Perplexity</td><td>Perplexity AI</td><td><span class="zh">Sonar / Sonar Pro</span><span class="eng">Sonar / Sonar Pro</span></td><td>200K</td><td><span class="zh">企业版可配置</span><span class="eng">Configurable</span></td><td>—</td><td><span class="zh">以搜索为核心,回答附引用来源,适合需可溯源信息的场景</span><span class="eng">Search-first; answers come with cited sources, suited to cases needing traceable information</span></td></tr>
         </tbody></table></div>
-      <p class="st" style="font-size:.74rem;color:var(--ink-3);margin:-2px 0 0;line-height:1.55"><span class="zh">排名与雷达图为 2026-06 综合评估(模型能力、数据安全、中英文与本公司各部门场景适配),并参考 Artificial Analysis 智能指数等公开基准——截至 2026-06,该指数由 Claude Opus 4.8(61.4)领先,GPT-5.5(60.2)、Gemini 3.1 Pro(57)紧随;第一梯队整体接近,雷达分值为相对估计。</span><span class="eng">Ranking and radar reflect a 2026-06 overall assessment (capability, data security, EN/CN, and fit for our teams&rsquo; use), informed by public benchmarks such as the Artificial Analysis Intelligence Index—where, as of 2026-06, Claude Opus 4.8 leads (61.4), with GPT-5.5 (60.2) and Gemini 3.1 Pro (57) close behind. The top tier is tightly clustered; radar scores are relative estimates.</span></p>
+      <p class="st" style="font-size:.74rem;color:var(--ink-3);margin:-2px 0 0;line-height:1.55"><span class="zh">排名与雷达图为 2026-06 综合评估(模型能力、数据安全、中英文与本公司各部门场景适配),并参考 Artificial Analysis 智能指数等公开基准——截至 2026-06,该指数由 Claude Opus 4.8(61.4)领先,GPT-5.5(60.2)、Gemini 3.1 Pro(57)紧随;第一梯队整体接近,雷达分值为相对估计。</span><span class="eng">Ranking and radar reflect a 2026-06 overall assessment (capability, data security, EN/CN, and fit for our teams' use), informed by public benchmarks such as the Artificial Analysis Intelligence Index—where, as of 2026-06, Claude Opus 4.8 leads (61.4), with GPT-5.5 (60.2) and Gemini 3.1 Pro (57) close behind. The top tier is tightly clustered; radar scores are relative estimates.</span></p>
 
-      <h3 class="st"><span class="hn">2.2</span><span class="zh">选用 Claude 的理由与依据</span><span class="eng">Why We Choose Claude</span></h3>
-      <div class="reasons st">
-        <div class="reason"><div class="rn">01</div><b><span class="zh">数据安全有合同保障</span><span class="eng">Data security backed by contract</span></b><p><span class="zh">企业版数据不用于训练,受服务协议约束,适合处理公司内部文件。</span><span class="eng">Enterprise data is not used for training and is bound by the service agreement—suitable for internal company documents.</span></p></div>
-        <div class="reason"><div class="rn">02</div><b><span class="zh">长文档处理能力突出</span><span class="eng">Outstanding long-document handling</span></b><p><span class="zh">100 万 token 超长上下文,合同、政策、多页 PDF 一次读完,不截断,精度高。</span><span class="eng">A 1M-token context reads contracts, policies, and multi-page PDFs in one pass—no truncation, high accuracy.</span></p></div>
-        <div class="reason"><div class="rn">03</div><b><span class="zh">输出质量稳定可靠</span><span class="eng">Stable, reliable output</span></b><p><span class="zh">语气更谨慎,更少随意编造,符合各部门对专业性与准确性的要求。</span><span class="eng">A more careful tone with less fabrication, meeting every team&rsquo;s needs for professionalism and accuracy.</span></p></div>
-        <div class="reason"><div class="rn">04</div><b><span class="zh">多语言处理能力强</span><span class="eng">Strong multilingual capability</span></b><p><span class="zh">中文、英文、菲律宾语均可流畅处理,支持中英双语输出。</span><span class="eng">Handles Chinese, English, and Filipino fluently, with bilingual EN/CN output.</span></p></div>
-        <div class="reason" style="grid-column:1/-1"><div class="rn">05</div><b><span class="zh">企业功能体系完善</span><span class="eng">A complete enterprise feature set</span></b><p><span class="zh">Projects(知识沉淀)、MCP(系统连接)、文件直接输出,满足企业使用场景。</span><span class="eng">Projects (knowledge retention), MCP (system connections), and direct file output cover enterprise use cases.</span></p></div>
-      </div>
     </section>
 
     <!-- P3 -->
     <section class="panel" id="p3">
       <div class="phead st"><span class="bignum">03</span><div class="eye">Section&nbsp;03</div><h2><span class="zh">Claude 的价值定位</span><span class="eng">Why Claude</span><span class="en">Positioning</span></h2></div>
 
-      <h3 class="st"><span class="hn">3.1</span><span class="zh">核心定位</span><span class="eng">Core positioning</span></h3>
-      <div class="callout dark st"><span class="lbl">Definition</span><span class="zh">Claude 是一款企业级 AI 助手,负责<strong>承接文字密集型的重复工作</strong>,使员工得以将精力集中于真正需要专业判断的任务。</span><span class="eng">Claude is an enterprise-grade AI assistant that <strong>takes on text-intensive, repetitive work</strong>, so employees can focus on the tasks that truly require professional judgment.</span></div>
+      <h3 class="st"><span class="hn">3.1</span><span class="zh">选用 Claude 的理由与依据</span><span class="eng">Why We Choose Claude</span></h3>
+      <div class="reasons st">
+        <div class="reason" style="grid-column:1/-1"><div class="rn">01</div><b><span class="zh">综合智能排名全球第一</span><span class="eng">Ranked #1 in overall intelligence</span></b><p><span class="zh">截至 2026-06,Claude Opus 4.8 在 Artificial Analysis 智能指数（综合推理、写作、长文档、编码等多项基准）中以 61.4 分领先全球,GPT-5.5（60.2）与 Gemini 3.1 Pro（57）紧随其后。选择 Claude,首先是因为它就是现阶段最聪明的模型。</span><span class="eng">As of 2026-06, Claude Opus 4.8 leads the Artificial Analysis Intelligence Index at 61.4—ahead of GPT-5.5 (60.2) and Gemini 3.1 Pro (57)—across reasoning, writing, long-document, coding, and other benchmarks. We choose Claude first and foremost because it is the most capable model available today.</span></p></div>
+        <div class="reason"><div class="rn">02</div><b><span class="zh">数据安全有合同保障</span><span class="eng">Data security backed by contract</span></b><p><span class="zh">企业版数据不用于训练,受服务协议约束,适合处理公司内部文件。</span><span class="eng">Enterprise data is not used for training and is bound by the service agreement—suitable for internal company documents.</span></p></div>
+        <div class="reason"><div class="rn">03</div><b><span class="zh">长文档处理能力突出</span><span class="eng">Outstanding long-document handling</span></b><p><span class="zh">100 万 token 超长上下文,合同、政策、多页 PDF 一次读完,不截断,精度高。</span><span class="eng">A 1M-token context reads contracts, policies, and multi-page PDFs in one pass—no truncation, high accuracy.</span></p></div>
+        <div class="reason"><div class="rn">04</div><b><span class="zh">输出质量稳定可靠</span><span class="eng">Stable, reliable output</span></b><p><span class="zh">语气更谨慎,更少随意编造,符合各部门对专业性与准确性的要求。</span><span class="eng">A more careful tone with less fabrication, meeting every team's needs for professionalism and accuracy.</span></p></div>
+        <div class="reason"><div class="rn">05</div><b><span class="zh">多语言处理能力强</span><span class="eng">Strong multilingual capability</span></b><p><span class="zh">中文、英文、菲律宾语均可流畅处理,支持中英双语输出。</span><span class="eng">Handles Chinese, English, and Filipino fluently, with bilingual EN/CN output.</span></p></div>
+        <div class="reason" style="grid-column:1/-1"><div class="rn">06</div><b><span class="zh">企业功能体系完善</span><span class="eng">A complete enterprise feature set</span></b><p><span class="zh">Projects(知识沉淀)、MCP(系统连接)、文件直接输出,满足企业使用场景。</span><span class="eng">Projects (knowledge retention), MCP (system connections), and direct file output cover enterprise use cases.</span></p></div>
+      </div>
 
-      <h3 class="st"><span class="hn">3.2</span><span class="zh">适用工作类型</span><span class="eng">Where it fits</span></h3>
+      <h3 class="st"><span class="hn">3.2</span><span class="zh">核心定位</span><span class="eng">Core positioning</span></h3>
+      <div class="callout dark st"><span class="lbl">Definition</span><span class="zh">Claude 是你的 AI 工作助手——<strong>处理重复的工作</strong>，让你省时间又可以专注真正重要的事。</span><span class="eng">Claude is your AI work assistant — <strong>handling the repetitive work</strong>, so you save time and focus on what truly matters.</span></div>
+
+      <h3 class="st"><span class="hn">3.3</span><span class="zh">适用工作类型</span><span class="eng">Where it fits</span></h3>
       <div class="tbl st"><table>
         <thead><tr><th><span class="zh">部门</span><span class="eng">Department</span></th><th><span class="zh">典型重复性工作</span><span class="eng">Typical repetitive work</span></th></tr></thead><tbody>
           <tr><td>HR</td><td><span class="zh">简历筛选、邮件往来、政策答疑、入职材料、会议纪要</span><span class="eng">Resume screening, email correspondence, policy Q&amp;A, onboarding materials, meeting minutes</span></td></tr>
@@ -495,27 +437,34 @@
           <tr><td><span class="zh">产品 · 运营 · 体育团队</span><span class="eng">Product · Operations · Sports</span></td><td><span class="zh">需求文档与版本说明、用户反馈归纳、活动公告、体育博彩内容与促销、配合取数解读数据</span><span class="eng">Spec docs &amp; release notes, user-feedback synthesis, campaign notices, sports-betting content &amp; promos, data interpretation with ChatBI</span></td></tr>
         </tbody></table></div>
 
-      <h3 class="st"><span class="hn">3.3</span><span class="zh">现场演示建议</span><span class="eng">Live demo suggestions</span> <span style="font-size:.8rem;font-weight:400;color:var(--ink-3)"><span class="zh">(选一个展示,引起共鸣)</span><span class="eng">(pick one to demo and resonate)</span></span></h3>
-      <div class="ba-row st">
-        <div class="ba"><div class="bt"><span class="zh">三份简历横向对比</span><span class="eng">Compare three resumes</span></div><div class="bb"><div class="b1"><span class="lab">Before</span><span class="zh">逐一翻阅多份文档</span><span class="eng">Flip through documents one by one</span></div><div class="div"></div><div class="b2"><span class="lab">After</span><span class="zh">一张结构化对比表</span><span class="eng">One structured comparison table</span></div></div></div>
-        <div class="ba"><div class="bt"><span class="zh">中英双语停电通知</span><span class="eng">Bilingual power-outage notice</span></div><div class="bb"><div class="b1"><span class="lab">Before</span><span class="zh">自行翻译</span><span class="eng">Translate it yourself</span></div><div class="div"></div><div class="b2"><span class="lab">After</span><span class="zh">一次生成双语文稿</span><span class="eng">Both languages generated at once</span></div></div></div>
-        <div class="ba"><div class="bt"><span class="zh">一批命名混乱的文件</span><span class="eng">A batch of messily named files</span></div><div class="bb"><div class="b1"><span class="lab">Before</span><span class="zh">手动逐一修改</span><span class="eng">Rename each by hand</span></div><div class="div"></div><div class="b2"><span class="lab">After</span><span class="zh">一张规范命名对照表</span><span class="eng">One standardized naming map</span></div></div></div>
-      </div>
     </section>
 
     <!-- P4 -->
     <section class="panel" id="p4">
-      <div class="phead st"><span class="bignum">04</span><div class="eye">Section&nbsp;04</div><h2><span class="zh">产品与功能概述</span><span class="eng">Products &amp; Features</span><span class="en">Products &amp; Models</span></h2></div>
+      <div class="phead st"><span class="bignum">04</span><div class="eye">Section&nbsp;04</div><h2><span class="zh">认识 Claude · 功能与设置</span><span class="eng">Getting to Know Claude</span><span class="en">Features &amp; Setup</span></h2></div>
 
-      <h3 class="st"><span class="hn">4.1</span><span class="zh">产品定义与基本能力</span><span class="eng">What it is &amp; core capabilities</span></h3>
+      <h3 class="st"><span class="hn">4.1</span><span class="zh">Claude 是什么、能做什么</span><span class="eng">What Claude is &amp; what it does</span></h3>
       <ul class="tight full st">
-        <li><span class="zh">Claude 不是搜索引擎,而是能<b>读懂上下文、协助完成文字任务</b>的智能助手。</span><span class="eng">Claude is not a search engine, but an assistant that <b>understands context and helps complete text tasks</b>.</span></li>
+        <li><span class="zh">Claude 是能<b>读懂上下文、协助完成文字任务</b>的智能助手，也具备网络搜索能力。</span><span class="eng">Claude is an intelligent assistant that <b>understands context and helps with text tasks</b> — with web search capability too.</span></li>
         <li><span class="zh">通过 claude.ai 即可访问,亦提供手机与桌面应用。</span><span class="eng">Accessible at claude.ai, with mobile and desktop apps as well.</span></li>
         <li><span class="zh">支持文件读取(PDF / Word / Excel / 图片)、起草、翻译,并可直接输出 Word / Excel / PPT / PDF。</span><span class="eng">Reads files (PDF / Word / Excel / images), drafts, translates, and outputs Word / Excel / PPT / PDF directly.</span></li>
       </ul>
 
-      <h3 class="st"><span class="hn">4.2</span><span class="zh">产品线概览</span><span class="eng">Product line overview</span></h3>
-      <h4 class="st"><span class="zh">正式产品(三款)</span><span class="eng">Generally available (3)</span></h4>
+      <h3 class="st"><span class="hn">4.2</span><span class="zh">三种使用方式</span><span class="eng">Three ways to use Claude</span></h3>
+      <div class="grid3 st">
+        <div class="mini" style="border-top:3px solid var(--bronze)">
+          <h5>Claude Chat</h5>
+          <p><span class="zh">日常使用界面（网页 / 手机 / 桌面）。最适合写作、研究、问答。无需配置，任何人均可直接上手。文件仅支持上传读取，无法写入本地。</span><span class="eng">The everyday interface (web / mobile / desktop). Best for writing, research, and Q&amp;A. No setup needed — anyone can use it. Files are upload-only; no local write access.</span></p>
+        </div>
+        <div class="mini">
+          <h5>Claude Cowork</h5>
+          <p><span class="zh">面向非技术人员的桌面 Agent。可直接读写本地文件，执行批量重命名、整理、处理等多步骤任务。用自然语言指令驱动，无需命令行。</span><span class="eng">Desktop app agent for non-coders. Can read and write your local files and automate multi-step tasks (rename, sort, process). Prompt-driven — no terminal needed.</span></p>
+        </div>
+        <div class="mini">
+          <h5>Claude Code</h5>
+          <p><span class="zh">面向开发者的命令行工具。直接在代码库中运行，可执行 bash 命令、读取整个代码仓库、提交代码、安装依赖包。</span><span class="eng">CLI tool for developers. Lives in your repo, runs bash, reads the whole codebase, commits code, and installs packages.</span></p>
+        </div>
+      </div>
       <div class="tbl st"><table>
         <thead><tr><th><span class="zh">产品</span><span class="eng">Product</span></th><th><span class="zh">界面形态</span><span class="eng">Interface</span></th><th><span class="zh">适合谁</span><span class="eng">For whom</span></th><th><span class="zh">核心定位</span><span class="eng">Core role</span></th></tr></thead><tbody>
           <tr><td>Claude Chat</td><td><span class="zh">网页 / 手机 / 桌面</span><span class="eng">Web / mobile / desktop</span></td><td><span class="zh">所有员工</span><span class="eng">All employees</span></td><td><span class="zh">日常工作首选,本次分享主角</span><span class="eng">The default for daily work; the focus of this briefing</span></td></tr>
@@ -534,8 +483,99 @@
         </tbody></table></div>
       <div class="callout soft st"><span class="lbl"><span class="zh">实用建议</span><span class="eng">Practical tip</span></span><span class="zh">日常工作选用 <strong>Sonnet 4.6</strong> 即可满足绝大多数需求;复杂分析与关键决策时,切换至 <strong>Opus 系列</strong>。</span><span class="eng"><strong>Sonnet 4.6</strong> covers the vast majority of daily needs; switch to the <strong>Opus series</strong> for complex analysis and critical decisions.</span></div>
 
-      <h3 class="st"><span class="hn">4.4</span><span class="zh">连接公司系统 · 连接器(MCP)</span><span class="eng">Connecting Company Systems · Connectors (MCP)</span></h3>
-      <p class="st"><span class="zh">除了上传文件,Claude 还能通过<b>连接器(MCP)</b>安全接入公司在用的系统——例如 <b>Lark(飞书)套件</b>与<b>数据仓库</b>:在里面取数、查文档、整理信息、办事,不必来回复制粘贴。MCP 是实现这种连接的开放标准。</span><span class="eng">Beyond uploading files, Claude can securely connect to the systems the company already uses through <b>connectors (MCP)</b>—for example the <b>Lark suite</b> and the <b>data warehouse</b>: pull data, search docs, organize information, and get work done, with no copy-pasting back and forth. MCP is the open standard that makes this possible.</span></p>
+      <h3 class="st"><span class="hn">4.4</span><span class="zh">核心功能详解</span><span class="eng">Key features explained</span></h3>
+
+      <div class="grid2 st">
+        <div class="mini tline">
+          <h5><span class="zh">Extended Thinking（扩展思考）</span><span class="eng">Extended Thinking</span></h5>
+          <p><span class="zh">打开后，Claude 会先进行深入思考再作答——速度变慢，但输出质量大幅提升，适合需要深度推理的任务。</span><span class="eng">When enabled, Claude thinks deeply before responding — slower, but significantly higher output quality for tasks requiring deep reasoning.</span></p>
+          <h4 style="margin-top:12px;color:var(--forest)"><span class="zh">建议开启</span><span class="eng">Turn it on for</span></h4>
+          <ul class="tight full">
+            <li><span class="zh">复杂合同条款分析</span><span class="eng">Complex contract clause analysis</span></li>
+            <li><span class="zh">多步骤战略规划</span><span class="eng">Multi-step strategic planning</span></li>
+            <li><span class="zh">需要权衡利弊的关键决策</span><span class="eng">Key decisions that require weighing trade-offs</span></li>
+          </ul>
+          <h4 style="margin-top:12px;color:var(--rust)"><span class="zh">无需开启</span><span class="eng">Leave it off for</span></h4>
+          <ul class="tight full">
+            <li><span class="zh">日常问答、查询事实</span><span class="eng">Everyday Q&amp;A and fact lookups</span></li>
+            <li><span class="zh">格式整理、简单起草任务（开了反而白等）</span><span class="eng">Formatting and simple drafting — enabling it just wastes time</span></li>
+          </ul>
+        </div>
+        <div class="mini tline">
+          <h5><span class="zh">Research（深度研究）</span><span class="eng">Research</span></h5>
+          <p><span class="zh">开启后，Claude 会主动联网检索十至二十个以上来源，交叉比对信息，最终生成一份带引用来源的结构化研究报告。</span><span class="eng">When enabled, Claude actively searches 10–20+ sources online, cross-references information, and produces a structured research report with cited sources.</span></p>
+          <h4 style="margin-top:12px;color:var(--forest)"><span class="zh">适合使用</span><span class="eng">Good for</span></h4>
+          <ul class="tight full">
+            <li><span class="zh">行业研究、竞品调查</span><span class="eng">Industry research, competitor analysis</span></li>
+            <li><span class="zh">不熟悉领域的快速入门</span><span class="eng">Getting up to speed on an unfamiliar topic</span></li>
+            <li><span class="zh">为决策层准备的尽调材料</span><span class="eng">Due-diligence materials for decision-makers</span></li>
+          </ul>
+          <h4 style="margin-top:12px;color:var(--rust)"><span class="zh">不适合使用</span><span class="eng">Not needed for</span></h4>
+          <ul class="tight full">
+            <li><span class="zh">已知答案的简单问题</span><span class="eng">Simple questions with known answers</span></li>
+          </ul>
+        </div>
+        <div class="mini tline">
+          <h5><span class="zh">Web Search（网络搜索）</span><span class="eng">Web Search</span></h5>
+          <p><span class="zh">允许 Claude 实时联网检索最新信息，突破训练数据的时效限制。适合查询近期新闻、最新法规、实时数据或任何可能已发生变化的内容。</span><span class="eng">Allows Claude to search the web in real time, going beyond its training data cutoff. Useful for recent news, updated regulations, live data, or anything that may have changed recently.</span></p>
+        </div>
+        <div class="mini tline">
+          <h5><span class="zh">Projects（项目工作空间）</span><span class="eng">Projects</span></h5>
+          <p><span class="zh"><b>痛点：</b>每次新对话都要重新讲一遍背景，重复且低效。Project 是解决这一问题的核心功能——一个独立的"工作空间"，可将相关资料与自定义指令永久保存。</span><span class="eng"><b>The problem:</b> every new conversation means re-explaining your context from scratch. Projects solve this — a dedicated workspace where your materials and custom instructions are saved permanently.</span></p>
+          <ol class="steps" style="margin-top:10px">
+            <li><span class="zh">上传一组相关资料（SOP、合同模板、员工手册、产品文档……）</span><span class="eng">Upload relevant materials (SOPs, contract templates, handbooks, product docs…)</span></li>
+            <li><span class="zh">写入自定义指令（说明身份、任务目标、输出风格要求）</span><span class="eng">Write custom instructions (role, goals, output style)</span></li>
+            <li><span class="zh">此后该 Project 内所有对话，Claude 自动读取以上全部内容</span><span class="eng">Every conversation in the Project automatically loads all of the above</span></li>
+          </ol>
+          <p style="font-size:.82rem;color:var(--ink-2);margin-top:8px"><span class="zh">比喻：单次对话就像每次看医生都要从头讲病史；Project 就像有了固定医生，且保有完整病历本。</span><span class="eng">Think of it this way: a single chat is like seeing a new doctor every time and repeating your whole history. A Project is like having a regular doctor who keeps your full medical record.</span></p>
+        </div>
+        <div class="mini tline">
+          <h5><span class="zh">Artifacts（构件）</span><span class="eng">Artifacts</span></h5>
+          <p><span class="zh">当 Claude 生成代码、网页、图表或长文档时，会在右侧自动开一个独立窗口，支持实时预览、一键复制 / 下载，以及原地迭代修改。</span><span class="eng">When Claude produces code, web pages, charts, or long documents, a separate panel opens on the right — with live preview, one-click copy / download, and in-place iteration.</span></p>
+          <ul class="tight full" style="margin-top:8px">
+            <li><span class="zh">HTML / React 组件直接渲染呈现</span><span class="eng">HTML and React components render live</span></li>
+            <li><span class="zh">说"把颜色改成蓝色"，Claude 在原处修改，无需重新生成</span><span class="eng">Say "change the color to blue" and Claude edits in place — no regeneration needed</span></li>
+            <li><span class="zh">典型产出：交互式数据看板、内部工具原型、复杂流程图</span><span class="eng">Typical outputs: interactive dashboards, internal tool prototypes, complex diagrams</span></li>
+          </ul>
+        </div>
+        <div class="mini tline">
+          <h5><span class="zh">Memory（记忆功能）</span><span class="eng">Memory</span></h5>
+          <p><span class="zh">允许 Claude 跨对话记住个人偏好、项目背景与工作习惯。在 Settings 手动开启；可随时查看、编辑或删除已存储的记忆内容。隐私敏感信息请勿存入。</span><span class="eng">Allows Claude to remember personal preferences, project context, and work habits across conversations. Enable it manually in Settings; you can view, edit, or delete stored memories at any time. Do not store sensitive personal information.</span></p>
+        </div>
+      </div>
+
+      <h3 class="st"><span class="hn">4.5</span><span class="zh">个人偏好设置</span><span class="eng">User Preferences</span></h3>
+      <p class="st" style="font-size:.9rem"><span class="zh">路径：Settings &gt; General &gt; Profile，在 <b>"Instructions for Claude"</b>（个人偏好）框中填写。此处填写的内容对所有对话永久生效，是最值得投入 10 分钟完成的配置。</span><span class="eng">Path: Settings &gt; General &gt; Profile, in the <b>"Instructions for Claude"</b> box. What you write here applies permanently to every conversation — worth 10 minutes of your time to set up properly.</span></p>
+      <div class="tbl st"><table>
+        <thead><tr><th><span class="zh">示例偏好设置</span><span class="eng">Example preferences</span></th></tr></thead><tbody>
+          <tr><td><span class="zh">回复默认使用简体中文</span><span class="eng">Reply in Simplified Chinese by default</span></td></tr>
+          <tr><td><span class="zh">邮件起草使用专业而温暖的语气</span><span class="eng">Use a professional yet warm tone for email drafting</span></td></tr>
+          <tr><td><span class="zh">涉及法律条款时，提示需要人工核验</span><span class="eng">When legal clauses are involved, remind me to verify with a human</span></td></tr>
+          <tr><td><span class="zh">回答尽量精简，没必要不长篇大论</span><span class="eng">Keep answers concise — don't elaborate unless necessary</span></td></tr>
+        </tbody></table></div>
+
+      <h3 class="st"><span class="hn">4.6</span><span class="zh">Claude Skills（技能）</span><span class="eng">Claude Skills</span></h3>
+      <p class="st"><span class="zh">Skills 相当于保存好的操作快捷方式。你只需<b>写一次指令并保存</b>，之后每次需要执行同类任务时，Claude 会自动按照该指令执行——无需重复解释。</span><span class="eng">Claude Skills are like saved shortcuts. You write the instructions once, save them, and Claude follows them automatically whenever you need that type of task — no need to explain the same thing over and over again.</span></p>
+      <h4 class="st"><span class="zh">如何创建一个 Skill</span><span class="eng">How to create a Skill</span></h4>
+      <ol class="steps st">
+        <li><span class="zh">确定一个<b>重复性任务</b></span><span class="eng">Pick a <b>repetitive task</b></span></li>
+        <li><span class="zh">写好<b>触发短语</b>（例如："分析报告"）</span><span class="eng">Write the <b>trigger phrase</b> (e.g. "analyse report")</span></li>
+        <li><span class="zh">写好<b>执行步骤</b>（具体做什么，一步一步）</span><span class="eng">Write the <b>SOP</b> — what to do, step by step</span></li>
+        <li><span class="zh">明确定义<b>输出格式</b></span><span class="eng">Define the <b>output format</b> clearly</span></li>
+        <li><span class="zh">保存为 <b>Skill</b></span><span class="eng">Save as a <b>Skill</b></span></li>
+      </ol>
+
+      <h3 class="st"><span class="hn">4.7</span><span class="zh">连接公司系统 · 连接器(MCP)</span><span class="eng">Connecting Company Systems · MCP</span></h3>
+      <p class="st"><span class="zh">MCP（Model Context Protocol）是一个<b>开源标准</b>，允许 Claude、ChatGPT 等 AI 应用连接外部系统或外部数据源。通过 MCP，Claude 可安全接入公司在用的系统——例如 <b>Lark(飞书)套件</b>与<b>数据仓库</b>，实现取数、查文档、整理信息，无需来回复制粘贴。</span><span class="eng">MCP (Model Context Protocol) is an <b>open-source standard</b> that lets AI applications such as Claude and ChatGPT connect to external systems or data sources. Through MCP, Claude can securely connect to the systems the company already uses — such as the <b>Lark suite</b> and the <b>data warehouse</b> — to pull data, search docs, and organize information, with no copy-pasting required.</span></p>
+
+      <h4 class="st"><span class="zh">MCP 连接的两种类型</span><span class="eng">Two types of MCP connection</span></h4>
+      <div class="grid2 st">
+        <div class="mini tline"><h5><span class="zh">远程连接器（Remote MCP）<span class="tg"><span class="zh">公司主用</span><span class="eng">Our setup</span></span></span><span class="eng">Remote MCP <span class="tg"><span class="zh">公司主用</span><span class="eng">Our setup</span></span></span></h5><p><span class="zh">通过一个公网 URL 接入，Claude 从云端直接连接，<b>网页 / 桌面 / 手机都能用</b>，无需在本机安装。公司的 <b>ChatBI</b> 与 <b>Lark</b> 连接器都属于这一种。</span><span class="eng">Connects via a public URL; Claude reaches it from the cloud, so it works on <b>web / desktop / mobile</b> with nothing to install locally. The company's <b>ChatBI</b> and <b>Lark</b> connectors are both this type.</span></p></div>
+        <div class="mini tline"><h5><span class="zh">本地连接器（Local MCP）</span><span class="eng">Local MCP</span></h5><p><span class="zh">仅在 Claude Desktop 通过本机配置文件运行，连接本地网络中的系统。</span><span class="eng">Runs only in Claude Desktop via a local config file, connecting to systems on your local network.</span></p></div>
+      </div>
+
+      <h4 class="st"><span class="zh">以 Lark MCP 为例</span><span class="eng">Example: the Lark MCP</span></h4>
+      <p class="st" style="font-size:.88rem"><span class="zh">连接 Lark 后，Claude 通过 Lark MCP 服务器调用一组飞书工具，即可直接操作云文档、多维表格、消息、日历等。整个链路是：<b>Claude（客户端）→ Lark MCP 服务器 → Lark 套件</b>。相比之下，<b>ChatBI</b> 同样是远程连接器，但它桥接的是<b>公司数据仓库</b>——用自然语言提问，Claude 经 ChatBI 查询数仓并返回数据与图表。</span><span class="eng">Once connected, Claude calls a set of Lark tools through the Lark MCP server to work directly with Docs, Base, messages, calendar, and more. The chain is: <b>Claude (client) → Lark MCP server → Lark suite</b>. By contrast, <b>ChatBI</b> is also a remote connector, but it bridges to the <b>company data warehouse</b> — ask in natural language and Claude queries the warehouse through ChatBI, returning data and charts.</span></p>
       <div class="st"><span class="livebadge"><span class="ld"></span><span class="zh">已实现 · ChatBI 连接数仓</span><span class="eng">Live · ChatBI connects the warehouse</span></span></div>
       <div class="grid3 st">
         <div class="mini tline"><h5><span class="zh">数据仓库 / BI</span><span class="eng">Data warehouse / BI</span></h5><p><span class="zh">用自然语言查询,直接拿到数据与图表(ChatBI,已上线)。</span><span class="eng">Query in natural language; get data and charts straight back (ChatBI, live).</span></p></div>
@@ -547,53 +587,9 @@
       </div>
     </section>
 
-    <!-- P5 -->
-    <section class="panel" id="p5">
-      <div class="phead st"><span class="bignum">05</span><div class="eye">Section&nbsp;05</div><h2><span class="zh">数据使用规范与安全</span><span class="eng">Data Policy &amp; Security</span><span class="en">Data &amp; Security</span></h2></div>
-
-      <div class="grid2 st" style="align-items:start">
-        <div>
-          <h3 style="margin-top:6px"><span class="hn">5.1</span><span class="zh">企业版数据保障</span><span class="eng">Enterprise data protection</span></h3>
-          <ul class="tight full">
-            <li><span class="zh">公司使用 Claude <b>企业版(Team / Enterprise)</b>,数据<b>不会用于训练</b>,受合同保障。</span><span class="eng">The company uses <b>Claude Enterprise (Team / Enterprise)</b>; data is <b>not used for training</b> and is contractually protected.</span></li>
-            <li><span class="zh">"内容被学走"的顾虑在企业版下不成立。</span><span class="eng">The worry that &lsquo;your content gets learned&rsquo; does not apply on the enterprise plan.</span></li>
-            <li><span class="zh">各部门日常文字工作,均可放心使用。</span><span class="eng">Day-to-day text work across all teams can be done with confidence.</span></li>
-          </ul>
-        </div>
-        <div>
-          <h3 style="margin-top:6px"><span class="hn">5.3</span><span class="zh">脱敏处理示例</span><span class="eng">De-identification examples</span></h3>
-          <div class="tbl"><table>
-            <thead><tr><th><span class="zh">原始内容</span><span class="eng">Original</span></th><th><span class="zh">替换为</span><span class="eng">Replace with</span></th></tr></thead><tbody>
-              <tr><td><span class="zh">员工 / 候选人姓名</span><span class="eng">Employee / candidate name</span></td><td><code class="m">[Employee A] / [Candidate B]</code></td></tr>
-              <tr><td><span class="zh">公司 / 当事人名称</span><span class="eng">Company / party name</span></td><td><code class="m">[Company A] / [Party X]</code></td></tr>
-              <tr><td><span class="zh">部门</span><span class="eng">Department</span></td><td><code class="m">[Dept X]</code></td></tr>
-            </tbody></table></div>
-        </div>
-      </div>
-
-      <h3 class="st"><span class="hn">5.2</span><span class="zh">仍需注意的数据风险类型</span><span class="eng">Risks that still need care</span></h3>
-      <p class="st" style="font-size:.88rem"><span class="zh">企业版保障的是"不用于训练",但以下几类情况出于其他原因仍需谨慎处理:</span><span class="eng">The enterprise plan guarantees &lsquo;not used for training,&rsquo; but the following still warrant caution for other reasons:</span></p>
-      <div class="tbl st"><table>
-        <thead><tr><th><span class="zh">风险类型</span><span class="eng">Risk type</span></th><th><span class="zh">说明</span><span class="eng">Explanation</span></th><th><span class="zh">处理建议</span><span class="eng">What to do</span></th></tr></thead><tbody>
-          <tr><td><span class="zh">公司数据分级政策</span><span class="eng">Company data-classification policy</span></td><td><span class="zh">某些级别数据按内规不得离开特定系统,与 AI 是否训练无关</span><span class="eng">Some classified data may not leave specific systems under internal rules, regardless of AI training</span></td><td><span class="pill"><span class="zh">确认数据级别</span><span class="eng">Check the data level</span></span></td></tr>
-          <tr><td><span class="zh">对客户 / 第三方保密义务</span><span class="eng">Confidentiality to clients / third parties</span></td><td><span class="zh">合同中的保密条款不因使用 AI 工具而豁免</span><span class="eng">Contractual confidentiality clauses are not waived by using an AI tool</span></td><td><span class="pill"><span class="zh">脱敏后再使用</span><span class="eng">De-identify first</span></span></td></tr>
-          <tr><td><span class="zh">法律保密特权(Privilege)</span><span class="eng">Legal privilege</span></td><td><span class="zh">法务享有保密特权的沟通内容须特别谨慎</span><span class="eng">Privileged communications require special caution</span></td><td><span class="pill"><span class="zh">脱敏或提交审批</span><span class="eng">De-identify or seek approval</span></span></td></tr>
-          <tr><td><span class="zh">个人信息保护(RA 10173)</span><span class="eng">Personal data protection (RA 10173)</span></td><td><span class="zh">处理个人数据须符合菲律宾《数据隐私法》等法规</span><span class="eng">Handling personal data must comply with the Philippine Data Privacy Act and related laws</span></td><td><span class="pill"><span class="zh">脱敏或匿名化</span><span class="eng">De-identify or anonymize</span></span></td></tr>
-        </tbody></table></div>
-
-      <h3 class="st"><span class="hn">5.4</span><span class="zh">各部门高风险数据清单</span><span class="eng">High-risk data by department</span></h3>
-      <div class="grid3 st">
-        <div class="mini tline"><h5>HR</h5><p><span class="zh">身份证 / 护照 / 银行账号、薪资明细与调薪记录、绩效评估、处分 / 投诉记录、候选人完整资料</span><span class="eng">IDs / passports / bank accounts, salary details and pay-adjustment records, performance reviews, disciplinary / complaint records, complete candidate profiles</span></p></div>
-        <div class="mini tline"><h5><span class="zh">行政</span><span class="eng">Admin</span></h5><p><span class="zh">供应商合同与报价单、高管 / 来宾行程与联系方式、标注"机密 / 内部"的文件</span><span class="eng">Supplier contracts and quotations, executive / guest itineraries and contacts, documents marked &lsquo;confidential / internal&rsquo;</span></p></div>
-        <div class="mini tline"><h5><span class="zh">法务</span><span class="eng">Legal</span></h5><p><span class="zh">未签署合同正本、诉讼 / 仲裁策略、和解金额与谈判底线、客户机密资料、保密特权沟通</span><span class="eng">Unsigned contract originals, litigation / arbitration strategy, settlement amounts and negotiation limits, client confidential materials, privileged communications</span></p></div>
-        <div class="mini tline"><h5><span class="zh">市场 · 品牌 · mosaic · CEO Office · PMO</span><span class="eng">Marketing · Brand · mosaic · CEO Office · PMO</span></h5><p><span class="zh">未公开的营销 / 品牌计划与预算、高管日程与董事会 / 机密决策材料、未发布的项目与里程碑、客户 / 合作伙伴名单与合同条款、内部财务与战略文件</span><span class="eng">Unreleased marketing / brand plans &amp; budgets, executive schedules and board / confidential decision materials, unannounced projects &amp; milestones, client / partner lists and contract terms, internal finance &amp; strategy documents</span></p></div>
-        <div class="mini tline"><h5><span class="zh">产品 · 运营 · 体育团队</span><span class="eng">Product · Operations · Sports</span></h5><p><span class="zh">未发布的产品路线图与功能、用户个人与投注 / 行为数据、运营与营收数据、赔率 / 风控模型、博彩牌照与合规材料</span><span class="eng">Unreleased product roadmaps &amp; features, user personal &amp; betting / behavioral data, ops &amp; revenue figures, odds / risk models, gaming licenses &amp; compliance materials</span></p></div>
-      </div>
-    </section>
-
     <!-- P6 -->
     <section class="panel" id="p6">
-      <div class="phead st"><span class="bignum">06</span><div class="eye">Section&nbsp;06</div><h2><span class="zh">有效提问方法</span><span class="eng">Effective Prompting</span><span class="en">Prompting</span></h2></div>
+      <div class="phead st"><span class="bignum">05</span><div class="eye">Section&nbsp;05</div><h2><span class="zh">如何写好提示词</span><span class="eng">Writing Better Prompts</span><span class="en">Writing Better Prompts</span></h2></div>
 
       <h3 class="st"><span class="hn">6.1</span><span class="zh">五要素提问公式</span><span class="eng">The five-part prompt formula</span></h3>
       <div class="formula st"><span class="c"><span class="zh">角色</span><span class="eng">Role</span></span><span class="p">+</span><span class="c"><span class="zh">任务</span><span class="eng">Task</span></span><span class="p">+</span><span class="c"><span class="zh">背景</span><span class="eng">Context</span></span><span class="p">+</span><span class="c"><span class="zh">约束</span><span class="eng">Constraints</span></span><span class="p">+</span><span class="c"><span class="zh">格式</span><span class="eng">Format</span></span></div>
@@ -627,7 +623,7 @@
         <div class="pq bad"><span class="mk"><span class="zh">✕ 模糊</span><span class="eng">✕ Vague</span></span><span class="zh">写个促销文案。</span><span class="eng">Write some promo copy.</span></div>
         <div class="pq good"><span class="mk"><span class="zh">✓ 有效</span><span class="eng">✓ Effective</span></span>You are a brand copywriter. Write 3 versions of a launch post for [product/event] — one each for Instagram, LinkedIn, and X — under 280 characters, on-brand, with an EN and a CN version of each.</div>
       </div>
-      <h4 class="st"><span class="zh">产品 / 运营 —— 用户反馈归纳</span><span class="eng">Product / Ops — User-feedback synthesis</span></h4>
+      <h4 class="st"><span class="zh">产品 / 运营 —— 用户反馈归纳</span><span class="eng">Product / Operations — User-feedback synthesis</span></h4>
       <div class="pp st">
         <div class="pq bad"><span class="mk"><span class="zh">✕ 模糊</span><span class="eng">✕ Vague</span></span><span class="zh">看看这些反馈。</span><span class="eng">Look at this feedback.</span></div>
         <div class="pq good"><span class="mk"><span class="zh">✓ 有效</span><span class="eng">✓ Effective</span></span>Here are 50 raw user-feedback entries. Sort them into feature requests, bugs, and UX issues, rank each group by frequency, and summarize the top 5 action items in a table.</div>
@@ -635,62 +631,32 @@
 
       <h3 class="st"><span class="hn">6.3</span><span class="zh">追问与迭代方法</span><span class="eng">Follow-up &amp; iteration</span></h3>
       <div class="grid3 st">
-        <div class="mini"><h5><span class="zh">结果不符合预期</span><span class="eng">Result isn&rsquo;t what you expected</span></h5><p><span class="zh">说明具体哪里不对、期望的改动方向,而非仅要求"重写"。</span><span class="eng">Say specifically what&rsquo;s wrong and the direction you want, rather than just asking to &lsquo;rewrite.&rsquo;</span></p></div>
+        <div class="mini"><h5><span class="zh">结果不符合预期</span><span class="eng">Result isn't what you expected</span></h5><p><span class="zh">说明具体哪里不对、期望的改动方向,而非仅要求"重写"。</span><span class="eng">Say specifically what's wrong and the direction you want, rather than just asking to 'rewrite.'</span></p></div>
         <div class="mini"><h5><span class="zh">任务较为复杂</span><span class="eng">The task is complex</span></h5><p><span class="zh">先要求输出大纲确认方向,确认后再展开执行。</span><span class="eng">Ask for an outline first to confirm direction, then proceed.</span></p></div>
-        <div class="mini"><h5><span class="zh">不确定是否被理解</span><span class="eng">Unsure it understood you</span></h5><p><span class="zh">让 Claude 先复述任务,确认无误后再执行。</span><span class="eng">Have Claude restate the task first, then proceed once it&rsquo;s correct.</span></p></div>
+        <div class="mini"><h5><span class="zh">不确定是否被理解</span><span class="eng">Unsure it understood you</span></h5><p><span class="zh">让 Claude 先复述任务,确认无误后再执行。</span><span class="eng">Have Claude restate the task first, then proceed once it's correct.</span></p></div>
       </div>
     </section>
 
     <!-- P7 -->
     <section class="panel" id="p7">
-      <div class="phead st"><span class="bignum">07</span><div class="eye">Section&nbsp;07</div><h2><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span><span class="en">Use Cases</span></h2></div>
+      <div class="phead st"><span class="bignum">06</span><div class="eye">Section&nbsp;06</div><h2><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span><span class="en">Use Cases</span></h2></div>
 
       <div class="grid2 st">
         <div class="mini"><h5><span class="tg">7.1</span><span class="zh">起草与文字撰写</span><span class="eng">Drafting &amp; writing</span></h5><div class="dl">
           <div class="it"><b><span class="zh">邮件起草</span><span class="eng">Email drafting</span></b><span class="ds"><span class="zh">提供收件人、事由、期望行动,生成专业邮件</span><span class="eng">Provide recipient, purpose, and desired action; get a professional email</span></span></div>
           <div class="it"><b><span class="zh">信函 / 通知撰写</span><span class="eng">Letters / notices</span></b><span class="ds"><span class="zh">内部通知、对外信函、中英双语公告</span><span class="eng">Internal notices, external letters, bilingual announcements</span></span></div>
-          <div class="it"><b><span class="zh">会议 / 面试纪要</span><span class="eng">Meeting / interview minutes</span></b><span class="ds"><span class="zh">零散记录整理为结构化纪要(日期/出席/议题/决议/待办)</span><span class="eng">Turn rough notes into structured minutes (date / attendees / agenda / decisions / action items)</span></span></div>
           <div class="it"><b><span class="zh">长文档摘要</span><span class="eng">Long-document summaries</span></b><span class="ds"><span class="zh">将冗长文件浓缩为结构化要点</span><span class="eng">Condense lengthy files into structured key points</span></span></div>
         </div></div>
         <div class="mini"><h5><span class="tg">7.2</span><span class="zh">文档分析与对比</span><span class="eng">Document analysis &amp; comparison</span></h5><div class="dl">
           <div class="it"><b><span class="zh">版本差异对比</span><span class="eng">Version diff</span></b><span class="ds"><span class="zh">提供两份文档,列出所有实质性差异</span><span class="eng">Provide two documents; list every substantive difference</span></span></div>
-          <div class="it"><b><span class="zh">多文档横向对比</span><span class="eng">Cross-document comparison</span></b><span class="ds"><span class="zh">多份简历/合同/报价单,生成结构化对比表</span><span class="eng">Multiple resumes / contracts / quotes; get a structured comparison table</span></span></div>
           <div class="it"><b><span class="zh">长文档条款审阅</span><span class="eng">Long-document clause review</span></b><span class="ds"><span class="zh">上传 PDF/Word,提取关键条款、风险点或摘要</span><span class="eng">Upload PDF / Word; extract key clauses, risks, or a summary</span></span></div>
         </div></div>
-        <div class="mini"><h5><span class="tg">7.3</span><span class="zh">数据整理与格式化</span><span class="eng">Data cleanup &amp; formatting</span></h5><div class="dl">
-          <div class="it"><b><span class="zh">文件批量重命名</span><span class="eng">Bulk file renaming</span></b><span class="ds"><span class="zh">说明规则并列出文件名,生成"原名 → 新名"对照表</span><span class="eng">State the rule and list filenames; get an &lsquo;old → new&rsquo; mapping table</span></span></div>
-          <div class="it"><b><span class="zh">数据结构化</span><span class="eng">Structuring data</span></b><span class="ds"><span class="zh">零散信息整理为规范表格,可直接输出 Excel</span><span class="eng">Organize scattered info into a clean table; export to Excel directly</span></span></div>
-          <div class="it"><b><span class="zh">台账 / 记录更新</span><span class="eng">Ledger / record updates</span></b><span class="ds"><span class="zh">粘贴现有台账与新增数据,输出更新后完整版本</span><span class="eng">Paste the existing ledger and new data; get the full updated version</span></span></div>
-        </div></div>
-        <div class="mini"><h5><span class="tg">7.4</span><span class="zh">翻译与文字润色</span><span class="eng">Translation &amp; polishing</span></h5><div class="dl">
+        <div class="mini"><h5><span class="tg">7.3</span><span class="zh">翻译与文字润色</span><span class="eng">Translation &amp; polishing</span></h5><div class="dl">
           <div class="it"><b><span class="zh">中英互译</span><span class="eng">EN ↔ CN translation</span></b><span class="ds"><span class="zh">邮件、通知、简报、合同条款的中英双向翻译</span><span class="eng">Two-way translation of emails, notices, briefs, and contract clauses</span></span></div>
           <div class="it"><b><span class="zh">专业语气</span><span class="eng">Professional tone</span></b><span class="ds"><span class="zh">将过于随意或生硬的文字调整为专业、正式语气</span><span class="eng">Adjust overly casual or stiff text into a professional, formal tone</span></span></div>
         </div></div>
       </div>
 
-      <h3 class="st"><span class="hn">7.5</span><span class="zh">Projects 功能的配置与使用</span><span class="eng">Setting up &amp; using Projects</span></h3>
-      <p class="st" style="font-size:.9rem"><span class="zh">每个部门建议建立专属 Project,实现<strong>背景信息一次设置、所有对话长期生效</strong>。</span><span class="eng">Each department should set up its own Project, so <strong>background information is configured once and applies to all conversations long-term</strong>.</span></p>
-      <div class="grid2 st" style="align-items:start">
-        <div>
-          <h4 style="margin-top:4px"><span class="zh">配置步骤</span><span class="eng">Setup steps</span></h4>
-          <ol class="steps">
-            <li><span class="zh">上传部门常用参考资料(SOP、合同模板、手册章节、常用格式)。</span><span class="eng">Upload the department&rsquo;s common references (SOPs, contract templates, handbook sections, standard formats).</span></li>
-            <li><span class="zh">写入自定义指令(团队身份、惯用语气、输出格式要求)。</span><span class="eng">Write custom instructions (team identity, preferred tone, output-format requirements).</span></li>
-            <li><span class="zh">此后该 Project 内所有对话自动读取以上内容,无需重复说明。</span><span class="eng">From then on, every conversation in the Project reads this automatically—no need to repeat it.</span></li>
-          </ol>
-        </div>
-        <div>
-          <h4 style="margin-top:4px"><span class="zh">推荐建立的 Projects</span><span class="eng">Recommended Projects</span></h4>
-          <div class="proj3">
-            <div class="proj"><div class="ic">H</div><b><span class="zh">HR 政策<br>问答</span><span class="eng">HR Policy<br>Q&amp;A</span></b></div>
-            <div class="proj"><div class="ic">A</div><b><span class="zh">行政文件<br>与模板</span><span class="eng">Admin Docs<br>&amp; Templates</span></b></div>
-            <div class="proj"><div class="ic">L</div><b><span class="zh">法务合同<br>审查</span><span class="eng">Legal Contract<br>Review</span></b></div>
-            <div class="proj"><div class="ic">M</div><b><span class="zh">营销 / 品牌<br>内容</span><span class="eng">Marketing / Brand<br>Content</span></b></div>
-            <div class="proj"><div class="ic">R</div><b><span class="zh">汇报模板</span><span class="eng">Reporting<br>Templates</span></b></div>
-            <div class="proj"><div class="ic">O</div><b><span class="zh">产品 / 运营<br>文档</span><span class="eng">Product / Ops<br>Docs</span></b></div>
-          </div>
-        </div>
-      </div>
     </section>
 
 
