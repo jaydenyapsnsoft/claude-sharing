@@ -202,10 +202,14 @@
   @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
 
   /* language toggle */
-  .eng{display:none;}
-  body.lang-en .zh{display:none;}
+  .eng{display:none;}  body.lang-en .zh{display:none;}
   body.lang-en .eng{display:inline;}
   body.lang-en .phead h2 .en{display:none;}
+  /* block-level code blocks that switch by language */
+  pre.zh-block{display:block;}
+  pre.eng-block{display:none;}
+  body.lang-en pre.zh-block{display:none;}
+  body.lang-en pre.eng-block{display:block;}
 
   /* mobile */
   .mtop{display:none;}
@@ -565,25 +569,141 @@
         <li><span class="zh">保存为 <b>Skill</b></span><span class="eng">Save as a <b>Skill</b></span></li>
       </ol>
 
+      <details style="margin-top:2px">
+        <summary style="cursor:pointer;font-size:.82rem;font-weight:600;color:var(--bronze-deep);list-style:none;display:flex;align-items:center;gap:6px"><span style="font-size:.7rem">▶</span><span class="zh">查看完整示例：邮件回复 Skill</span><span class="eng">View full example: email reply Skill</span></summary>
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+
+          <div class="mini tline">
+            <h5 style="color:var(--bronze-deep);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase"><span class="zh">Step 1 — 确定重复性任务</span><span class="eng">Step 1 — Pick a repetitive task</span></h5>
+            <p style="font-size:.82rem;margin-top:4px"><span class="zh">用一句话说清楚：我每次要做什么？</span><span class="eng">Describe in one sentence: what do I have to do every time?</span></p>
+            <p style="font-size:.82rem;margin-top:6px;color:var(--ink)"><span class="zh">我经常需要起草专业的英文邮件回复，每次都要想措辞、语气，很浪费时间。</span><span class="eng">I often need to draft professional email replies in English — every time I have to think about wording and tone, which wastes a lot of time.</span></p>
+          </div>
+
+          <div class="mini tline">
+            <h5 style="color:var(--bronze-deep);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase"><span class="zh">Step 2 — 写触发短语</span><span class="eng">Step 2 — Write the trigger phrase</span></h5>
+            <p style="font-size:.82rem;margin-top:4px"><span class="zh">告诉 Claude：什么情况下启动这个 Skill？</span><span class="eng">Tell Claude: when should this Skill activate?</span></p>
+            <p style="font-size:.82rem;margin-top:6px;color:var(--ink)"><span class="zh">当我说"帮我回这封邮件"、"draft a reply"、"帮我写邮件给…"，或者我贴上一封邮件内容时，就启动这个 Skill。</span><span class="eng">When I say "help me reply to this email", "draft a reply", "help me write an email to…", or when I paste in an email, activate this Skill.</span></p>
+          </div>
+
+          <div class="mini tline">
+            <h5 style="color:var(--bronze-deep);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase"><span class="zh">Step 3 — 写执行步骤</span><span class="eng">Step 3 — Write the SOP</span></h5>
+            <p style="font-size:.82rem;margin-top:4px"><span class="zh">告诉 Claude：具体要做什么，几步做完？</span><span class="eng">Tell Claude: what exactly to do, step by step.</span></p>
+            <ol style="margin-top:6px;padding-left:18px;font-size:.82rem;color:var(--ink);display:flex;flex-direction:column;gap:3px">
+              <li><span class="zh">读取我提供的邮件内容或背景</span><span class="eng">Read the email content or context I provide</span></li>
+              <li><span class="zh">判断收件人是内部同事还是外部合作方</span><span class="eng">Determine whether the recipient is an internal colleague or external party</span></li>
+              <li><span class="zh">用专业、简洁、有礼貌的语气起草回复</span><span class="eng">Draft the reply in a professional, concise, and polite tone</span></li>
+              <li><span class="zh">开头不用"I hope this email finds you well"</span><span class="eng">Do not open with "I hope this email finds you well"</span></li>
+              <li><span class="zh">结尾要有明确的 next step</span><span class="eng">Close with a clear next step</span></li>
+            </ol>
+          </div>
+
+          <div class="mini tline">
+            <h5 style="color:var(--bronze-deep);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase"><span class="zh">Step 4 — 明确输出格式</span><span class="eng">Step 4 — Define the output format</span></h5>
+            <p style="font-size:.82rem;margin-top:4px"><span class="zh">告诉 Claude：我要看到什么样的结果？</span><span class="eng">Tell Claude: what should the output look like?</span></p>
+            <p style="font-size:.82rem;margin-top:6px;color:var(--ink);font-family:'JetBrains Mono',monospace;line-height:1.7"><span class="zh">Subject: [主题]<br>正文（3–5句，不要太长）<br>署名：Jayden<br>只给我一个版本，不需要解释。</span><span class="eng">Subject: [subject line]<br>Body (3–5 sentences, keep it short)<br>Sign-off: Jayden<br>Give me one version only, no explanation.</span></p>
+          </div>
+
+          <div class="mini tline">
+            <h5 style="color:var(--bronze-deep);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase"><span class="zh">Step 5 — 整合成完整 Prompt 保存</span><span class="eng">Step 5 — Combine and save as a Skill</span></h5>
+            <p style="font-size:.82rem;margin-top:4px"><span class="zh">把以上全部合并成一段话，存进 Skill：</span><span class="eng">Merge everything above into one prompt and save it as a Skill:</span></p>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="zh-block">你是我的专业邮件起草助手。
+
+【触发条件】
+当我说"帮我回邮件"、"draft a reply"、"帮我写邮件"，
+或者我贴上邮件内容时，自动启动。
+
+【执行步骤】
+1. 读取我提供的邮件内容或背景说明
+2. 判断收件人类型（内部同事 / 外部合作方 / 客户）
+3. 根据类型调整语气：
+   - 内部：简洁友好
+   - 外部/客户：正式有礼
+4. 起草回复，开头不用套话，结尾要有明确行动指示
+
+【输出格式】
+Subject: [主题行]
+
+[正文，3-5句]
+
+Best regards,
+Jayden</pre>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="eng-block">You are my professional email drafting assistant.
+
+[Trigger]
+When I say "help me reply to this email", "draft a reply",
+"help me write an email to...", or when I paste in an email,
+activate this Skill automatically.
+
+[Steps]
+1. Read the email content or context I provide
+2. Identify recipient type (internal colleague / external partner / client)
+3. Adjust tone accordingly:
+   - Internal: concise and friendly
+   - External / client: formal and polite
+4. Draft the reply — no filler opener, close with a clear next step
+
+[Output format]
+Subject: [subject line]
+
+[Body, 3–5 sentences]
+
+Best regards,
+Jayden</pre>
+          </div>
+
+        </div>
+      </details>
+
       <h3 class="st"><span class="hn">4.7</span><span class="zh">连接公司系统 · 连接器(MCP)</span><span class="eng">Connecting Company Systems · MCP</span></h3>
       <p class="st"><span class="zh">MCP（Model Context Protocol）是一个<b>开源标准</b>，允许 Claude、ChatGPT 等 AI 应用连接外部系统或外部数据源。通过 MCP，Claude 可安全接入公司在用的系统——例如 <b>Lark(飞书)套件</b>与<b>数据仓库</b>，实现取数、查文档、整理信息，无需来回复制粘贴。</span><span class="eng">MCP (Model Context Protocol) is an <b>open-source standard</b> that lets AI applications such as Claude and ChatGPT connect to external systems or data sources. Through MCP, Claude can securely connect to the systems the company already uses — such as the <b>Lark suite</b> and the <b>data warehouse</b> — to pull data, search docs, and organize information, with no copy-pasting required.</span></p>
 
       <h4 class="st"><span class="zh">MCP 连接的两种类型</span><span class="eng">Two types of MCP connection</span></h4>
       <div class="grid2 st">
-        <div class="mini tline"><h5><span class="zh">远程连接器（Remote MCP）<span class="tg"><span class="zh">公司主用</span><span class="eng">Our setup</span></span></span><span class="eng">Remote MCP <span class="tg"><span class="zh">公司主用</span><span class="eng">Our setup</span></span></span></h5><p><span class="zh">通过一个公网 URL 接入，Claude 从云端直接连接，<b>网页 / 桌面 / 手机都能用</b>，无需在本机安装。公司的 <b>ChatBI</b> 与 <b>Lark</b> 连接器都属于这一种。</span><span class="eng">Connects via a public URL; Claude reaches it from the cloud, so it works on <b>web / desktop / mobile</b> with nothing to install locally. The company's <b>ChatBI</b> and <b>Lark</b> connectors are both this type.</span></p></div>
+        <div class="mini tline"><h5><span class="zh">远程连接器（Remote MCP）<span class="tg"><span class="zh">公司主用</span><span class="eng">Our setup</span></span></span><span class="eng">Remote MCP <span class="tg"><span class="zh">公司主用</span><span class="eng">Our setup</span></span></span></h5><p><span class="zh">通过一个公网 URL 接入，Claude 从云端直接连接，<b>网页 / 桌面 / 手机都能用</b>，无需在本机安装。公司的 <b>ChatBI</b> 连接器属于这一种。</span><span class="eng">Connects via a public URL; Claude reaches it from the cloud, so it works on <b>web / desktop / mobile</b> with nothing to install locally. The company's <b>ChatBI</b> connector is this type.</span></p></div>
         <div class="mini tline"><h5><span class="zh">本地连接器（Local MCP）</span><span class="eng">Local MCP</span></h5><p><span class="zh">仅在 Claude Desktop 通过本机配置文件运行，连接本地网络中的系统。</span><span class="eng">Runs only in Claude Desktop via a local config file, connecting to systems on your local network.</span></p></div>
       </div>
 
       <h4 class="st"><span class="zh">以 Lark MCP 为例</span><span class="eng">Example: the Lark MCP</span></h4>
-      <p class="st" style="font-size:.88rem"><span class="zh">连接 Lark 后，Claude 通过 Lark MCP 服务器调用一组飞书工具，即可直接操作云文档、多维表格、消息、日历等。整个链路是：<b>Claude（客户端）→ Lark MCP 服务器 → Lark 套件</b>。相比之下，<b>ChatBI</b> 同样是远程连接器，但它桥接的是<b>公司数据仓库</b>——用自然语言提问，Claude 经 ChatBI 查询数仓并返回数据与图表。</span><span class="eng">Once connected, Claude calls a set of Lark tools through the Lark MCP server to work directly with Docs, Base, messages, calendar, and more. The chain is: <b>Claude (client) → Lark MCP server → Lark suite</b>. By contrast, <b>ChatBI</b> is also a remote connector, but it bridges to the <b>company data warehouse</b> — ask in natural language and Claude queries the warehouse through ChatBI, returning data and charts.</span></p>
-      <div class="st"><span class="livebadge"><span class="ld"></span><span class="zh">已实现 · ChatBI 连接数仓</span><span class="eng">Live · ChatBI connects the warehouse</span></span></div>
+      <p class="st" style="font-size:.88rem"><span class="zh">连接 Lark 后，Claude 通过 Lark MCP 服务器调用一组飞书工具，即可直接操作云文档、多维表格、任务、日历等。整个链路是：<b>Claude（客户端）→ Lark MCP 服务器 → Lark 套件</b>。相比之下，<b>ChatBI</b> 同样是远程连接器，但它桥接的是<b>公司数据仓库</b>——用自然语言提问，Claude 经 ChatBI 查询数仓并返回数据与图表。</span><span class="eng">Once connected, Claude calls a set of Lark tools through the Lark MCP server to work directly with Docs, Base, tasks, calendar, and more. The chain is: <b>Claude (client) → Lark MCP server → Lark suite</b>. By contrast, <b>ChatBI</b> is also a remote connector, but it bridges to the <b>company data warehouse</b> — ask in natural language and Claude queries the warehouse through ChatBI, returning data and charts.</span></p>
       <div class="grid3 st">
-        <div class="mini tline"><h5><span class="zh">数据仓库 / BI</span><span class="eng">Data warehouse / BI</span></h5><p><span class="zh">用自然语言查询,直接拿到数据与图表(ChatBI,已上线)。</span><span class="eng">Query in natural language; get data and charts straight back (ChatBI, live).</span></p></div>
+        <div class="mini tline"><h5><span class="zh">数据仓库 / BI</span><span class="eng">Data warehouse / BI</span></h5><p><span class="zh">用自然语言查询,直接拿到数据与图表。基于 Remote MCP 接入。</span><span class="eng">Query in natural language; get data and charts straight back. Connected via Remote MCP.</span></p><span class="livebadge" style="margin-top:10px"><span class="ld"></span><span class="zh">已实现 · ChatBI 连接数仓</span><span class="eng">Live · ChatBI connects the warehouse</span></span></div>
         <div class="mini tline"><h5><span class="zh">Lark 云文档 / 知识库</span><span class="eng">Lark Docs / Wiki</span></h5><p><span class="zh">检索、总结、起草云文档与 Wiki 内容。</span><span class="eng">Search, summarize, and draft Docs and Wiki content.</span></p></div>
         <div class="mini tline"><h5><span class="zh">Lark 多维表格 / 表格</span><span class="eng">Lark Base / Sheets</span></h5><p><span class="zh">读取与整理表格数据,按条件汇总、生成记录。</span><span class="eng">Read and organize table data; summarize and generate records by criteria.</span></p></div>
-        <div class="mini tline"><h5><span class="zh">Lark 消息 / 群聊</span><span class="eng">Lark Messenger</span></h5><p><span class="zh">归纳群聊讨论,整理成会议纪要与待办。</span><span class="eng">Distill group-chat discussions into minutes and to-dos.</span></p></div>
-        <div class="mini tline"><h5><span class="zh">Lark 日历 / 会议</span><span class="eng">Lark Calendar / Meetings</span></h5><p><span class="zh">查日程、安排会议,整理会议纪要(妙记)。</span><span class="eng">Check schedules, set up meetings, and tidy meeting minutes.</span></p></div>
-        <div class="mini tline"><h5><span class="zh">Lark 邮箱 / 审批</span><span class="eng">Lark Mail / Approval</span></h5><p><span class="zh">起草与归纳邮件,梳理审批与待办事项。</span><span class="eng">Draft and summarize email; track approvals and action items.</span></p></div>
+        <div class="mini tline"><h5><span class="zh">Lark 任务</span><span class="eng">Lark Tasks</span></h5><p><span class="zh">创建、查询与更新任务,梳理待办与负责人。</span><span class="eng">Create, look up, and update tasks; organize to-dos and owners.</span></p>
+          <details style="margin-top:8px">
+            <summary style="cursor:pointer;font-size:.76rem;font-weight:600;color:var(--bronze-deep);list-style:none;display:flex;align-items:center;gap:6px"><span style="font-size:.68rem">▶</span><span class="zh">查看示例</span><span class="eng">View example</span></summary>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.7;overflow-x:auto;white-space:pre-wrap" class="zh-block">帮我创建一个 Lark 任务，
+标题为"Meeting"，截止时间 11 AM，
+请提前 15 分钟提醒我。</pre>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.7;overflow-x:auto;white-space:pre-wrap" class="eng-block">Please create a Lark task for me with the
+title "Meeting" and a deadline of 11 AM.
+Please remind me 15 minutes in advance.</pre>
+          </details>
+        </div>
+        <div class="mini tline"><h5><span class="zh">Lark 日历 / 会议</span><span class="eng">Lark Calendar / Meetings</span></h5><p><span class="zh">查日程、安排会议,整理会议纪要(妙记)。</span><span class="eng">Check schedules, set up meetings, and tidy meeting minutes.</span></p>
+          <details style="margin-top:8px">
+            <summary style="cursor:pointer;font-size:.76rem;font-weight:600;color:var(--bronze-deep);list-style:none;display:flex;align-items:center;gap:6px"><span style="font-size:.68rem">▶</span><span class="zh">查看示例</span><span class="eng">View example</span></summary>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.7;overflow-x:auto;white-space:pre-wrap" class="zh-block">帮我创建一个日历日程：
+- 标题：Meeting Claude
+- 日期：2026-06-08
+- 时间：晚上 8:00 至 10:00</pre>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.7;overflow-x:auto;white-space:pre-wrap" class="eng-block">Create a calendar event:
+- Title: Meeting Claude
+- Date: 2026-06-08
+- Time: 8:00PM to 10:00PM</pre>
+          </details>
+        </div>
+        <div class="mini tline"><h5><span class="zh">Lark 邮箱</span><span class="eng">Lark Mail</span></h5><p><span class="zh">总结邮件,梳理邮件。</span><span class="eng">Summarize and organize email.</span></p>
+          <details style="margin-top:8px">
+            <summary style="cursor:pointer;font-size:.76rem;font-weight:600;color:var(--bronze-deep);list-style:none;display:flex;align-items:center;gap:6px"><span style="font-size:.68rem">▶</span><span class="zh">查看示例</span><span class="eng">View example</span></summary>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.7;overflow-x:auto;white-space:pre-wrap" class="zh-block">帮我总结今天收到的所有 Lark 邮件，
+按重要程度排序，
+列出需要我回复的。</pre>
+            <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.7;overflow-x:auto;white-space:pre-wrap" class="eng-block">Summarize all the Lark emails I received today,
+rank them by importance, and list the ones
+that need my reply.</pre>
+          </details>
+        </div>
       </div>
     </section>
 
@@ -643,9 +763,285 @@
 
       <div class="grid2 st">
         <div class="mini"><h5><span class="tg">7.1</span><span class="zh">起草与文字撰写</span><span class="eng">Drafting &amp; writing</span></h5><div class="dl">
-          <div class="it"><b><span class="zh">邮件起草</span><span class="eng">Email drafting</span></b><span class="ds"><span class="zh">提供收件人、事由、期望行动,生成专业邮件</span><span class="eng">Provide recipient, purpose, and desired action; get a professional email</span></span></div>
-          <div class="it"><b><span class="zh">信函 / 通知撰写</span><span class="eng">Letters / notices</span></b><span class="ds"><span class="zh">内部通知、对外信函、中英双语公告</span><span class="eng">Internal notices, external letters, bilingual announcements</span></span></div>
-          <div class="it"><b><span class="zh">长文档摘要</span><span class="eng">Long-document summaries</span></b><span class="ds"><span class="zh">将冗长文件浓缩为结构化要点</span><span class="eng">Condense lengthy files into structured key points</span></span></div>
+          <div class="it"><b><span class="zh">邮件起草</span><span class="eng">Email drafting</span></b><span class="ds"><span class="zh">提供收件人、事由、期望行动,生成专业邮件</span><span class="eng">Provide recipient, purpose, and desired action; get a professional email</span></span>
+            <details style="margin-top:8px">
+              <summary style="cursor:pointer;font-size:.78rem;font-weight:600;color:var(--bronze-deep);list-style:none;display:flex;align-items:center;gap:6px"><span style="font-size:.7rem">▶</span><span class="zh">查看完整 Skill 创建示例</span><span class="eng">View full Skill creation example</span></summary>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 1 — <span class="zh">确定重复性任务</span><span class="eng">Pick a repetitive task</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink)"><span class="zh">我经常需要起草专业的英文邮件回复，每次都要想措辞、语气，很浪费时间。</span><span class="eng">I often need to draft professional email replies in English — every time I have to think about wording and tone, which wastes a lot of time.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 2 — <span class="zh">写触发短语</span><span class="eng">Write the trigger phrase</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink)"><span class="zh">当我说"帮我回这封邮件"、"draft a reply"、"帮我写邮件给…"，或者我贴上一封邮件内容时，就启动这个 Skill。</span><span class="eng">When I say "help me reply to this email", "draft a reply", "help me write an email to…", or when I paste in an email, activate this Skill.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 3 — <span class="zh">写执行步骤</span><span class="eng">Write the SOP</span></h5>
+                  <ol style="margin-top:6px;padding-left:18px;font-size:.8rem;color:var(--ink);display:flex;flex-direction:column;gap:3px">
+                    <li><span class="zh">读取我提供的邮件内容或背景</span><span class="eng">Read the email content or context I provide</span></li>
+                    <li><span class="zh">判断收件人是内部同事还是外部合作方</span><span class="eng">Determine whether the recipient is internal or external</span></li>
+                    <li><span class="zh">用专业、简洁、有礼貌的语气起草回复</span><span class="eng">Draft in a professional, concise, and polite tone</span></li>
+                    <li><span class="zh">开头不用"I hope this email finds you well"</span><span class="eng">Do not open with "I hope this email finds you well"</span></li>
+                    <li><span class="zh">结尾要有明确的 next step</span><span class="eng">Close with a clear next step</span></li>
+                  </ol>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 4 — <span class="zh">明确输出格式</span><span class="eng">Define the output format</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink);font-family:'JetBrains Mono',monospace;line-height:1.7"><span class="zh">Subject: [主题]<br>正文（3–5句，不要太长）<br>署名：Jayden<br>只给我一个版本，不需要解释。</span><span class="eng">Subject: [subject line]<br>Body (3–5 sentences, keep it short)<br>Sign-off: Jayden<br>One version only, no explanation.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 5 — <span class="zh">整合保存为 Skill</span><span class="eng">Combine and save as a Skill</span></h5>
+                  <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="zh-block">你是我的专业邮件起草助手。
+
+【触发条件】
+当我说"帮我回邮件"、"draft a reply"、"帮我写邮件"，
+或者我贴上邮件内容时，自动启动。
+
+【执行步骤】
+1. 读取我提供的邮件内容或背景说明
+2. 判断收件人类型（内部同事 / 外部合作方 / 客户）
+3. 根据类型调整语气：
+   - 内部：简洁友好
+   - 外部/客户：正式有礼
+4. 起草回复，开头不用套话，结尾要有明确行动指示
+
+【输出格式】
+Subject: [主题行]
+
+[正文，3-5句]
+
+Best regards,
+Jayden</pre>
+                  <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="eng-block">You are my professional email drafting assistant.
+
+[Trigger]
+When I say "help me reply to this email", "draft a reply",
+"help me write an email to...", or when I paste in an email,
+activate this Skill automatically.
+
+[Steps]
+1. Read the email content or context I provide
+2. Identify recipient type (internal colleague / external partner / client)
+3. Adjust tone accordingly:
+   - Internal: concise and friendly
+   - External / client: formal and polite
+4. Draft the reply — no filler opener, close with a clear next step
+
+[Output format]
+Subject: [subject line]
+
+[Body, 3–5 sentences]
+
+Best regards,
+Jayden</pre>
+                </div>
+
+              </div>
+            </details>
+          </div>
+          <div class="it"><b><span class="zh">信函 / 通知撰写</span><span class="eng">Letters / notices</span></b><span class="ds"><span class="zh">内部通知、对外信函、中英双语公告</span><span class="eng">Internal notices, external letters, bilingual announcements</span></span>
+            <details style="margin-top:8px">
+              <summary style="cursor:pointer;font-size:.78rem;font-weight:600;color:var(--bronze-deep);list-style:none;display:flex;align-items:center;gap:6px"><span style="font-size:.7rem">▶</span><span class="zh">查看完整 Skill 创建示例</span><span class="eng">View full Skill creation example</span></summary>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 1 — <span class="zh">确定重复性任务</span><span class="eng">Pick a repetitive task</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink)"><span class="zh">我经常需要写内部通知、对外信函或双语公告，每次都要想格式、语气、中英文怎么对应，很费时间。</span><span class="eng">I often need to write internal notices, external letters, or bilingual announcements — each time I have to think about format, tone, and how to align the two languages, which takes a lot of time.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 2 — <span class="zh">写触发短语</span><span class="eng">Write the trigger phrase</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink)"><span class="zh">当我说"帮我写通知"、"draft an announcement"、"写一封对外信函"、"中英双语公告"、"内部公告"时，自动启动。</span><span class="eng">When I say "help me write a notice", "draft an announcement", "write an external letter", "bilingual announcement", or "internal notice", activate automatically.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 3 — <span class="zh">写执行步骤</span><span class="eng">Write the SOP</span></h5>
+                  <ol style="margin-top:6px;padding-left:18px;font-size:.8rem;color:var(--ink);display:flex;flex-direction:column;gap:3px">
+                    <li><span class="zh">读取我提供的主题和背景</span><span class="eng">Read the topic and context I provide</span></li>
+                    <li><span class="zh">判断文件类型：内部通知 / 对外信函 / 双语公告</span><span class="eng">Determine the type: internal notice / external letter / bilingual announcement</span></li>
+                    <li><span class="zh">判断受众：员工 / 客户 / 合作方 / 公众</span><span class="eng">Determine the audience: staff / clients / partners / public</span></li>
+                    <li><span class="zh">根据类型和受众调整语气：内部→简洁直接，口语化可以；对外→正式，代表公司形象；双语→中英意思一致，非直译</span><span class="eng">Adjust tone by type and audience: internal → concise and direct, casual is fine; external → formal, represents the company; bilingual → meaning matches across languages, not a literal translation</span></li>
+                    <li><span class="zh">如果信息不够，只问我一个最关键的问题</span><span class="eng">If information is missing, ask me only the single most important question</span></li>
+                  </ol>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 4 — <span class="zh">明确输出格式</span><span class="eng">Define the output format</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink);font-family:'JetBrains Mono',monospace;line-height:1.7"><span class="zh">内部通知：标题 + 正文 + 生效日期/署名<br>对外信函：称谓 + 正文 + 署名 Jayden<br>双语公告：中文版 → 英文版，分开呈现</span><span class="eng">Internal notice: title + body + effective date / sign-off<br>External letter: salutation + body + sign-off Jayden<br>Bilingual announcement: Chinese version → English version, shown separately</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 5 — <span class="zh">整合保存为 Skill</span><span class="eng">Combine and save as a Skill</span></h5>
+                  <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="zh-block">你是我的信函与公告撰写助手。
+
+【触发条件】
+当我说"帮我写通知"、"draft an announcement"、
+"写对外信函"、"中英双语公告"、"内部公告"时，自动启动。
+
+【执行步骤】
+1. 读取我提供的主题和背景说明
+2. 判断类型：内部通知 / 对外信函 / 双语公告
+3. 判断受众：员工 / 客户 / 合作方 / 公众
+4. 根据类型调整语气：
+   - 内部通知：简洁直接
+   - 对外信函：正式，代表公司形象
+   - 双语公告：中英意思一致，非直译
+5. 信息不足时，只问我一个最关键的问题
+
+【输出格式】
+内部通知：
+标题：[通知标题]
+[正文]
+生效日期：[日期] | 发出人：Jayden
+
+对外信函：
+Dear [Name/Team],
+[正文，3-5句]
+Best regards,
+Jayden
+
+双语公告：
+【中文版】
+[内容]
+【English Version】
+[内容]
+
+只给一个版本，不需要解释。</pre>
+                  <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="eng-block">You are my letter and announcement writing assistant.
+
+[Trigger]
+When I say "help me write a notice", "draft an announcement",
+"write an external letter", "bilingual announcement",
+or "internal notice", activate automatically.
+
+[Steps]
+1. Read the topic and context I provide
+2. Determine the type: internal notice / external letter / bilingual announcement
+3. Determine the audience: staff / clients / partners / public
+4. Adjust tone by type:
+   - Internal notice: concise and direct
+   - External letter: formal, represents the company
+   - Bilingual announcement: meaning matches across languages, not literal
+5. If information is missing, ask me only the single most important question
+
+[Output format]
+Internal notice:
+Title: [notice title]
+[Body]
+Effective date: [date] | Issued by: Jayden
+
+External letter:
+Dear [Name/Team],
+[Body, 3-5 sentences]
+Best regards,
+Jayden
+
+Bilingual announcement:
+[Chinese Version]
+[content]
+[English Version]
+[content]
+
+Give one version only, no explanation.</pre>
+                </div>
+
+              </div>
+            </details>
+          </div>
+          <div class="it"><b><span class="zh">长文档摘要</span><span class="eng">Long-document summaries</span></b><span class="ds"><span class="zh">将冗长文件浓缩为结构化要点</span><span class="eng">Condense lengthy files into structured key points</span></span>
+            <details style="margin-top:8px">
+              <summary style="cursor:pointer;font-size:.78rem;font-weight:600;color:var(--bronze-deep);list-style:none;display:flex;align-items:center;gap:6px"><span style="font-size:.7rem">▶</span><span class="zh">查看完整 Skill 创建示例</span><span class="eng">View full Skill creation example</span></summary>
+              <div style="margin-top:10px;display:flex;flex-direction:column;gap:8px">
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 1 — <span class="zh">确定重复性任务</span><span class="eng">Pick a repetitive task</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink)"><span class="zh">我经常收到长文件、长报告、长邮件，需要快速抓到重点，不想每次都从头读。</span><span class="eng">I often receive long files, reports, and emails, and need to grasp the key points quickly without reading everything from the start.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 2 — <span class="zh">写触发短语</span><span class="eng">Write the trigger phrase</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink)"><span class="zh">当我说"帮我总结这份文件"、"summarize this"、"给我重点"、"太长了帮我浓缩"，或者我贴上一大段文字时，自动启动。</span><span class="eng">When I say "summarize this file", "summarize this", "give me the key points", "this is too long, condense it", or when I paste in a large block of text, activate automatically.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 3 — <span class="zh">写执行步骤</span><span class="eng">Write the SOP</span></h5>
+                  <ol style="margin-top:6px;padding-left:18px;font-size:.8rem;color:var(--ink);display:flex;flex-direction:column;gap:3px">
+                    <li><span class="zh">读取我提供的文件或文字内容</span><span class="eng">Read the file or text I provide</span></li>
+                    <li><span class="zh">识别文件类型（报告 / 邮件 / 合同 / 会议记录）</span><span class="eng">Identify the type (report / email / contract / meeting notes)</span></li>
+                    <li><span class="zh">提取核心信息：主要结论、关键数据、待办事项</span><span class="eng">Extract the essentials: main conclusions, key figures, action items</span></li>
+                    <li><span class="zh">去掉废话和重复内容，只保留有用的</span><span class="eng">Cut filler and repetition, keep only what's useful</span></li>
+                    <li><span class="zh">如果有需要我做决定或行动的地方，单独列出来</span><span class="eng">If anything needs my decision or action, list it separately</span></li>
+                  </ol>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 4 — <span class="zh">明确输出格式</span><span class="eng">Define the output format</span></h5>
+                  <p style="font-size:.8rem;margin-top:4px;color:var(--ink);font-family:'JetBrains Mono',monospace;line-height:1.7"><span class="zh">📌 一句话总结（1句）<br>🔑 关键要点（3-5点，每点一行）<br>⚡ 需要我跟进的行动（如果有）<br>不需要解释，不需要重复原文。</span><span class="eng">📌 One-line summary (1 sentence)<br>🔑 Key points (3-5, one per line)<br>⚡ Actions for me to follow up (if any)<br>No explanation, no repeating the original.</span></p>
+                </div>
+
+                <div class="mini tline">
+                  <h5 style="color:var(--bronze-deep);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase">Step 5 — <span class="zh">整合保存为 Skill</span><span class="eng">Combine and save as a Skill</span></h5>
+                  <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="zh-block">你是我的长文档摘要助手。
+
+【触发条件】
+当我说"帮我总结"、"summarize this"、"给我重点"、
+"太长了帮我浓缩"，或者我贴上大段文字时，自动启动。
+
+【执行步骤】
+1. 读取我提供的内容
+2. 识别类型（报告 / 邮件 / 合同 / 会议记录）
+3. 提取：主要结论、关键数据、待办事项
+4. 去掉重复和废话，只留有用的
+5. 如果有需要跟进的行动，单独列出
+
+【输出格式】
+📌 一句话总结：[1句]
+
+🔑 关键要点：
+- [要点1]
+- [要点2]
+- [要点3]
+
+⚡ 需要跟进：
+- [行动1]（如果没有就写"无"）
+
+不需要解释，不重复原文内容。</pre>
+                  <pre style="margin-top:8px;background:var(--ink);color:#EDE6D6;border-radius:10px;padding:14px 16px;font-family:'JetBrains Mono',monospace;font-size:.72rem;line-height:1.75;overflow-x:auto;white-space:pre-wrap" class="eng-block">You are my long-document summary assistant.
+
+[Trigger]
+When I say "summarize", "summarize this", "give me the key points",
+"this is too long, condense it", or when I paste in a large block
+of text, activate automatically.
+
+[Steps]
+1. Read the content I provide
+2. Identify the type (report / email / contract / meeting notes)
+3. Extract: main conclusions, key figures, action items
+4. Cut repetition and filler, keep only what's useful
+5. If anything needs follow-up, list it separately
+
+[Output format]
+📌 One-line summary: [1 sentence]
+
+🔑 Key points:
+- [point 1]
+- [point 2]
+- [point 3]
+
+⚡ Follow-up needed:
+- [action 1] (write "none" if there is nothing)
+
+No explanation, no repeating the original.</pre>
+                </div>
+
+              </div>
+            </details>
+          </div>
         </div></div>
         <div class="mini"><h5><span class="tg">7.2</span><span class="zh">文档分析与对比</span><span class="eng">Document analysis &amp; comparison</span></h5><div class="dl">
           <div class="it"><b><span class="zh">版本差异对比</span><span class="eng">Version diff</span></b><span class="ds"><span class="zh">提供两份文档,列出所有实质性差异</span><span class="eng">Provide two documents; list every substantive difference</span></span></div>
