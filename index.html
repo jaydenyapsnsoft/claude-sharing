@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -277,20 +278,7 @@
 </style>
 </head>
 <body>
-<script>
-  (function(){
-    const correct = "claude";
-    const key = "auth_claude_sharing";
-    if(sessionStorage.getItem(key) !== "1"){
-      const input = prompt("请输入访问密码 / Enter password:");
-      if(input === correct){
-        sessionStorage.setItem(key, "1");
-      } else {
-        document.body.innerHTML = "<div style='display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#888;font-size:1.1rem'>Access denied.</div>";
-      }
-    }
-  })();
-</script>
+
 
 <div class="app">
 
@@ -307,10 +295,9 @@
     <div class="tabs" id="tabs">
       <button class="tab active" data-t="p1"><span class="n">1</span><span class="zh">引言</span><span class="eng">Introduction</span></button>
       <button class="tab" data-t="p2"><span class="n">2</span><span class="zh">AI 工具市场概览</span><span class="eng">AI Tool Landscape</span></button>
-      <button class="tab" data-t="p3"><span class="n">3</span><span class="zh">Claude 的价值定位</span><span class="eng">Why Claude</span></button>
-      <button class="tab" data-t="p4"><span class="n">4</span><span class="zh">认识 Claude · 功能与设置</span><span class="eng">Features &amp; Setup</span></button>
-      <button class="tab" data-t="p6"><span class="n">5</span><span class="zh">如何写好提示词</span><span class="eng">Writing Better Prompts</span></button>
-      <button class="tab" data-t="p7"><span class="n">6</span><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span></button>
+      <button class="tab" data-t="p4"><span class="n">3</span><span class="zh">认识 Claude · 功能与设置</span><span class="eng">Features &amp; Setup</span></button>
+      <button class="tab" data-t="p6"><span class="n">4</span><span class="zh">如何写好提示词</span><span class="eng">Writing Better Prompts</span></button>
+      <button class="tab" data-t="p7"><span class="n">5</span><span class="zh">通用应用场景</span><span class="eng">General Use Cases</span></button>
     </div>
   </div>
 
@@ -323,7 +310,6 @@
     <div class="mstrip" id="mstrip">
       <button class="mtab active" data-t="p1"><span class="zh">引言</span><span class="eng">Intro</span></button>
       <button class="mtab" data-t="p2"><span class="zh">AI 市场</span><span class="eng">Landscape</span></button>
-      <button class="mtab" data-t="p3"><span class="zh">价值定位</span><span class="eng">Why Claude</span></button>
       <button class="mtab" data-t="p4"><span class="zh">功能设置</span><span class="eng">Features</span></button>
       <button class="mtab" data-t="p6"><span class="zh">提示词</span><span class="eng">Prompting</span></button>
       <button class="mtab" data-t="p7"><span class="zh">应用场景</span><span class="eng">Use Cases</span></button>
@@ -412,34 +398,12 @@
         </tbody></table></div>
       <p class="st" style="font-size:.74rem;color:var(--ink-3);margin:-2px 0 0;line-height:1.55"><span class="zh">排名与雷达图为 2026-06 综合评估(模型能力、数据安全、中英文与本公司各部门场景适配),并参考 Artificial Analysis 智能指数等公开基准——截至 2026-06,该指数由 Claude Opus 4.8(61.4)领先,GPT-5.5(60.2)、Gemini 3.1 Pro(57)紧随;第一梯队整体接近,雷达分值为相对估计。</span><span class="eng">Ranking and radar reflect a 2026-06 overall assessment (capability, data security, EN/CN, and fit for our teams' use), informed by public benchmarks such as the Artificial Analysis Intelligence Index—where, as of 2026-06, Claude Opus 4.8 leads (61.4), with GPT-5.5 (60.2) and Gemini 3.1 Pro (57) close behind. The top tier is tightly clustered; radar scores are relative estimates.</span></p>
 
-    </section>
-
-    <!-- P3 -->
-    <section class="panel" id="p3">
-      <div class="phead st"><span class="bignum">03</span><div class="eye">Section&nbsp;03</div><h2><span class="zh">Claude 的价值定位</span><span class="eng">Why Claude</span><span class="en">Positioning</span></h2></div>
-
       <h3 class="st"><span class="hn">3.1</span><span class="zh">选用 Claude 的理由与依据</span><span class="eng">Why We Choose Claude</span></h3>
       <div class="reasons st">
         <div class="reason" style="grid-column:1/-1"><div class="rn">01</div><b><span class="zh">综合智能排名全球第一</span><span class="eng">Ranked #1 in overall intelligence</span></b><p><span class="zh">截至 2026-06,Claude Opus 4.8 在 Artificial Analysis 智能指数（综合推理、写作、长文档、编码等多项基准）中以 61.4 分领先全球,GPT-5.5（60.2）与 Gemini 3.1 Pro（57）紧随其后。选择 Claude,首先是因为它就是现阶段最聪明的模型。</span><span class="eng">As of 2026-06, Claude Opus 4.8 leads the Artificial Analysis Intelligence Index at 61.4—ahead of GPT-5.5 (60.2) and Gemini 3.1 Pro (57)—across reasoning, writing, long-document, coding, and other benchmarks. We choose Claude first and foremost because it is the most capable model available today.</span></p></div>
         <div class="reason"><div class="rn">02</div><b><span class="zh">数据安全有合同保障</span><span class="eng">Data security backed by contract</span></b><p><span class="zh">企业版数据不用于训练,受服务协议约束,适合处理公司内部文件。</span><span class="eng">Enterprise data is not used for training and is bound by the service agreement—suitable for internal company documents.</span></p></div>
         <div class="reason"><div class="rn">03</div><b><span class="zh">长文档处理能力突出</span><span class="eng">Outstanding long-document handling</span></b><p><span class="zh">100 万 token 超长上下文,合同、政策、多页 PDF 一次读完,不截断,精度高。</span><span class="eng">A 1M-token context reads contracts, policies, and multi-page PDFs in one pass—no truncation, high accuracy.</span></p></div>
-        <div class="reason"><div class="rn">04</div><b><span class="zh">输出质量稳定可靠</span><span class="eng">Stable, reliable output</span></b><p><span class="zh">语气更谨慎,更少随意编造,符合各部门对专业性与准确性的要求。</span><span class="eng">A more careful tone with less fabrication, meeting every team's needs for professionalism and accuracy.</span></p></div>
-        <div class="reason"><div class="rn">05</div><b><span class="zh">多语言处理能力强</span><span class="eng">Strong multilingual capability</span></b><p><span class="zh">中文、英文、菲律宾语均可流畅处理,支持中英双语输出。</span><span class="eng">Handles Chinese, English, and Filipino fluently, with bilingual EN/CN output.</span></p></div>
-        <div class="reason" style="grid-column:1/-1"><div class="rn">06</div><b><span class="zh">企业功能体系完善</span><span class="eng">A complete enterprise feature set</span></b><p><span class="zh">Projects(知识沉淀)、MCP(系统连接)、文件直接输出,满足企业使用场景。</span><span class="eng">Projects (knowledge retention), MCP (system connections), and direct file output cover enterprise use cases.</span></p></div>
       </div>
-
-      <h3 class="st"><span class="hn">3.2</span><span class="zh">核心定位</span><span class="eng">Core positioning</span></h3>
-      <div class="callout dark st"><span class="lbl">Definition</span><span class="zh">Claude 是你的 AI 工作助手——<strong>处理重复的工作</strong>，让你省时间又可以专注真正重要的事。</span><span class="eng">Claude is your AI work assistant — <strong>handling the repetitive work</strong>, so you save time and focus on what truly matters.</span></div>
-
-      <h3 class="st"><span class="hn">3.3</span><span class="zh">适用工作类型</span><span class="eng">Where it fits</span></h3>
-      <div class="tbl st"><table>
-        <thead><tr><th><span class="zh">部门</span><span class="eng">Department</span></th><th><span class="zh">典型重复性工作</span><span class="eng">Typical repetitive work</span></th></tr></thead><tbody>
-          <tr><td>HR</td><td><span class="zh">简历筛选、邮件往来、政策答疑、入职材料、会议纪要</span><span class="eng">Resume screening, email correspondence, policy Q&amp;A, onboarding materials, meeting minutes</span></td></tr>
-          <tr><td><span class="zh">行政</span><span class="eng">Admin</span></td><td><span class="zh">通知公告、文件整理、双语翻译、活动与行程安排</span><span class="eng">Notices and announcements, document organization, bilingual translation, event and itinerary planning</span></td></tr>
-          <tr><td><span class="zh">法务</span><span class="eng">Legal</span></td><td><span class="zh">合同审查、风险提取、法规研究、信函与答复起草</span><span class="eng">Contract review, risk extraction, regulatory research, drafting letters and replies</span></td></tr>
-          <tr><td><span class="zh">市场 · 品牌 · mosaic · CEO Office · PMO</span><span class="eng">Marketing · Brand · mosaic · CEO Office · PMO</span></td><td><span class="zh">营销与品牌文案、对外公告、新闻稿、汇报简报、会议纪要、跨项目状态与行动项梳理</span><span class="eng">Marketing &amp; brand copy, external announcements, press releases, briefings, meeting minutes, cross-project status &amp; action items</span></td></tr>
-          <tr><td><span class="zh">产品 · 运营 · 体育团队</span><span class="eng">Product · Operations · Sports</span></td><td><span class="zh">需求文档与版本说明、用户反馈归纳、活动公告、体育博彩内容与促销、配合取数解读数据</span><span class="eng">Spec docs &amp; release notes, user-feedback synthesis, campaign notices, sports-betting content &amp; promos, data interpretation with ChatBI</span></td></tr>
-        </tbody></table></div>
 
     </section>
 
